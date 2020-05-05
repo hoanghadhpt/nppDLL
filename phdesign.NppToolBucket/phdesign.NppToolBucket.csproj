@@ -266,6 +266,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
+    <None Include="Resources\giaoan.lik-trong-dong.png" />
+    <None Include="Resources\e6dc3452323521.5608da7b64f55.jpg" />
+    <None Include="Resources\drstrange.jpg" />
     <None Include="Resources\star-icon.png" />
     <None Include="Resources\Deadpool_2018.jpg" />
     <None Include="Resources\deadpool-wallpapers-29482-8205796.jpg" />

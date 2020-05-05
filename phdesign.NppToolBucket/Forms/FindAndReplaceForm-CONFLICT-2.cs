@@ -323,7 +323,7 @@ namespace phdesign.NppToolBucket.Forms
         private void FindAndReplaceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Hide the form rather than closing it.
-            this.Hide();
+            Hide();
             //Owner.Focus();
             e.Cancel = true;
         }
@@ -377,7 +377,12 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button5_Click(object sender, EventArgs e)
         {
-            HoangHaFunctions.NonVirgoPreProcess();
+            FindText = "1";
+            ReplaceText = "1";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAll3);
+            //Done
             MessageBox.Show("Non-Virgo Format Replaced.", "Hoàng Hà Plugin");
         }
 
@@ -385,21 +390,6 @@ namespace phdesign.NppToolBucket.Forms
         {
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
-
-            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265")
-            {
-
-            }
-            else
-            {
-                button11.Enabled = false;
-                button15.Enabled = false;
-                button16.Enabled = false;
-                button17.Enabled = false;
-                button18.Enabled = false;
-                button19.Enabled = false;
-                button20.Enabled = false;
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -420,16 +410,11 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button9_Click(object sender, EventArgs e)
         {
-            
-
             FindText = "[\n\r]+$";
             ReplaceText = "";
             MatchCase = true;
             UseRegularExpression = true;
             OnDoAction(Action.ReplaceAll);
-
-            
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -451,51 +436,6 @@ namespace phdesign.NppToolBucket.Forms
             OnDoAction(Action.AdvEmph);
             MessageBox.Show("Processed....", "Hoang Ha Plugin");
         }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.RemoveDuplicatedLines();
-        }
-
-        private void button11_Click_1(object sender, EventArgs e)
-        {
-            Helpers.Ftnt2end();
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.AddDel();
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.AddUpperCase();
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.RemoveDuplicatedLines();
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.RemovePeriodFootnote();
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.AutoPredictPara();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.SpacingFormat();
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 
@@ -513,8 +453,7 @@ namespace phdesign.NppToolBucket.Forms
         DateFormat,
         TexasSmcaps,
         AdvEmph,
-        Count,
-        footnote2end
+        Count
     }
 
     public class DoActionEventArgs : EventArgs
