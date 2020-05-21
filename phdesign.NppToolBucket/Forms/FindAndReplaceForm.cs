@@ -386,19 +386,13 @@ namespace phdesign.NppToolBucket.Forms
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
 
-            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265")
+            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265" || Environment.UserName.ToUpper() == "E1057")
             {
 
             }
             else
             {
-                button11.Enabled = false;
-                button15.Enabled = false;
-                button16.Enabled = false;
-                button17.Enabled = false;
-                button18.Enabled = false;
-                button19.Enabled = false;
-                button20.Enabled = false;
+                tabControl1.Enabled = false;
             }
         }
 
@@ -459,7 +453,7 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button11_Click_1(object sender, EventArgs e)
         {
-            Helpers.Ftnt2end();
+            HoangHaFunctions.FootnoteToEnd();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -494,7 +488,110 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button22_Click(object sender, EventArgs e)
         {
+            HoangHaFunctions.NewFontProcess();
+        }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteLinkNumber();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteLinkCite();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteSID();
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteVisfRenumber();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.AllListT();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.AllListNonT();
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteLinkCount();
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.SegmentsSort();
+        }
+
+        private void button25_Click_1(object sender, EventArgs e)
+        {
+            HoangHaFunctions.PaginationRenumber();
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.NewParaFormat();
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.RemoveFonts();
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            FindText = "\r";
+            ReplaceText = "[@R]";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAllNoMSG);
+
+            FindText = "\n";
+            ReplaceText = "[@N]";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAllNoMSG);
+
+            FindText = "[@R][@N]";
+            ReplaceText = "\r\n";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAllNoMSG);
+
+            FindText = "[@R]";
+            ReplaceText = "\r\n";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAllNoMSG);
+
+            FindText = "[@N]";
+            ReplaceText = "\r\n";
+            MatchCase = true;
+            UseRegularExpression = false;
+            OnDoAction(Action.ReplaceAllNoMSG);
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteReturn();
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.SplitFiles();
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.OpenAllDocuments();
         }
     }
 
@@ -514,7 +611,8 @@ namespace phdesign.NppToolBucket.Forms
         TexasSmcaps,
         AdvEmph,
         Count,
-        footnote2end
+        footnote2end,
+        ReplaceAllNoMSG
     }
 
     public class DoActionEventArgs : EventArgs

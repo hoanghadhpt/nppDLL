@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2011-2012 Paul Heasley
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,11 +27,12 @@ namespace phdesign.NppToolBucket.PluginCore
 
         private const int IndicatorMatch = 31;
         private const int BookmarkMarker = 24;
+        private const int SC_EOL_CRLF = 0;
 
         #endregion
 
         #region Fields
-        
+
         private readonly IntPtr _activeScintilla;
 
         #endregion
@@ -531,6 +532,51 @@ namespace phdesign.NppToolBucket.PluginCore
         {
             return Call(SciMsg.SCI_POSITIONAFTER, pos);
         }
+
+
+        /// <summary>
+        /// Convert EOL to Windows Format
+        /// 
+        /// 
+        /// </summary>
+        public int EOLWindows()
+        {
+            //return Call(SciMsg.SCI_SETEOLMODE, 0, 0);
+
+            return Call(SciMsg.SCI_SETEOLMODE, SC_EOL_CRLF);
+
+        }
+
+
+        /// <summary>
+        /// trả về tên file
+        /// 
+        /// 
+        /// </summary>
+        public string GetCurrentDirectory()
+        {
+            StringBuilder sbCurrentDirectory = new StringBuilder(Win32.MAX_PATH);
+            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTDIRECTORY, Win32.MAX_PATH, sbCurrentDirectory);
+            return sbCurrentDirectory.ToString();
+        }
+
+        public string GetCurrentFileName()
+        {
+            StringBuilder sbCurrentDirectory = new StringBuilder(Win32.MAX_PATH);
+            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETFILENAME, Win32.MAX_PATH, sbCurrentDirectory);
+            return sbCurrentDirectory.ToString();
+        }
+
+        public int GetAllOpenFiles()
+        {
+            return (int)Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETNBOPENFILES, 0, 0);
+        }
+
+        public void ActiveDocumentByIndex(int indext)
+        {
+            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_ACTIVATEDOC, 0, indext);
+        }
+
 
         #endregion
     }

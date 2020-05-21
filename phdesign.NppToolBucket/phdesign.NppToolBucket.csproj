@@ -64,7 +64,7 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Artdesigner-Emoticons-2-Cry-mouth.ico</ApplicationIcon>
+    <ApplicationIcon>Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -266,6 +266,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
+    <Content Include="Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico" />
+    <None Include="Resources\Sort-ascending-icon.png" />
     <None Include="Resources\giaoan.lik-trong-dong.png" />
     <None Include="Resources\e6dc3452323521.5608da7b64f55.jpg" />
     <None Include="Resources\drstrange.jpg" />

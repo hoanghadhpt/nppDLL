@@ -291,6 +291,14 @@ namespace phdesign.NppToolBucket
                         window.Text);
                     _searchScope = null;
                     break;
+                case Forms.Action.ReplaceAllNoMSG:
+                    // Todo: Check if readonly
+                    // if ((*_ppEditView)->getCurrentBuffer()->isReadOnly()) return false;
+                    if (SaveReplaceHistory(replaceText))
+                        window.ReplaceHistory = Settings.ReplaceHistory.ToArray();
+                    ReplaceAll(findText, replaceText);
+                    _searchScope = null;
+                    break;
                 case Forms.Action.ReplaceAll2:
                     ReplaceAll("§§", "$Z");
                     ReplaceAll("§", "$S");

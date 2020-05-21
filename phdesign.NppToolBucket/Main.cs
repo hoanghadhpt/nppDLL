@@ -44,7 +44,7 @@ namespace phdesign.NppToolBucket
             E1897_DateConvert,
             E1897_XML_Convert,
             E1897_Footnote2End,
-            frmD9290
+            E1897_SegmentsSort = 13,
 
         }
 
@@ -94,14 +94,18 @@ namespace phdesign.NppToolBucket
             SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Date Convert", Helpers.E1897_DateConvert);
             SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - XML Convert", Helpers.E1897_XML_Convert);
             SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - &&#x2D; to Hyphen '-'", Helpers.E1897_2DtoDash);
-            SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Footnote to Endnote", Helpers.Ftnt2end);
+            SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Footnote to End", HoangHaFunctions.FootnoteToEnd);
             SetCommand((int)CmdIndex.E1897_Footnote2End, "-------------------------------", HoangHaFunctions.EmptyFunc);
-            if (_Username == "HOANG HA" || _Username == "E1897" || _Username == "E1859" || _Username == "E0265")
+            if (_Username == "HOANG HA" || _Username == "E1897" || _Username == "E1859" || _Username == "E0265" || _Username == "E1057")
             {
                 SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - (Under Construction)", HoangHaFunctions.EmptyFunc);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Duplicate Lines", HoangHaFunctions.RemoveDuplicatedLines);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Small Caps XML Tags", HoangHaFunctions.SmCapsTags);
-
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Duplicated Lines", HoangHaFunctions.RemoveDuplicatedLines);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - smcaps XML", HoangHaFunctions.SmCapsTags);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - New Font Process", HoangHaFunctions.NewFontProcess);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - New Para", HoangHaFunctions.NewParaFormat);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Fonts", HoangHaFunctions.RemoveFonts);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Segments Sort", HoangHaFunctions.SegmentsSort);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Footnote Return", HoangHaFunctions.FootnoteReturn);
             }
             SetCommand((int)CmdIndex.About, "About", About);
             
@@ -125,19 +129,20 @@ namespace phdesign.NppToolBucket
                 pTbIcons);
             Marshal.FreeHGlobal(pTbIcons);
 
-            var toolbarIconBinocularPencil = Properties.Resources.cry_mouth_icon16;
-            tbIcons = new toolbarIcons
+            var toolbarIconSort = Properties.Resources.Sort_ascending_icon;
+            var tbIcons2 = new toolbarIcons
             {
-                hToolbarBmp = toolbarIconBinocularPencil.GetHbitmap()
+                hToolbarBmp = toolbarIconSort.GetHbitmap()
             };
-            pTbIcons = Marshal.AllocHGlobal(Marshal.SizeOf(tbIcons));
-            Marshal.StructureToPtr(tbIcons, pTbIcons, false);
+            var pTbIcons2 = Marshal.AllocHGlobal(Marshal.SizeOf(tbIcons2));
+            Marshal.StructureToPtr(tbIcons2, pTbIcons2, false);
             Win32.SendMessage(
                 nppData._nppHandle,
                 NppMsg.NPPM_ADDTOOLBARICON,
-                _funcItems.Items[(int)CmdIndex.FindAndReplace]._cmdID,
-                pTbIcons);
-            Marshal.FreeHGlobal(pTbIcons);
+                _funcItems.Items[(int)CmdIndex.E1897_SegmentsSort]._cmdID,
+                pTbIcons2);
+            Marshal.FreeHGlobal(pTbIcons2);
+
         }
 
         internal static void PluginCleanUp()
