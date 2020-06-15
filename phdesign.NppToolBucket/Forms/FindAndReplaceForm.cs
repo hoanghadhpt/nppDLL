@@ -359,20 +359,10 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FindText = "1";
-                ReplaceText = "1";
-                MatchCase = true;
-                UseRegularExpression = false;
-                OnDoAction(Action.ReplaceAll2);
-            }
-            catch
-            {
-            }
-            
+            HoangHaFunctions.CaselawVISFPreProcess();
+
             //Done
-            MessageBox.Show("Caselaw Format Replaced.", "Hoàng Hà Plugin");
+            MessageBox.Show("Caselaw VISF Formatted.", "Hoàng Hà Plugin");
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -592,6 +582,81 @@ namespace phdesign.NppToolBucket.Forms
         private void button38_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.OpenAllDocuments();
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D9290_Img_ReNumber();
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D1414_IMG();
+        }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            if (Environment.UserName.ToString().ToUpper() == "E1897")
+            {
+                D9290 frmD9290 = new D9290();
+                frmD9290.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Restricted Area!!!!\r\n\tPlease go out!");
+            }
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            frmMichiganCounsel frm1 = new frmMichiganCounsel();
+            frm1.Show();
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteXMLRenumber();
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+            PaginationXML frm = new PaginationXML();
+            frm.Show();
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.BreakWords();
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.Footnote_Indicator_Predict();
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.Table_Process();
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.StringDola120();
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteLinkAddSID();
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.VISF2XML();
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.EntityToUnicode();
         }
     }
 

@@ -123,6 +123,16 @@ namespace phdesign.NppToolBucket.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Generate_tables_icon {
+            get {
+                object obj = ResourceManager.GetObject("Generate_tables_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap giaoan_lik_trong_dong {
             get {
                 object obj = ResourceManager.GetObject("giaoan_lik_trong_dong", resourceCulture);

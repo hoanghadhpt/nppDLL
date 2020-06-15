@@ -68,9 +68,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -78,6 +81,12 @@
   <ItemGroup>
     <Compile Include="FindAndReplace.cs" />
     <Compile Include="FindAndReplaceSettings.cs" />
+    <Compile Include="Forms\D9290.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\D9290.Designer.cs">
+      <DependentUpon>D9290.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FindAndReplaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +98,18 @@
     </Compile>
     <Compile Include="Forms\GuidGeneratorForm.Designer.cs">
       <DependentUpon>GuidGeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MichiganCounsel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MichiganCounsel.Designer.cs">
+      <DependentUpon>MichiganCounsel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaginationXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaginationXML.Designer.cs">
+      <DependentUpon>PaginationXML.cs</DependentUpon>
     </Compile>
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="GuidGeneratorSettings.cs" />
@@ -234,8 +255,12 @@
     <Compile Include="Utilities\Security\MD5.cs" />
     <Compile Include="Utilities\Security\SHA1.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
+    <Compile Include="VisfToXML.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\D9290.resx">
+      <DependentUpon>D9290.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FindAndReplaceForm.resx">
       <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -244,6 +269,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IndentationSettingsForm.resx">
       <DependentUpon>IndentationSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MichiganCounsel.resx">
+      <DependentUpon>MichiganCounsel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaginationXML.resx">
+      <DependentUpon>PaginationXML.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -267,6 +298,7 @@
   <ItemGroup>
     <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
     <Content Include="Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico" />
+    <None Include="Resources\Generate-tables-icon.png" />
     <None Include="Resources\Sort-ascending-icon.png" />
     <None Include="Resources\giaoan.lik-trong-dong.png" />
     <None Include="Resources\e6dc3452323521.5608da7b64f55.jpg" />

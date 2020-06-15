@@ -45,6 +45,7 @@ namespace phdesign.NppToolBucket
             E1897_XML_Convert,
             E1897_Footnote2End,
             E1897_SegmentsSort = 13,
+            E1897_TableProcess = 18,
 
         }
 
@@ -52,7 +53,7 @@ namespace phdesign.NppToolBucket
 
         internal const string PluginName = "Hoàng Hà";
         internal const string PluginShortName = "Hoàng Hà";
-
+        
         private static string _iniFilePath;
         private static Settings _settings;
         private static bool _showTabBarIcons;
@@ -95,7 +96,6 @@ namespace phdesign.NppToolBucket
             SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - XML Convert", Helpers.E1897_XML_Convert);
             SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - &&#x2D; to Hyphen '-'", Helpers.E1897_2DtoDash);
             SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Footnote to End", HoangHaFunctions.FootnoteToEnd);
-            SetCommand((int)CmdIndex.E1897_Footnote2End, "-------------------------------", HoangHaFunctions.EmptyFunc);
             if (_Username == "HOANG HA" || _Username == "E1897" || _Username == "E1859" || _Username == "E0265" || _Username == "E1057")
             {
                 SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - (Under Construction)", HoangHaFunctions.EmptyFunc);
@@ -106,6 +106,14 @@ namespace phdesign.NppToolBucket
                 SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Fonts", HoangHaFunctions.RemoveFonts);
                 SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Segments Sort", HoangHaFunctions.SegmentsSort);
                 SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Footnote Return", HoangHaFunctions.FootnoteReturn);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Word Break", HoangHaFunctions.BreakWords);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Caselaw VISF Process", HoangHaFunctions.CaselawVISFPreProcess);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Non-Virgo pre-Process", HoangHaFunctions.NonVirgoPreProcess);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Convert Decimal", HoangHaFunctions.ConvertToDecimal);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Table Process", HoangHaFunctions.Table_Process);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - String $ < 120:", HoangHaFunctions.StringDola120);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - visf to XML:", HoangHaFunctions.VISF2XML);
+
             }
             SetCommand((int)CmdIndex.About, "About", About);
             
@@ -114,7 +122,7 @@ namespace phdesign.NppToolBucket
         internal static void SetToolBarIcon()
         {
             if (!_showTabBarIcons) return;
-
+            // === BEGIN ===
             var toolbarIconEditIndent = Properties.Resources.star_icon;
             var tbIcons = new toolbarIcons
             {
@@ -128,7 +136,9 @@ namespace phdesign.NppToolBucket
                 _funcItems.Items[(int)CmdIndex.IndentationSettings]._cmdID,
                 pTbIcons);
             Marshal.FreeHGlobal(pTbIcons);
-
+            // === END ===
+            // =============================================================
+            // === BEGIN ===
             var toolbarIconSort = Properties.Resources.Sort_ascending_icon;
             var tbIcons2 = new toolbarIcons
             {
@@ -142,7 +152,23 @@ namespace phdesign.NppToolBucket
                 _funcItems.Items[(int)CmdIndex.E1897_SegmentsSort]._cmdID,
                 pTbIcons2);
             Marshal.FreeHGlobal(pTbIcons2);
-
+            // === END ===
+            // =============================================================
+            // === BEGIN ===
+            var toolbarIconTable = Properties.Resources.Generate_tables_icon;
+            var tbIcons3 = new toolbarIcons
+            {
+                hToolbarBmp = toolbarIconTable.GetHbitmap()
+            };
+            var pTbIcons3 = Marshal.AllocHGlobal(Marshal.SizeOf(tbIcons3));
+            Marshal.StructureToPtr(tbIcons3, pTbIcons3, false);
+            Win32.SendMessage(
+                nppData._nppHandle,
+                NppMsg.NPPM_ADDTOOLBARICON,
+                _funcItems.Items[(int)CmdIndex.E1897_TableProcess]._cmdID,
+                pTbIcons3);
+            Marshal.FreeHGlobal(pTbIcons3);
+            // === END ===
         }
 
         internal static void PluginCleanUp()
@@ -162,6 +188,8 @@ namespace phdesign.NppToolBucket
         {
             Win32.SendMessage(nppData._nppHandle, NppMsg.NPPM_DOOPEN, 0, IniFilePath);
         }
+
+        
 
         internal static void About()
         {

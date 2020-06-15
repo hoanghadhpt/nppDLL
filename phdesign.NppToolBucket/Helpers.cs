@@ -82,6 +82,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
             if (string.IsNullOrEmpty(text))
             {
                 System.Windows.Forms.MessageBox.Show("Bạn chưa chọn Text","Hoàng Hà");
@@ -89,25 +90,32 @@ namespace phdesign.NppToolBucket
             
             var result = asTitleCase(text);
             editor.SetSelectedText(result);
+            editor.SetSelection(pos.cpMin, pos.cpMax);
         }
 
         internal static void E1897_DateConvert()
         {
             var editor = Editor.GetActive();
             var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
             if (string.IsNullOrEmpty(text))
             {
                 System.Windows.Forms.MessageBox.Show("Bạn chưa chọn Text", "Hoàng Hà");
             }
-            DateTime dt = Convert.ToDateTime(text);
-            var result = dt.ToString("MMMM d, yyyy");
-            editor.SetSelectedText(result);
+            else
+            {
+                DateTime dt = Convert.ToDateTime(text);
+                var result = dt.ToString("MMMM d, yyyy");
+                editor.SetSelectedText(result);
+                editor.SetSelection(pos.cpMin, pos.cpMin + result.Length);
+            }
         }
 
         internal static void E1897_XML_Convert()
         {
             var editor = Editor.GetActive();
             var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
             if (string.IsNullOrEmpty(text))
             {
                 System.Windows.Forms.MessageBox.Show("Bạn chưa chọn Text", "Hoàng Hà");
@@ -115,6 +123,7 @@ namespace phdesign.NppToolBucket
 
             var result = XML_Convert(text);
             editor.SetSelectedText(result);
+            editor.SetSelection(pos.cpMin, pos.cpMin+ result.Length);
         }
 
 

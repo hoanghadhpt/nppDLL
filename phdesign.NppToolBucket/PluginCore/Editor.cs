@@ -577,6 +577,27 @@ namespace phdesign.NppToolBucket.PluginCore
             Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_ACTIVATEDOC, 0, indext);
         }
 
+        // Get Current Position
+        public int GetCurrentPosition()
+        {
+            return Call(SciMsg.SCI_GETCURRENTPOS);
+        }
+        // Set Current Position
+        public int SetCurrentPosition(int Pos)
+        {
+            return Call(SciMsg.SCI_SETCURRENTPOS, Pos, Pos);
+        }
+
+        // Set Scroll Current Position
+        public int ScrollCaret()
+        {
+            return Call(SciMsg.SCI_SCROLLCARET);
+        }
+        // Set Scroll Current Position
+        public int GoToPos(int line)
+        {
+            return Call(SciMsg.SCI_GOTOLINE, line);
+        }
 
         #endregion
     }

@@ -55,7 +55,7 @@ namespace phdesign.NppToolBucket
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
             var CurrentPos = editor.GetCurrentPosition();
-
+            
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
             text = text.Replace("¶", "P");
@@ -124,8 +124,8 @@ namespace phdesign.NppToolBucket
 
             text = text.Replace("Id$O.", "Id.$O");
             text = text.Replace("id$O.", "id.$O");
-            text = text.Replace(" seq$O.", " seq.$O");
-            text = text.Replace(" seq$O.", " seq.$O");
+            text = text.Replace(" seq$O.", " seq.$U");
+            text = text.Replace(" seq$O.", " seq.$U");
             text = text.Replace("$O.,", ".$O,");
             text = text.Replace("$O; $U", "; ");
             text = text.Replace("$O, $U", ", ");
@@ -143,14 +143,6 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$=R,\r\n$=B", ",\r\n");
             text = text.Replace("$N,\r\n$I", ",\r\n");
             text = text.Replace("$O,\r\n$U", ",\r\n");
-
-            text = text.Replace("$N\r\nv. $I", "\r\nv. ");
-            text = text.Replace("$O\r\nv. $U", "\r\nv. ");
-            text = text.Replace("$=R\r\nv. $=B", "\r\nv. ");
-
-            text = text.Replace("$N. v.\r\n$I", ". v.\r\n");
-            text = text.Replace("$O. v.\r\n$U", ". v.\r\n");
-            text = text.Replace("$=R. v.\r\n$=B", ". v.\r\n");
 
             text = text.Replace("$=R. $=B", " ");
             text = text.Replace("$N. $I", " ");
@@ -180,7 +172,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$=B.$=R", ".");
             text = text.Replace("$U.$O", ".");
 
-            text = Regex.Replace(text, @"(\d+)\-\-\r\n(\d+)", "$1-$2");
+            text = Regex.Replace(text,@"(\d+)\-\-\r\n(\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)\-\r\n(\d+)", "$1-$2");
 
             //SpaceAfterDollarAmount
@@ -260,7 +252,8 @@ namespace phdesign.NppToolBucket
 
             text = text.Replace("Id$O.", "Id.$O");
             text = text.Replace("id$O.", "id.$O");
-            text = text.Replace(" seq$O.", " seq.$O");
+            text = text.Replace(" seq$O.", " seq.$U");
+            text = text.Replace(" seq$O.", " seq.$U");
             text = text.Replace("$O.,", ".$O,");
             text = text.Replace("$O; $U", "; ");
             text = text.Replace("$O, $U", ", ");
@@ -307,17 +300,8 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$=B.$=R", ".");
             text = text.Replace("$U.$O", ".");
 
-            text = text.Replace("$N\r\nv. $I", "\r\nv. ");
-            text = text.Replace("$O\r\nv. $U", "\r\nv. ");
-            text = text.Replace("$=R\r\nv. $=B", "\r\nv. ");
+            
 
-            text = text.Replace("$N. v.\r\n$I", ". v.\r\n");
-            text = text.Replace("$O. v.\r\n$U", ". v.\r\n");
-            text = text.Replace("$=R. v.\r\n$=B", ". v.\r\n");
-
-
-            text = Regex.Replace(text, @"(\d+)-\r\n(\d+)", "$1-$2");
-            text = Regex.Replace(text, @"(\d+)- (\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)MDASH\r\n(\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)MDASH(\d+)", "$1-$2");
 
@@ -396,17 +380,9 @@ namespace phdesign.NppToolBucket
             text = text.Replace(".$N", "$N.");
             text = text.Replace(".$O", "$O.");
 
-            text = text.Replace("$I. ", ". $I");
-            text = text.Replace("$=B. ", ". $=B");
-            text = text.Replace("$U. ", ". $U");
-
-            // Font I footnote 
-            text = text.Replace("\r\n$E\r\n$Fn$N", "$N\r\n$E\r\n$Fn");
-
-
             // Footnote BODY =
 
-            text = Regex.Replace(text, @"\r\n n(\d+) (.*?)\r\n\r\n\r\n", "\r\n$F>FTNT>$Tn$1 $2>ENDFN>$E\r\n\r\n\r\n", RegexOptions.Singleline);
+            text = Regex.Replace(text, @"\r\n n(\d+) (.*?)\r\n\r\n\r\n", "\r\n$F>FTNT>$Tn$1 $2>ENDFN>$E\r\n\r\n\r\n",RegexOptions.Singleline);
 
             // ===============
 
@@ -454,7 +430,7 @@ namespace phdesign.NppToolBucket
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
 
-            text = Regex.Replace(text, @"\$\(A> (.*?) <A\$\)", m => $@"$(A> {m.Groups[1].Value.ToUpper()} <A$)", RegexOptions.Singleline);
+            text = Regex.Replace(text, @"\$\(A> (.*?) <A\$\)", m => $@"$(A> {m.Groups[1].Value.ToUpper()} <A$)",RegexOptions.Singleline);
 
             editor.SetDocumentText(text);
 
@@ -990,20 +966,20 @@ namespace phdesign.NppToolBucket
                 MatchCollection matches = Regex.Matches(file, @"15125:(.*);1");
                 foreach (Match m in matches)
                 {
-
+                    
                     d198 += m.Groups[1].Value + " ";
                 }
                 tempAllFiles += file + "\r\n" + d198 + "\r\n";
             }
-            editor.SetDocumentText(tempAllFiles.Replace("\r\n$198:\r\n", ""));
+            editor.SetDocumentText(tempAllFiles.Replace("\r\n$198:\r\n",""));
 
         }
 
-        private static string D9290_IMG_NUMBER(string text, int i = -1)
+        private static string D9290_IMG_NUMBER(string text, int i =-1)
         {
             string result = Regex.Replace(text, @"15125:(.*)([0-9]{4})([a-z]{1,5});1", (Match n) =>
             {
-                result = string.Format("15125:{0}{2}{1};1", n.Groups[1].Value, D9290imgList[++i], n.Groups[2].Value);
+                result = string.Format("15125:{0}{2}{1};1", n.Groups[1].Value, D9290imgList[++i],n.Groups[2].Value);
                 return (result);
             });
             return result;
@@ -1042,7 +1018,7 @@ namespace phdesign.NppToolBucket
                 }
                 tempAllFiles += file + "\r\n" + d198 + "\r\n";
             }
-            editor.SetDocumentText(tempAllFiles.Replace("\r\n$233:\r\n", ""));
+            editor.SetDocumentText(tempAllFiles.Replace("\r\n$233:\r\n",""));
 
         }
 
@@ -1056,7 +1032,7 @@ namespace phdesign.NppToolBucket
             {
                 string ssid = "";
                 Match SID;
-                SID = Regex.Match(file, "#SID([A-Z0-9]{14})", RegexOptions.None);
+                SID = Regex.Match(file, "#SID([A-Z0-9]{14})",RegexOptions.None);
 
                 if (SID.Success)
                 {
@@ -1150,11 +1126,11 @@ namespace phdesign.NppToolBucket
                         indicator_final = "< " + m2.Value + ">";
                         text = text.Replace(indicator_final, "\r\n" + body + "\r\n");
                     }
-
+                    
                 }
 
                 File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "_BodyFootnote.H.Ha", "");
-                File.AppendAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "_BodyFootnote.H.Ha", tmp.Replace("[!!]", "\r\n"));
+                File.AppendAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "_BodyFootnote.H.Ha", tmp.Replace("[!!]","\r\n"));
 
                 text = text.Replace("[!!]___$%$%", "\r\n$%$%");
                 text = text.Replace("[!!]", "\r\n");
@@ -1196,7 +1172,7 @@ namespace phdesign.NppToolBucket
             }
         }
 
-        //
+       //
 
         internal static void SplitFiles()
         {
@@ -1247,7 +1223,7 @@ namespace phdesign.NppToolBucket
         internal static void OpenAllDocuments()
         {
             var editor = Editor.GetActive();
-            int totalopenfiles = editor.GetAllOpenFiles() - 1;
+            int totalopenfiles = editor.GetAllOpenFiles()-1;
             for (int i = 0; i < totalopenfiles; i++)
             {
                 editor.ActiveDocumentByIndex(i);
@@ -1292,15 +1268,9 @@ namespace phdesign.NppToolBucket
             else
             {
                 text = Regex.Replace(text, @"([a-z]{2,}[.,?:;’”\'""\)]{0,})(\d+)", @"$1  n$2");
-                text = Regex.Replace(text, @"\)\.(\d+)", @").   n$1");
-                text = Regex.Replace(text, @"19(\d+)\.(\d+)", @"19$1.   n$2");
-                text = Regex.Replace(text, @"20(\d+)\.(\d+)", @"20$1.   n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$=R", @"$1$=R  n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$O", @"$1$O  n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$N", @"$1$N  n$2");
-
                 editor.SetDocumentText(text);
             }
+
         }
 
         internal static void ConvertToDecimal()
@@ -1333,59 +1303,8 @@ namespace phdesign.NppToolBucket
             }
         }
 
-        internal static void EntityToUnicode()
-        {
-            var editor = Editor.GetActive();
-            var text = editor.GetSelectedText();
-            var pos = editor.GetSelectionRange();
-            if (string.IsNullOrEmpty(text))
-            {
-                MessageBox.Show("Document Empty");
-                return;
-            }
-            else
-            {
-                StringBuilder stringBuilder = new StringBuilder();
-                foreach (char c in text)
-                {
-                    if ((int)c > 127)
-                    {
-                        stringBuilder.Append("&#");
-                        stringBuilder.Append((int)c);
-                        stringBuilder.Append(";");
-                    }
-                    else
-                    {
-                        stringBuilder.Append(c);
-                    }
-                }
-                editor.SetSelectedText(stringBuilder.ToString());
-                editor.SetSelection(pos.cpMin, pos.cpMin + stringBuilder.ToString().Length);
-            }
-
-        }
 
 
-        internal static void VISF2XML()
-        {
-            var editor = Editor.GetActive();
-            var text = editor.GetDocumentText();
-            var fName = editor.GetCurrentFileName();
-            var fPath = editor.GetCurrentDirectory() + "\\" + fName;
-            string text2 = text;
-            if (string.IsNullOrEmpty(text))
-            {
-                MessageBox.Show("Document Empty");
-                return;
-            }
-            else
-            {
-                VisfToXML v = new VisfToXML();
-                text = v.visf2xml(text, fName,fPath);
-                
-                editor.SetDocumentText(text);
-            }
-        }
 
         // Class - Somethings else
 
