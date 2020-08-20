@@ -549,7 +549,7 @@ namespace phdesign.NppToolBucket.PluginCore
 
 
         /// <summary>
-        /// trả về tên file
+        /// trả về tên Folder
         /// 
         /// 
         /// </summary>
@@ -559,7 +559,11 @@ namespace phdesign.NppToolBucket.PluginCore
             Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTDIRECTORY, Win32.MAX_PATH, sbCurrentDirectory);
             return sbCurrentDirectory.ToString();
         }
-
+        /// <summary>
+        /// trả về tên File
+        /// 
+        /// 
+        /// </summary>
         public string GetCurrentFileName()
         {
             StringBuilder sbCurrentDirectory = new StringBuilder(Win32.MAX_PATH);
@@ -567,17 +571,32 @@ namespace phdesign.NppToolBucket.PluginCore
             return sbCurrentDirectory.ToString();
         }
 
+        /// <summary>
+        /// trả về tổng số file đang mở
+        /// int
+        /// 
+        /// </summary>
         public int GetAllOpenFiles()
         {
             return (int)Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETNBOPENFILES, 0, 0);
         }
 
+
+        /// <summary>
+        /// Active Scintillar by Index (int)
+        /// 
+        /// 
+        /// </summary>
         public void ActiveDocumentByIndex(int indext)
         {
             Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_ACTIVATEDOC, 0, indext);
         }
 
-        // Get Current Position
+        /// <summary>
+        /// Get Current Position
+        /// 
+        /// 
+        /// </summary>
         public int GetCurrentPosition()
         {
             return Call(SciMsg.SCI_GETCURRENTPOS);
@@ -599,6 +618,45 @@ namespace phdesign.NppToolBucket.PluginCore
             return Call(SciMsg.SCI_GOTOLINE, line);
         }
 
+        /// <summary>
+        /// Get Current Language
+        /// Return int type
+        /// 
+        /// </summary>
+        public int GetCurrentLanguage()
+        {
+            var i = Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTBUFFERID, 0, 0);
+            var ii =  Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETBUFFERLANGTYPE, i, 0);
+            return ii.ToInt32();
+        }
+        /// <summary>
+        /// Open file by Path
+        /// 
+        /// 
+        /// </summary>
+        public void OpenFile(string fullPathToFile)
+        {
+            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_DOOPEN, 0, fullPathToFile);
+        }
+
+        /// <summary>
+        /// Add New Scintillar
+        /// 
+        /// 
+        /// </summary>
+        public void NewScintillar()
+        {
+            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_MENUCOMMAND, 0, NppMenuCmd.IDM_FILE_NEW);
+        }
+        /// <summary>
+        /// Save current Scintillar to file
+        /// 
+        /// 
+        /// </summary>
+        public void SaveAs(string filename)
+        {
+            //Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_MENUCOMMAND, 0, NppMenuCmd.IDM_FILE_SAVECOPYAS);
+        }
         #endregion
     }
 }

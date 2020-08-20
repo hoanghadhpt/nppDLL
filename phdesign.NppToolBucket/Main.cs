@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using phdesign.NppToolBucket.Forms;
 using phdesign.NppToolBucket.Infrastructure;
 using phdesign.NppToolBucket.PluginCore;
 using phdesign.NppToolBucket.Utilities;
@@ -46,13 +48,17 @@ namespace phdesign.NppToolBucket
             E1897_Footnote2End,
             E1897_SegmentsSort = 13,
             E1897_TableProcess = 18,
-
+            Shortcut,
+            SpacingFormat = 23,
+            CallD9290 = 24,
+            MichiganCounsel = 25,
+            Pagination = 26,
         }
 
         #region Fields
 
-        internal const string PluginName = "Hoàng Hà";
-        internal const string PluginShortName = "Hoàng Hà";
+        internal const string PluginName = "Hoang Ha";
+        internal const string PluginShortName = "HoangHa";
         
         private static string _iniFilePath;
         private static Settings _settings;
@@ -91,32 +97,67 @@ namespace phdesign.NppToolBucket
             GuidGenerator.Settings = new GuidGeneratorSettings(_settings);
 
             SetCommand((int)CmdIndex.FindAndReplace, "Hoàng Hà Plugin", FindAndReplace.Show, new ShortcutKey(false, false, false, Keys.F10));
-            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Advance Proper Case", Helpers.E1897_SmallCaps);
-            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Date Convert", Helpers.E1897_DateConvert);
-            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - XML Convert", Helpers.E1897_XML_Convert);
-            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - &&#x2D; to Hyphen '-'", Helpers.E1897_2DtoDash);
-            SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Footnote to End", HoangHaFunctions.FootnoteToEnd);
-            if (_Username == "HOANG HA" || _Username == "E1897" || _Username == "E1859" || _Username == "E0265" || _Username == "E1057")
+            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Advance Proper Case", Helpers.E1897_SmallCaps);
+            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Date Convert", Helpers.E1897_DateConvert);
+            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - XML Convert", Helpers.E1897_XML_Convert);
+            SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - &&#x2D; to Hyphen '-'", Helpers.E1897_2DtoDash);
+            SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - Footnote to End", HoangHaFunctions.FootnoteToEnd);
+            if (_Username == "HOANG HA" || _Username == "E1897" || _Username == "E1859" || _Username == "E0265" || _Username == "E1057" || _Username == "E2866" || _Username == "E1872")
             {
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - (Under Construction)", HoangHaFunctions.EmptyFunc);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Duplicated Lines", HoangHaFunctions.RemoveDuplicatedLines);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - smcaps XML", HoangHaFunctions.SmCapsTags);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - New Font Process", HoangHaFunctions.NewFontProcess);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - New Para", HoangHaFunctions.NewParaFormat);
-                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoàng Hà - Remove Fonts", HoangHaFunctions.RemoveFonts);
-                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Segments Sort", HoangHaFunctions.SegmentsSort);
-                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Footnote Return", HoangHaFunctions.FootnoteReturn);
-                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoàng Hà - Word Break", HoangHaFunctions.BreakWords);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Caselaw VISF Process", HoangHaFunctions.CaselawVISFPreProcess);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Non-Virgo pre-Process", HoangHaFunctions.NonVirgoPreProcess);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Convert Decimal", HoangHaFunctions.ConvertToDecimal);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - Table Process", HoangHaFunctions.Table_Process);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - String $ < 120:", HoangHaFunctions.StringDola120);
-                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoàng Hà - visf to XML:", HoangHaFunctions.VISF2XML);
-
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - (Under Construction)", HoangHaFunctions.EmptyFunc);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - Remove Duplicated Lines", HoangHaFunctions.RemoveDuplicatedLines);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - smcaps XML", HoangHaFunctions.SmCapsTags); //9
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - New Font Process", HoangHaFunctions.NewFontProcess);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - New Para", HoangHaFunctions.NewParaFormat);
+                SetCommand((int)CmdIndex.E1897_Footnote2End, "Hoang Ha - Remove Fonts", HoangHaFunctions.RemoveFonts);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoang Ha - Segments Sort", HoangHaFunctions.SegmentsSort);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoang Ha - Footnote Return", HoangHaFunctions.FootnoteReturn);
+                SetCommand((int)CmdIndex.E1897_SegmentsSort, "Hoang Ha - Word Break", HoangHaFunctions.BreakWords);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Caselaw VISF Process", HoangHaFunctions.CaselawVISFPreProcess);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Non-Virgo pre-Process", HoangHaFunctions.NonVirgoPreProcess);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Convert Decimal", HoangHaFunctions.ConvertToDecimal);
+                //SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Table Process", HoangHaFunctions.Table_Process); --- Old Table
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Table Process", HoangHaFunctions.TableForm); // _NEW TALBE
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - String $ < 120:", HoangHaFunctions.StringDola120);
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - visf to XML:", HoangHaFunctions.VISF2XML); //21
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - NonVirgo XML String:", HoangHaFunctions.NonVirgoXMLString); //22
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Counsel", Counsel.ProcessCounsel); //
+                SetCommand((int)CmdIndex.E1897_DateConvert, "Hoang Ha - Spacing Format", HoangHaFunctions.SpacingFormat); //23
+                SetCommand((int)CmdIndex.CallD9290, "Hoang Ha - D9290", CallD9290); //24
+                SetCommand((int)CmdIndex.MichiganCounsel, "Hoang Ha - Michigan Counsel", CallMichigan); //25
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Pagination", CallPagination); //26
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Add SID to $200", HoangHaFunctions.AddSIDs); //27
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Remove Table Only", HoangHaFunctions.RemoveTableOnly); //28
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Body Footnote One Space", HoangHaFunctions.FootnoteBodyOneSpace); //29
+                SetCommand((int)CmdIndex.Shortcut, "Hoang Ha - Shortcut", HoangHaFunctions.CallShortcut, new ShortcutKey(true, false, false, Keys.OemPeriod)); // 27
             }
             SetCommand((int)CmdIndex.About, "About", About);
-            
+        }
+
+        private static void CallD9290()
+        {
+            if (Environment.UserName.ToString().ToUpper() == "E1897" || Environment.UserName.ToString().ToUpper() == "HOANG HA")
+            {
+                D9290 frmD9290 = new D9290();
+                frmD9290.Show();
+            }
+            else
+            {
+                MessageBox.Show("Restricted Area!!!!\r\n\tPlease go out!");
+            }
+        }
+
+        private static void CallMichigan()
+        {
+
+            frmMichiganCounsel frm = new frmMichiganCounsel();
+            frm.Show();
+        }
+
+        private static void CallPagination()
+        {
+            PaginationXML frm = new PaginationXML();
+            frm.Show();
         }
 
         internal static void SetToolBarIcon()
@@ -139,7 +180,7 @@ namespace phdesign.NppToolBucket
             // === END ===
             // =============================================================
             // === BEGIN ===
-            var toolbarIconSort = Properties.Resources.Sort_ascending_icon;
+            var toolbarIconSort = Properties.Resources.timeshift_icon;
             var tbIcons2 = new toolbarIcons
             {
                 hToolbarBmp = toolbarIconSort.GetHbitmap()
@@ -149,7 +190,7 @@ namespace phdesign.NppToolBucket
             Win32.SendMessage(
                 nppData._nppHandle,
                 NppMsg.NPPM_ADDTOOLBARICON,
-                _funcItems.Items[(int)CmdIndex.E1897_SegmentsSort]._cmdID,
+                _funcItems.Items[(int)CmdIndex.MichiganCounsel]._cmdID,
                 pTbIcons2);
             Marshal.FreeHGlobal(pTbIcons2);
             // === END ===
@@ -165,10 +206,29 @@ namespace phdesign.NppToolBucket
             Win32.SendMessage(
                 nppData._nppHandle,
                 NppMsg.NPPM_ADDTOOLBARICON,
-                _funcItems.Items[(int)CmdIndex.E1897_TableProcess]._cmdID,
+                _funcItems.Items[(int)CmdIndex.Pagination]._cmdID,
                 pTbIcons3);
             Marshal.FreeHGlobal(pTbIcons3);
             // === END ===
+
+            // =============================================================
+            // === BEGIN ===
+            var toolbarIconPagination = Properties.Resources.hahahah;
+            var tbIcons4 = new toolbarIcons
+            {
+                hToolbarBmp = toolbarIconPagination.GetHbitmap()
+            };
+            var tbIconsPagination = Marshal.AllocHGlobal(Marshal.SizeOf(tbIcons4));
+            Marshal.StructureToPtr(tbIcons4, tbIconsPagination, false);
+            Win32.SendMessage(
+                nppData._nppHandle,
+                NppMsg.NPPM_ADDTOOLBARICON,
+                _funcItems.Items[(int)CmdIndex.CallD9290]._cmdID,
+                tbIconsPagination);
+            Marshal.FreeHGlobal(tbIconsPagination);
+            // === END ===
+
+            // =============================================================
         }
 
         internal static void PluginCleanUp()
@@ -194,7 +254,7 @@ namespace phdesign.NppToolBucket
         internal static void About()
         {
             MessageBox.Show(
-                string.Format("{0}\r\nv{1}\r\n\r\nBy Hoang Ha\r\nAka E1897", PluginName, AssemblyUtils.Version),
+                string.Format("{0}\r\nv{1}\r\n\r\nDeveloped by Hoàng Mạnh Hà\r\nAka E1897", PluginName, AssemblyUtils.Version),
                 string.Format("{0} Plugin", PluginName),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

@@ -148,4 +148,16 @@
   <data name="Generate_tables_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Generate-tables-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cat_walk_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cat-walk-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hahahah" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\10042-squinting-face-with-tongue-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="text_plus_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\text-plus-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="timeshift_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\timeshift-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

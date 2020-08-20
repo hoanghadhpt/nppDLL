@@ -376,7 +376,7 @@ namespace phdesign.NppToolBucket.Forms
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
 
-            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265" || Environment.UserName.ToUpper() == "E1057")
+            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265" || Environment.UserName.ToUpper() == "E1057" || Environment.UserName.ToUpper() == "E1872")
             {
 
             }
@@ -596,10 +596,10 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button60_Click(object sender, EventArgs e)
         {
-            if (Environment.UserName.ToString().ToUpper() == "E1897")
+            if (Environment.UserName.ToString().ToUpper() == "E1897" || Environment.UserName.ToString().ToUpper() == "HOANG HA" || Environment.UserName.ToString().ToUpper() == "1057")
             {
                 D9290 frmD9290 = new D9290();
-                frmD9290.ShowDialog();
+                frmD9290.Show();
             }
             else
             {
@@ -657,6 +657,66 @@ namespace phdesign.NppToolBucket.Forms
         private void button78_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.EntityToUnicode();
+        }
+
+        private void button79_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.NonVirgoXMLString();
+        }
+
+        private void button89_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.ConvertToDecimal();
+        }
+
+        private void button90_Click(object sender, EventArgs e)
+        {
+            Helpers.E1897_DateConvert();
+        }
+
+        private void button91_Click(object sender, EventArgs e)
+        {
+            Helpers.E1897_XML_Convert();
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.FootnoteTagsForCaselaw();
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.AddSIDs();
+        }
+
+        private void button80_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D1BVU_XML();
+        }
+
+        private void button81_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D1BVU_VISF();
+        }
+
+        private void button82_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.DE535();
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D1712();
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.StringDola14();
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.StringDola130();
         }
     }
 

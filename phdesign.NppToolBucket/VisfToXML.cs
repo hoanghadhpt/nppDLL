@@ -723,16 +723,30 @@ namespace phdesign.NppToolBucket
                 text = Regex.Replace(text, "</lnvxe:text></p></lnvxe:text></p>\r\n</lnvxe:blockquote>", "</lnvxe:text></p>\r\n</lnvxe:blockquote></p>", RegexOptions.None);
                 text = Regex.Replace(text, "</lnvxe:fnr> </lnvxe:text></p>", "</lnvxe:fnr></lnvxe:text></p>", RegexOptions.None);
                 text = Regex.Replace(text, "</lnvxe:blockquote></lnvxe:text></p>", "</lnvxe:blockquote></p>", RegexOptions.None);
-                text = Regex.Replace(text, "</lnvxe:footnotegrp>\r\n<lnvxe:footnotegrp>", "", RegexOptions.None);
-                //</lnvxe:fnr> <emph typestyle="it">
-                //<lnvxe:blockquote><p i="3"><lnvxe:text> </lnvxe:text></p></lnvxe:blockquote>
+                text = Regex.Replace(text, "</lnvxe:text></p>\r\n</lnvxe:text></p>", "</lnvxe:text></p>", RegexOptions.None);
+
+                
+                // Normal Replace
+                //
+                //
                 text = text.Replace("</lnv:FULL-NAME>" + Environment.NewLine + "<lnv:FULL-NAME>", "");
                 text = text.Replace("</lnv:NUMBER>" + Environment.NewLine + "<lnv:NUMBER>", "<lnvxe:connector>,</lnvxe:connector>");
-                text = text.Replace("</lnvxe:footnotegrp>" + Environment.NewLine + "<lnvxe:footnotegrp>", "");
-                text = text.Replace("</lnvxe:footnotegrp>" + Environment.NewLine + "<lnvxe:footnotegrp>", "");
+                text = text.Replace("</lnvxe:blockquote>\n<lnvxe:footnotegrp>", "</lnvxe:blockquote></p>\r\n<lnvxe:footnotegrp>");
+                text = text.Replace("</lnvxe:footnotegrp>\r\n<lnvxe:footnotegrp>", "");
+                text = text.Replace("</lnvxe:footnotegrp>\n<lnvxe:footnotegrp>", "");
                 text = text.Replace("</lnvxe:fnr> ,", "</lnvxe:fnr>,");
                 text = text.Replace("</lnvxe:fnr> .", "</lnvxe:fnr>.");
                 text = text.Replace("</lnvxe:fnr> :", "</lnvxe:fnr>:");
+                text = text.Replace("</lnvxe:blockquote><lnvxe:h>", "</lnvxe:blockquote>\r\n<lnvxe:h>");
+                text = text.Replace("</lnvxe:h><lnvxe:h>", "</lnvxe:h>\r\n<lnvxe:h>");
+                text = text.Replace("</lnvxe:blockquote></p>\r\n</lnvxe:blockquote>\r\n<lnvxe:text>", "</lnvxe:text></p>\r\n</lnvxe:blockquote></p>\r\n</lnvxe:blockquote>\r\n<lnvxe:text>");
+                text = text.Replace("</lnvxe:blockquote></p>\r\n<lnvxe:text>", "</lnvxe:blockquote>\r\n<lnvxe:text>");
+                text = text.Replace("<emph typestyle=\"it\">See</emph><emph typestyle=\"smcaps\">", "<emph typestyle=\"it\">See</emph> <emph typestyle=\"smcaps\">");
+                text = text.Replace("<emph typestyle=\"it\">See</emph><emph typestyle=\"bf\">", "<emph typestyle=\"it\">See</emph> <emph typestyle=\"bf\">");
+                text = text.Replace("<emph typestyle=\"it\">See</emph><emph typestyle=\"un\">", "<emph typestyle=\"it\">See</emph> <emph typestyle=\"un\">");
+                text = text.Replace("<emph typestyle=\"it\">see also</emph><emph typestyle=\"un\">", "<emph typestyle=\"it\">see also</emph> <emph typestyle=\"un\">");
+                text = text.Replace("<emph typestyle=\"it\">see</emph><emph typestyle=\"un\">", "<emph typestyle=\"it\">see</emph> <emph typestyle=\"un\">");
+                text = text.Replace("<emph typestyle=\"it\">citing</emph><emph typestyle=\"un\">", "<emph typestyle=\"it\">citing</emph> <emph typestyle=\"un\">");
 
                 if (text.Contains("<lnv:COURT>UNITED STATES DISTRICT COURT"))
                 {

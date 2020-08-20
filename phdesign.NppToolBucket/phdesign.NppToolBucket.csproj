@@ -79,8 +79,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classD1712.cs" />
+    <Compile Include="classDE535.cs" />
+    <Compile Include="Counsel.cs" />
+    <Compile Include="D1BVU.cs" />
     <Compile Include="FindAndReplace.cs" />
     <Compile Include="FindAndReplaceSettings.cs" />
+    <Compile Include="Forms\FormTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTable.designer.cs">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\D9290.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +120,12 @@
     </Compile>
     <Compile Include="Forms\PaginationXML.Designer.cs">
       <DependentUpon>PaginationXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Shortcut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Shortcut.Designer.cs">
+      <DependentUpon>Shortcut.cs</DependentUpon>
     </Compile>
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="GuidGeneratorSettings.cs" />
@@ -233,6 +249,7 @@
     <Compile Include="Jayrock\Reflection\Reflector.cs" />
     <Compile Include="Jayrock\TypeResolution.cs" />
     <Compile Include="Jayrock\UnixTime.cs" />
+    <Compile Include="KeyboardHook.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="PluginCore\Editor.cs" />
     <Compile Include="PluginCore\NppPluginNETBase.cs" />
@@ -256,8 +273,12 @@
     <Compile Include="Utilities\Security\SHA1.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
     <Compile Include="VisfToXML.cs" />
+    <Compile Include="xZero.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FormTable.resx">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\D9290.resx">
       <DependentUpon>D9290.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PaginationXML.resx">
       <DependentUpon>PaginationXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Shortcut.resx">
+      <DependentUpon>Shortcut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -298,6 +322,10 @@
   <ItemGroup>
     <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
     <Content Include="Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico" />
+    <None Include="Resources\text-plus-icon.png" />
+    <None Include="Resources\cat-walk-icon.png" />
+    <None Include="Resources\10042-squinting-face-with-tongue-icon.png" />
+    <None Include="Resources\timeshift-icon.png" />
     <None Include="Resources\Generate-tables-icon.png" />
     <None Include="Resources\Sort-ascending-icon.png" />
     <None Include="Resources\giaoan.lik-trong-dong.png" />

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using phdesign.NppToolBucket.PluginCore;
 using phdesign.NppToolBucket.Utilities.Security;
+using phdesign.NppToolBucket.Forms;
 
 namespace phdesign.NppToolBucket
 {
@@ -95,7 +96,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$=R,\r\n$=B", ",\r\n");
             text = text.Replace("v$=R.\r\n$=B", "v.\r\n");
 
-            text = text.Replace("$I\r\n$=U", "\r\n");
+            text = text.Replace("$I\r\n$U", "\r\n");
             text = text.Replace("$O,\r\n$U", ",\r\n");
             text = text.Replace("v$O.\r\n$U", "v.\r\n");
 
@@ -172,6 +173,26 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$N, v. $I", ". v. ");
             text = text.Replace("$O, v. $U", ". v. ");
 
+            text = text.Replace("$=R. v $=B", ". v. ");
+            text = text.Replace("$N. v $I", ". v. ");
+            text = text.Replace("$O. v $U", ". v. ");
+
+            text = text.Replace("$=R, v $=B", ". v. ");
+            text = text.Replace("$N, v $I", ". v. ");
+            text = text.Replace("$O, v $U", ". v. ");
+
+            text = text.Replace("$=R v $=B", ". v. ");
+            text = text.Replace("$N v $I", ". v. ");
+            text = text.Replace("$O v $U", ". v. ");
+
+            text = text.Replace("$N.\r\n$Iv. ", ".\r\nv. ");
+            text = text.Replace("$O.\r\n$Uv. ", ".\r\nv. ");
+            text = text.Replace("$=R.\r\n$=Bv. ", ".\r\nv. ");
+
+            text = text.Replace("$=R\r\n$=B", "\r\n");
+            text = text.Replace("$N\r\n$I", "\r\n");
+            text = text.Replace("$O\r\n$U", "\r\n");
+
             text = text.Replace("$I$N", "");
             text = text.Replace("$=B$=R", "");
             text = text.Replace("$U$O", "");
@@ -180,8 +201,22 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$=B.$=R", ".");
             text = text.Replace("$U.$O", ".");
 
+            text = text.Replace("$N--$I", "--");
+            text = text.Replace("$=R--$=B", "--");
+            text = text.Replace("$O--$U", "--");
+
+            text = text.Replace("$I, ", ", $I");
+            text = text.Replace("$=B, ", ", $=B");
+            text = text.Replace("$U, ", ", $U");
+
+            text = text.Replace(". . .$N", "$N. . .");
+            text = text.Replace(". .$N .", "$N. . .");
+            text = text.Replace(".$N . .", "$N. . .");
+
+
             text = Regex.Replace(text, @"(\d+)\-\-\r\n(\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)\-\r\n(\d+)", "$1-$2");
+            text = Regex.Replace(text, @"\$=P(\d+)\r\n", "$=P$1 ");
 
             //SpaceAfterDollarAmount
 
@@ -191,6 +226,14 @@ namespace phdesign.NppToolBucket
             text = text.Replace("__$__$", "$");
             text = text.Replace("$__$", "$ ");
 
+            // Xoa Mac Dinh Doan Thua
+            text = text.Replace("$%$%$T", "$%$%");
+            text = text.Replace("$%$%$=H", "$%$%");
+            text = text.Replace("$T$=H", "$T");
+            text = text.Replace("$T$%", "$T");
+            text = text.Replace("$%$%$%$%", "$%$%");
+            text = text.Replace("$%$%$%", "$%$%");
+            text = text.Replace("$T$T", "$T");
             // End Process
             editor.SetDocumentText(text);
         }
@@ -205,7 +248,7 @@ namespace phdesign.NppToolBucket
             // Begin process
             text = text.Replace("¶", @"\P");
             text = text.Replace("§§", "$Z");
-            text = text.Replace("§", " $S");
+            text = text.Replace("§", "$S");
             text = text.Replace("½", " 1/2");
             text = text.Replace("¼", " 1/4");
             text = text.Replace("‘", "'");
@@ -230,10 +273,10 @@ namespace phdesign.NppToolBucket
             text = text.Replace("v$=R.\r\n$=B", "v.\r\n");
             text = text.Replace("$=R\r\n$=Bv.", "\r\nv.");
 
-            text = text.Replace("$O\r\n$=U", "\r\n");
+            text = text.Replace("$O\r\n$U", "\r\n");
             text = text.Replace("$O,\r\n$U", ",\r\n");
             text = text.Replace("v$O.\r\n$U", "v.\r\n");
-            text = text.Replace("$=O\r\n$=Uv.", "\r\nv.");
+            text = text.Replace("$O\r\n$Uv.", "\r\nv.");
 
             text = text.Replace("“", "\"");
             text = text.Replace("”", "\"");
@@ -295,6 +338,18 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$N. v. $I", ". v. ");
             text = text.Replace("$O. v. $U", ". v. ");
 
+            text = text.Replace("$=R. v $=B", ". v. ");
+            text = text.Replace("$N. v $I", ". v. ");
+            text = text.Replace("$O. v $U", ". v. ");
+
+            text = text.Replace("$=R, v $=B", ". v. ");
+            text = text.Replace("$N, v $I", ". v. ");
+            text = text.Replace("$O, v $U", ". v. ");
+
+            text = text.Replace("$=R v $=B", ". v. ");
+            text = text.Replace("$N v $I", ". v. ");
+            text = text.Replace("$O v $U", ". v. ");
+
             text = text.Replace("$=R, v. $=B", ", v. ");
             text = text.Replace("$N, v. $I", ", v. ");
             text = text.Replace("$O, v. $U", ", v. ");
@@ -306,6 +361,11 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$I.$N", ".");
             text = text.Replace("$=B.$=R", ".");
             text = text.Replace("$U.$O", ".");
+
+
+            text = text.Replace("$N.\r\n$Iv. ", ".\r\nv. ");
+            text = text.Replace("$O.\r\n$Uv. ", ".\r\nv. ");
+            text = text.Replace("$=R.\r\n$=Bv. ", ".\r\nv. ");
 
             text = text.Replace("$N\r\nv. $I", "\r\nv. ");
             text = text.Replace("$O\r\nv. $U", "\r\nv. ");
@@ -320,7 +380,19 @@ namespace phdesign.NppToolBucket
             text = Regex.Replace(text, @"(\d+)- (\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)MDASH\r\n(\d+)", "$1-$2");
             text = Regex.Replace(text, @"(\d+)MDASH(\d+)", "$1-$2");
+            // Xoa Mac Dinh Doan Thua
 
+            // Xoa Mac Dinh Doan Thua
+            text = text.Replace("$%$%$T", "$%$%");
+            text = text.Replace("$%$%$=H", "$%$%");
+            text = text.Replace("$T$=H", "$T");
+            text = text.Replace("$T$%", "$T");
+            text = text.Replace("$%$%$%$%", "$%$%");
+            text = text.Replace("$%$%$%", "$%$%");
+            text = text.Replace("$T$T", "$T");
+
+            text = text.Replace("$=H$%$%", "$=H");
+            text = text.Replace("$=H$T", "$=H");
 
             // End Process
             editor.SetDocumentText(text);
@@ -339,6 +411,12 @@ namespace phdesign.NppToolBucket
             text = text.Replace("<U>", "<u>");
             text = text.Replace("<S>", "<s>");
             text = text.Replace("<N>", "<s>");
+
+            text = text.Replace("</I>", "</i>");
+            text = text.Replace("</B>", "</b>");
+            text = text.Replace("</U>", "</u>");
+            text = text.Replace("</S>", "</s>");
+            text = text.Replace("</N>", "</s>");
 
 
             text = text.Replace(" <i>", "<i> ");
@@ -420,12 +498,16 @@ namespace phdesign.NppToolBucket
             var text = editor.GetDocumentText();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
-
+            
             RegexOptions options = RegexOptions.None;
+            text = text.Replace("\t", " ");
+            text = Regex.Replace(text, @"^\s+", "");
             Regex regex = new Regex("[ ]{2,}", options);
             Regex regex2 = new Regex(@"\s+\r\n", options);
             text = regex.Replace(text, " ");
             text = regex2.Replace(text, "\r\n");
+            text = Regex.Replace(text, @"\r\n\s+", "\r\n");
+            text = Regex.Replace(text, @"\$(\d{2,3}): \$", m => "$"+ m.Groups[1].Value + ":$");
             text.Trim();
 
             editor.SetDocumentText(text);
@@ -547,7 +629,7 @@ namespace phdesign.NppToolBucket
 
             text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$T$1. ");
             text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$T$1. ");
-            text = Regex.Replace(text, @"\r\n(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\. ", "\r\n$T$1. ");
+            text = Regex.Replace(text, @"\r\n(cm|cd|d?c{0,3})(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})\. ", "\r\n$T$1$2$3. ");
             text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$T($1.) ");
             text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$T($1.) ");
             text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$T($1) ");
@@ -564,7 +646,7 @@ namespace phdesign.NppToolBucket
 
             text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$%$%$1. ");
             text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$%$%$1. ");
-            text = Regex.Replace(text, @"\r\n(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\. ", "\r\n$%$%$1. ");
+            text = Regex.Replace(text, @"\r\n(cm|cd|d?c{0,3})(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})\. ", "\r\n$%$%$1$2$3. ");
             text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$%$%($1.) ");
             text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$%$%($1.) ");
             text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$%$%($1) ");
@@ -825,6 +907,42 @@ namespace phdesign.NppToolBucket
             editor.SetDocumentText(tempAllFiles);
         }
 
+        internal static void StringDola130()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            text = text.Replace("\r\n", "[!!]");
+            string tempAllFiles = "";
+            // Split Into Multiple Files
+            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+
+            foreach (string file in listFiles)
+            {
+                string[] Segments = Regex.Split(file, @"(?=\$\d+:)");
+                Array.Sort(Segments, new MyComparer());
+
+                // Find Opinion $
+
+                int Index = Array.FindIndex(Segments, StartbyDola130);
+                for (int i = 0; i < Index; i++)
+                {
+                    Segments[i] = Segments[i].Replace("[!!]", " ");
+                    Segments[i] = Segments[i].Replace(" $%$%", "[!!]$%$%");
+                    Segments[i] = Segments[i].Replace(" $", "[!!]$");
+                    Segments[i] = Segments[i] + "[!!]";
+                }
+                // ===================
+                string tempFile = "";
+                foreach (string s in Segments)
+                {
+                    tempFile += s;
+                }
+                tempAllFiles += tempFile;
+            }
+            tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
+            editor.SetDocumentText(tempAllFiles);
+        }
+
 
         private static bool StartbyDola120(String s)
         {
@@ -840,6 +958,18 @@ namespace phdesign.NppToolBucket
         private static bool StartbyDola14(String s)
         {
             if (s.StartsWith("$14:"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool StartbyDola130(String s)
+        {
+            if (s.StartsWith("$130:"))
             {
                 return true;
             }
@@ -925,6 +1055,54 @@ namespace phdesign.NppToolBucket
 
         }
 
+        internal static void RemoveTableOnly()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Select text before process");
+                return;
+            }
+            else
+            {
+                text = text.Replace("$Q", "");
+                text = text.Replace("$G", "");
+                text = text.Replace("$R", "");
+                text = text.Replace("$B", "");
+                text = text.Replace("$J", "");
+                text = text.Replace("$Y", "");
+                text = text.Replace("$X", "");
+                text = text.Replace("$L", "");
+                text = text.Replace("$H", "");
+                text = text.Replace("$D", "");
+            }
+
+            editor.SetSelectedText(text);
+            editor.SetSelection(pos.cpMin, pos.cpMin + text.Length);
+
+        }
+
+        internal static void FootnoteBodyOneSpace()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var pos = editor.GetSelectionRange();
+
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Select text before process");
+                return;
+            }
+            else
+            {
+                text = Regex.Replace(text, @"\r\n n(\d+) ", "\r\n$E\r\n$Fn$1 ");
+            }
+
+            editor.SetSelectedText(text);
+        }
 
         public static List<string> bodylist = new List<string>();
         internal static void FootnoteToEnd()
@@ -1094,6 +1272,9 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+
             if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Emply Document.");
@@ -1101,67 +1282,106 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                text = text.Replace("\r\n", "[!!]");
-                text = text.Replace("$=I[!!]$%$%", "$=I[!!]___$%$%");
-                text = text.Replace("[!!]$T", "\r\n$T");
-                text = text.Replace("[!!]$=H", "\r\n$=H");
-                text = text.Replace("[!!]$%$%", "\r\n$%$%");
-
-
-                text = Regex.Replace(text, @"\[!!\](\$(\d+):)", "\r\n$1");
-
-                bodylist.Clear();
-
-                //GetBODY
-
-                foreach (Match m in Regex.Matches(text, @"\$F(.*?)\$E", RegexOptions.Singleline))
+                string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+                int i = 0;
+                string tempAllFiles = "";
+                foreach (string f in listFiles)
                 {
-                    bodylist.Add(m.Value.ToString());
-                }
-                for (int i = 0; i < bodylist.Count; i++)
-                {
-                    text = text.Replace(bodylist[i], "");
+
+                    tempAllFiles += FootnoteReturnSingleFile(f, filename, Dir, i) + "\r\n";
+                    i++;
                 }
 
+                // Remove Blank Lines
 
-                // Get Indicator
-                foreach (Match m in Regex.Matches(text, ".* n([0-9]{1,5}).*"))
-                {
-                    string linecontainindicator = m.Value;
-                    string pattern2 = " (n[0-9]{1,5})";
-                    foreach (Match m2 in Regex.Matches(linecontainindicator, pattern2))
-                    {
-                        linecontainindicator += "<" + m2.Value + ">";
-                    }
-                    text = text.Replace(m.Value, linecontainindicator);
-                }
 
-                var filename = editor.GetCurrentFileName();
-                var Dir = editor.GetCurrentDirectory();
-                // Main Function
-                string tmp = "";
-                foreach (string body in bodylist)
-                {
-                    tmp += body + "\r\n";
-                    string pattern2 = "(n[0-9]{1,5})";
-                    string indicator_final = "";
-                    foreach (Match m2 in Regex.Matches(body, pattern2))
-                    {
-                        indicator_final = "< " + m2.Value + ">";
-                        text = text.Replace(indicator_final, "\r\n" + body + "\r\n");
-                    }
 
-                }
-
-                File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "_BodyFootnote.H.Ha", "");
-                File.AppendAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "_BodyFootnote.H.Ha", tmp.Replace("[!!]", "\r\n"));
-
-                text = text.Replace("[!!]___$%$%", "\r\n$%$%");
-                text = text.Replace("[!!]", "\r\n");
-
-                editor.SetDocumentText(text);
+                editor.SetDocumentText(tempAllFiles);
                 MessageBox.Show("Footnote Returned.");
             }
+        }
+
+        // Process footnote before Move
+        private static string footnoteReturnBlockquoteProcess(string input)
+        {
+            string output = input;
+            foreach (Match m in Regex.Matches(input, @"\$=S(.*?)\$=I", RegexOptions.Singleline))
+            {
+                string mReplaced = m.Value.ToString().Replace("$T", "___$T");
+                mReplaced = mReplaced.Replace("$%$%", "___$%$%");
+                output = output.Replace(m.Value.ToString(), mReplaced);
+            }
+            return output;
+        }
+
+
+        private static string FootnoteReturnSingleFile(string text, string fileName, string Dir, int fileNumber)
+        {
+            text = footnoteReturnBlockquoteProcess(text);
+            text = text.Replace("\r\n", "[!!]");
+            text = text.Replace("$=I[!!]$%$%", "$=I[!!]___$%$%");
+            text = text.Replace("[!!]$T", "\r\n$T");
+            text = text.Replace("[!!]$=H", "\r\n$=H");
+            text = text.Replace("[!!]$%$%", "\r\n$%$%");
+
+
+
+            text = Regex.Replace(text, @"\[!!\](\$(\d+):)", "\r\n$1");
+
+            bodylist.Clear();
+
+            //GetBODY
+
+            foreach (Match m in Regex.Matches(text, @"\$F(.*?)\$E", RegexOptions.Singleline))
+            {
+                bodylist.Add(m.Value.ToString());
+            }
+            for (int i = 0; i < bodylist.Count; i++)
+            {
+                text = text.Replace(bodylist[i], "");
+            }
+
+
+            // Get Indicator
+            foreach (Match m in Regex.Matches(text, ".* n([0-9]{1,5}).*"))
+            {
+                string linecontainindicator = m.Value;
+                string pattern2 = " (n[0-9]{1,5})";
+                foreach (Match m2 in Regex.Matches(linecontainindicator, pattern2))
+                {
+                    linecontainindicator += "<" + m2.Value + ">";
+                }
+                text = text.Replace(m.Value, linecontainindicator);
+            }
+
+
+            // Main Function
+            string tmp = "";
+            foreach (string body in bodylist)
+            {
+                tmp += body + "\r\n";
+                string pattern2 = "(n[0-9]{1,5})";
+                string indicator_final = "";
+                foreach (Match m2 in Regex.Matches(body, pattern2))
+                {
+                    indicator_final = "< " + m2.Value + ">";
+                    text = text.Replace(indicator_final, "\r\n" + body + "\r\n");
+                }
+
+            }
+
+            File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_" + fileNumber + "_BodyFootnote.H.Ha", "");
+            File.AppendAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_" + fileNumber + "_BodyFootnote.H.Ha", tmp.Replace("[!!]", "\r\n"));
+
+            text = text.Replace("[!!]___$%$%", "\r\n$%$%");
+            text = text.Replace("[!!]", "\r\n");
+            text = Regex.Replace(text, @"^(?:[\t ]*(?:\r?\n|\r))+", "");
+            text = text.Replace("\r\n\n", "\r\n");
+            text = text.Replace("\r\r\n", "\r\n");
+            text = text.Replace("___$T", "$T");
+            text = text.Replace("___$%$%", "$%$%");
+
+            return text;
         }
 
         // TABLE
@@ -1291,13 +1511,25 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                text = Regex.Replace(text, @"([a-z]{2,}[.,?:;’”\'""\)]{0,})(\d+)", @"$1  n$2");
-                text = Regex.Replace(text, @"\)\.(\d+)", @").   n$1");
-                text = Regex.Replace(text, @"19(\d+)\.(\d+)", @"19$1.   n$2");
-                text = Regex.Replace(text, @"20(\d+)\.(\d+)", @"20$1.   n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$=R", @"$1$=R  n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$O", @"$1$O  n$2");
-                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$N", @"$1$N  n$2");
+                text = Regex.Replace(text, @"([a-z]{2,}[.,?:;’”\'""\)]{0,})(\d+)", @"$1  n$2 ");
+                text = Regex.Replace(text, @"\)\.(\d+)", @").  n$1 ");
+                text = Regex.Replace(text, @"\)(\d+)", @")  n$1 ");
+                text = Regex.Replace(text, @"19(\d+)\.(\d+)", @"19$1.  n$2 ");
+                text = Regex.Replace(text, @"20(\d+)\.(\d+)", @"20$1.  n$2 ");
+                text = Regex.Replace(text, @"19(\d+),(\d+)", @"19$1,  n$2 ");
+                text = Regex.Replace(text, @"20(\d+),(\d+)", @"20$1,  n$2 ");
+                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$=R", @"$1$=R  n$2 ");
+                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$O", @"$1$O  n$2 ");
+                text = Regex.Replace(text, @"([A-Z]{2,})(\d+)\$N", @"$1$N  n$2 ");
+
+                // after process
+                text = Regex.Replace(text, @"  n(\d+)\$=R", @"$=R  n$1");
+                text = Regex.Replace(text, @"  n(\d+)\$N", @"$N  n$1");
+                text = Regex.Replace(text, @"  n(\d+)\$O", @"$O  n$1");
+                text = Regex.Replace(text, @"Cir.  n(\d+)", @"Cir.$1");
+                text = Regex.Replace(text, @"Cal.  n(\d+)", @"Cal.$1");
+                text = Regex.Replace(text, @" pp.  n(\d+)", @" pp.$1");
+                text = Regex.Replace(text, @"Supp.  n(\d+)", @"Supp.$1");
 
                 editor.SetDocumentText(text);
             }
@@ -1335,6 +1567,7 @@ namespace phdesign.NppToolBucket
 
         internal static void EntityToUnicode()
         {
+            string output = "";
             var editor = Editor.GetActive();
             var text = editor.GetSelectedText();
             var pos = editor.GetSelectionRange();
@@ -1345,31 +1578,43 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                StringBuilder stringBuilder = new StringBuilder();
-                foreach (char c in text)
-                {
-                    if ((int)c > 127)
-                    {
-                        stringBuilder.Append("&#");
-                        stringBuilder.Append((int)c);
-                        stringBuilder.Append(";");
-                    }
-                    else
-                    {
-                        stringBuilder.Append(c);
-                    }
-                }
-                editor.SetSelectedText(stringBuilder.ToString());
-                editor.SetSelection(pos.cpMin, pos.cpMin + stringBuilder.ToString().Length);
+                output = System.Web.HttpUtility.HtmlDecode(text);
+
+                editor.SetSelectedText(output);
+                editor.SetSelection(pos.cpMin, pos.cpMin + output.Length);
             }
 
         }
 
+        internal static void FootnoteTagsForCaselaw()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            if (String.IsNullOrEmpty(text))
+            {
+                return;
+            }
+            else
+            {
+                text = text.Replace(">ENDFN>$E", "$E");
+                text = text.Replace("$Fn", "$F>FTNT>$Tn");
+                text = text.Replace("$E", ">ENDFN>$E");
+                editor.SetDocumentText(text);
+            }
+        }
+
+        // Call Shortcut
+        internal static void CallShortcut()
+        {
+            frmShortcut frm1 = new frmShortcut();
+            frm1.ShowDialog();
+        }
+        //
 
         internal static void VISF2XML()
         {
             var editor = Editor.GetActive();
-            var text = editor.GetDocumentText();
+            var text = editor.GetSelectedOrAllText();
             var fName = editor.GetCurrentFileName();
             var fPath = editor.GetCurrentDirectory() + "\\" + fName;
             string text2 = text;
@@ -1381,9 +1626,216 @@ namespace phdesign.NppToolBucket
             else
             {
                 VisfToXML v = new VisfToXML();
-                text = v.visf2xml(text, fName,fPath);
-                
+                text = v.visf2xml(text, fName, fPath);
+
+                text = xZero.insertCourt(text);
+                // Write XML
+                string fileOutput = Path.ChangeExtension(fPath, ".xml");
+                File.WriteAllText(fileOutput, text, Encoding.GetEncoding("ISO-8859-1"));
+                editor.OpenFile(fileOutput);
+            }
+        }
+
+        internal static void NonVirgoXMLString()
+        {
+
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+                return;
+            }
+            else
+            {
+                text = text.Replace("$=B", "<emph typestyle=\"bf\">");
+                text = text.Replace("$I", "<emph typestyle=\"it\">");
+                text = text.Replace("$U", "<emph typestyle=\"un\">");
+                text = text.Replace("$=R", "</emph>");
+                text = text.Replace("$N", "</emph>");
+                text = text.Replace("$O", "</emph>");
+
+                text = "<p><lnvxe:text>" + text.Trim() + "</lnvxe:text></p>";
+                text = text.Replace("$00:0100000001:", "\r\n\r\n$T$00:0100000001:\r\n\r\n");
+                text = text.Replace("\r\n", " ");
+                text = text.Replace("$%$%", "</lnvxe:text></p>\n<p><lnvxe:text>");
+                text = text.Replace("$T", "</lnvxe:text></p>\n<p><lnvxe:text>");
+                text = text.Replace("$=H", "\r\n<lnvxe:h>");
+                text = text.Replace("$E</lnvxe:text></p>", "$E\r\n");
+                text = text.Replace("$Fn", "</lnvxe:text></p>\r\n$Fn");
+                text = text.Replace("$=E", "</lnvxe:h>\n");
+                text = text.Replace("\r\n</lnvxe:text></p>", "</lnvxe:text></p>");
+                text = text.Replace(" </lnvxe:text></p>", "</lnvxe:text></p>");
+                text = text.Replace("<p></lnvxe:text></p>", "");
+                //List Replace
+                text = text.Replace("$=S", "\n<lnvxe:l>");
+                text = text.Replace("$=I", "</lnvxe:text></p>\n</lnvxe:li>\n</lnvxe:l>\n");
+                text = text.Replace("$W", "</lnvxe:text></p>\n</lnvxe:li>\n<lnvxe:li>\n<lnvxe:lilabel>");
+                text = text.Replace("$K", "</lnvxe:lilabel>\n<p><lnvxe:text align=\"left\">");
+                text = text.Replace("<lnvxe:l></lnvxe:text></p>\n</lnvxe:li>", "<lnvxe:l>");
+                text = text.Replace("</lnvxe:l>\n</lnvxe:text></p>", "</lnvxe:l>");
+
+                text = text.Replace("<p><lnvxe:text>$00:0100000001:  </lnvxe:text></p>", "\r\n\r\n$00:0100000001:\r\n\r\n");
+
+                editor.SetSelectedText(text);
+                editor.SetSelection(pos.cpMin, pos.cpMin + text.Length);
+            }
+        }
+
+        internal static void AddSIDs()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+
+            string[] listPDF = Directory.GetFiles(Dir, "*.pdf", SearchOption.TopDirectoryOnly);
+
+            if (listPDF.Length == 0)
+            {
+                MessageBox.Show("PDF not found.");
+            }
+            else
+            {
+                string Pattern = @"\$200:(.*)";
+                var result = "";
+                int i = -1;
+                result = Regex.Replace(text, Pattern, (Match n) =>
+                {
+                    if (i >= listPDF.Length - 1)
+                    {
+                        return "$200:$?#SID___#$?";
+                    }
+                    else
+                    {
+                        result = string.Format("$200:$?#SID" + getSID(listPDF[++i]) + "#$?");
+                        return result;
+                    }
+                });
+
+                string Pattern2 = @"\$00:(\d{2})(.*)";
+                var result2 = "";
+                int i2 = 0;
+                result2 = Regex.Replace(result, Pattern2, (Match nn) =>
+                {
+                    if (i2 < 9)
+                    {
+                        result2 = string.Format("$00:{0}0000000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    else if (i2 < 99)
+                    {
+                        result2 = string.Format("$00:{0}000000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    else if (i2 < 999)
+                    {
+                        result2 = string.Format("$00:{0}00000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    return result2;
+                });
+
+                editor.SetDocumentText(result2);
+            }
+        }
+        private static string getSID(string filename)
+        {
+            string a = Path.GetFileNameWithoutExtension(filename);
+            string SID = a.Substring(a.Length - 14, 14);
+            return SID;
+        }
+
+        internal static void D1BVU_XML()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classD1BVU d1bvu = new classD1BVU();
+                // Convert to XML
+                text = d1bvu.D1BVU_Process(text);
+                // Renumber Level
+                text = d1bvu.D1BVU_ReNumberLevel(text);
+
                 editor.SetDocumentText(text);
+            }
+
+        }
+
+        internal static void D1BVU_VISF()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classD1BVU d1bvu = new classD1BVU();
+                text = d1bvu.D1BVU_PreProcess(text);
+                editor.SetDocumentText(text);
+            }
+        }
+        internal static void DE535()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classDE535 de535 = new classDE535();
+                text = de535.processDE535(text);
+                editor.SetDocumentText(text);
+            }
+        }
+
+        internal static void D1712()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            string tempAllFiles = "";
+            // Split Into Multiple Files
+            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            foreach (string file in listFiles)
+            {
+                classD1712 d1712 = new classD1712();
+                tempAllFiles += d1712.D1712FootnoteProcess(file);
+            }
+            editor.SetDocumentText(tempAllFiles);
+        }
+
+        internal static void TableForm()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Vui lòng chọn Text trước....","Hoàng Hà's Table");
+            }
+            else
+            {
+                string tbl = "";
+                File.WriteAllText("tableTemp.txt", text);
+                frmTable frmTable = new frmTable();
+                frmTable.ShowDialog();
+                tbl = frmTable.tbl;
+                editor.SetSelectedText(tbl);
+                editor.SetSelection(pos.cpMin, pos.cpMin + tbl.Length);
             }
         }
 

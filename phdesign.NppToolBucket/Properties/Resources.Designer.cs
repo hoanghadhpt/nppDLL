@@ -83,6 +83,16 @@ namespace phdesign.NppToolBucket.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cat_walk_icon {
+            get {
+                object obj = ResourceManager.GetObject("cat_walk_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cry_mouth_icon {
             get {
                 object obj = ResourceManager.GetObject("cry_mouth_icon", resourceCulture);
@@ -143,6 +153,16 @@ namespace phdesign.NppToolBucket.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hahahah {
+            get {
+                object obj = ResourceManager.GetObject("hahahah", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sort_ascending_icon {
             get {
                 object obj = ResourceManager.GetObject("Sort_ascending_icon", resourceCulture);
@@ -156,6 +176,26 @@ namespace phdesign.NppToolBucket.Properties {
         internal static System.Drawing.Bitmap star_icon {
             get {
                 object obj = ResourceManager.GetObject("star_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap text_plus_icon {
+            get {
+                object obj = ResourceManager.GetObject("text_plus_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap timeshift_icon {
+            get {
+                object obj = ResourceManager.GetObject("timeshift_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
