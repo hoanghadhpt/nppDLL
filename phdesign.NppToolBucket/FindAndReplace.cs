@@ -409,6 +409,7 @@ namespace phdesign.NppToolBucket
             }
         }
 
+
         private bool IsViewVisible(int targetView)
         {
             int currentView;

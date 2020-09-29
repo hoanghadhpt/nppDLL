@@ -79,9 +79,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classCanada.cs" />
     <Compile Include="classD1712.cs" />
     <Compile Include="classDE535.cs" />
     <Compile Include="Counsel.cs" />
+    <Compile Include="classDF989.cs" />
     <Compile Include="D1BVU.cs" />
     <Compile Include="FindAndReplace.cs" />
     <Compile Include="FindAndReplaceSettings.cs" />
@@ -102,6 +104,18 @@
     </Compile>
     <Compile Include="Forms\FindAndReplaceForm.Designer.cs">
       <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFootnoteXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFootnoteXML.Designer.cs">
+      <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTableXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTableXML.Designer.cs">
+      <DependentUpon>frmTableXML.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GuidGeneratorForm.cs">
       <SubType>Form</SubType>
@@ -285,6 +299,12 @@
     <EmbeddedResource Include="Forms\FindAndReplaceForm.resx">
       <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFootnoteXML.resx">
+      <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTableXML.resx">
+      <DependentUpon>frmTableXML.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GuidGeneratorForm.resx">
       <DependentUpon>GuidGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +342,10 @@
   <ItemGroup>
     <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
     <Content Include="Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico" />
+    <None Include="Resources\Generate-tables-icon48.png" />
+    <None Include="Resources\Generate-tables-icon64.png" />
+    <None Include="Resources\Table48px.bmp" />
+    <None Include="Resources\Generate-tables-icon1.png" />
     <None Include="Resources\text-plus-icon.png" />
     <None Include="Resources\cat-walk-icon.png" />
     <None Include="Resources\10042-squinting-face-with-tongue-icon.png" />

@@ -127,9 +127,11 @@ namespace phdesign.NppToolBucket
                 SetCommand((int)CmdIndex.MichiganCounsel, "Hoang Ha - Michigan Counsel", CallMichigan); //25
                 SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Pagination", CallPagination); //26
                 SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Add SID to $200", HoangHaFunctions.AddSIDs); //27
-                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Remove Table Only", HoangHaFunctions.RemoveTableOnly); //28
-                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Body Footnote One Space", HoangHaFunctions.FootnoteBodyOneSpace); //29
-                SetCommand((int)CmdIndex.Shortcut, "Hoang Ha - Shortcut", HoangHaFunctions.CallShortcut, new ShortcutKey(true, false, false, Keys.OemPeriod)); // 27
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - $T to $%$%", HoangHaFunctions.SelectedText_ToDolaNewLine); //28
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Table XML", HoangHaFunctions.TableFormXML); //29
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Delete $DEL_",HoangHaFunctions.RemoveDolaDEL); //30
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Footnote Body", HoangHaFunctions.FootnoteBodyOneSpace); //31
+                SetCommand((int)CmdIndex.Shortcut, "Hoang Ha - Shortcut", HoangHaFunctions.CallShortcut, new ShortcutKey(true, false, false, Keys.OemPeriod)); // 32
             }
             SetCommand((int)CmdIndex.About, "About", About);
         }

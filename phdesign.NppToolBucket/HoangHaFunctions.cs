@@ -56,6 +56,7 @@ namespace phdesign.NppToolBucket
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
             var CurrentPos = editor.GetCurrentPosition();
+            var curLine = editor.GetCurrentLineNumber();
 
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
@@ -236,6 +237,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$T$T", "$T");
             // End Process
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
 
@@ -244,6 +246,7 @@ namespace phdesign.NppToolBucket
             // Read all Doc.
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
             text = text.Replace("¶", @"\P");
@@ -390,13 +393,14 @@ namespace phdesign.NppToolBucket
             text = text.Replace("$%$%$%$%", "$%$%");
             text = text.Replace("$%$%$%", "$%$%");
             text = text.Replace("$T$T", "$T");
+            text = text.Replace("$%$T", "$%");
 
             text = text.Replace("$=H$%$%", "$=H");
             text = text.Replace("$=H$T", "$=H");
 
             // End Process
             editor.SetDocumentText(text);
-
+            editor.GotoLineNumber(curLine);
         }
 
 
@@ -404,6 +408,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
 
             text = text.Replace("<I>", "<i>");
@@ -487,15 +492,15 @@ namespace phdesign.NppToolBucket
             text = Regex.Replace(text, @"\r\n n(\d+) (.*?)\r\n\r\n\r\n", "\r\n$F>FTNT>$Tn$1 $2>ENDFN>$E\r\n\r\n\r\n", RegexOptions.Singleline);
 
             // ===============
-
-
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void SpacingFormat()
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
             
@@ -511,6 +516,7 @@ namespace phdesign.NppToolBucket
             text.Trim();
 
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void AddDel()
@@ -518,6 +524,7 @@ namespace phdesign.NppToolBucket
             // Read all Doc.
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
 
@@ -525,7 +532,7 @@ namespace phdesign.NppToolBucket
             text = Regex.Replace(text, @"<DEL>(.*?)</DEL>", "$(D> $1 <D$)", RegexOptions.Singleline);
 
             editor.SetDocumentText(text);
-
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void AddUpperCase()
@@ -533,12 +540,14 @@ namespace phdesign.NppToolBucket
             // Read all Doc.
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
 
             text = Regex.Replace(text, @"\$\(A> (.*?) <A\$\)", m => $@"$(A> {m.Groups[1].Value.ToUpper()} <A$)", RegexOptions.Singleline);
 
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
 
         }
 
@@ -559,6 +568,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
             // Begin process
             text = Regex.Replace(text, @"\$Fn(\d+)\. ", m => $@"$Fn{m.Groups[1].Value.ToUpper()} ");
@@ -574,7 +584,7 @@ namespace phdesign.NppToolBucket
             }
 
             editor.SetDocumentText(text);
-
+            editor.GotoLineNumber(curLine);
         }
 
 
@@ -625,34 +635,61 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
 
-            text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$T$1. ");
-            text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$T$1. ");
-            text = Regex.Replace(text, @"\r\n(cm|cd|d?c{0,3})(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})\. ", "\r\n$T$1$2$3. ");
-            text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$T($1.) ");
-            text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$T($1.) ");
-            text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$T($1) ");
-            text = Regex.Replace(text, @"\r\n\(([A-Za-z]{1,2})\) ", "\r\n$T($1) ");
+            text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$T$1._$?$?_");
+            text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$T$1._$?$?_");
+            text = Regex.Replace(text, @"\r\n(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})(iii)\. ", "\r\n$T$1$2$3._$?$?_");
+            text = Regex.Replace(text, @"\r\n(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})(III)\. ", "\r\n$T$1$2$3._$?$?_");
+            text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$T($1.)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$T($1.)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$T($1)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\(([A-Za-z]{1,3})\) ", "\r\n$T($1)_$?$?_");
+
+            // Remove nonlist
+
+            text = Regex.Replace(text, @"(ections?)\r\n\$T", "$1\r\n");
+            text = Regex.Replace(text, @"(aragraphs?)\r\n\$T", "$1\r\n");
+            text = Regex.Replace(text, @"(hapters?)\r\n\$T", "$1\r\n");
+
+            text = Regex.Replace(text, @"((?:s(?:even|ix)|t(?:hir|wen)|f(?:if|or)|eigh|nine)ty)\r\n\$T(.*)_\?_\?", "$1\r\n$2 ");
+            text = Regex.Replace(text, @" (twelve|(?:(?:elev|t)e|(?:fif|eigh|nine|(?:thi|fou)r|s(?:ix|even))tee)n)\r\n\$T(.*)_\?_\?", " $1\r\n$2 ");
+            text = Regex.Replace(text, @" ((?:f(?:ive|our)|s(?:even|ix)|t(?:hree|wo)|(?:ni|o)ne|eight))\r\n\$T(.*)_\?_\?", " $1\r\n$2 ");
 
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void AllListNonT()
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text)) return;
 
-            text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$%$%$1. ");
-            text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$%$%$1. ");
-            text = Regex.Replace(text, @"\r\n(cm|cd|d?c{0,3})(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})\. ", "\r\n$%$%$1$2$3. ");
-            text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$%$%($1.) ");
-            text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$%$%($1.) ");
-            text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$%$%($1) ");
-            text = Regex.Replace(text, @"\r\n\(([A-Za-z]{1,2})\) ", "\r\n$%$%($1) ");
+            text = Regex.Replace(text, @"\r\n(\d+)\. ", "\r\n$%$%$1._$?$?_");
+            text = Regex.Replace(text, @"\r\n([A-Za-z])\. ", "\r\n$%$%$1._$?$?_");
+            text = Regex.Replace(text, @"\r\n(x{0,3})(iix|ix|iv|v?i{0,3})\. ", "\r\n$%$%$1$2._$?$?_");
+            text = Regex.Replace(text, @"\r\n(X{0,3})(IIX|IX|IV|V?I{0,3})\. ", "\r\n$%$%$1$2._$?$?_");
+            text = Regex.Replace(text, @"\r\n\(([A-Za-z])\.\) ", "\r\n$%$%($1.)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\((\d+)\.\) ", "\r\n$%$%($1.)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\((\d+)\) ", "\r\n$%$%($1)_$?$?_");
+            text = Regex.Replace(text, @"\r\n\(([A-Za-z]{1,3})\) ", "\r\n$%$%($1)_$?$?_");
+
+            // Remove nonlist
+
+            text = Regex.Replace(text, @"(ections?)\r\n\$%\$%", "$1\r\n");
+            text = Regex.Replace(text, @"(aragraphs?)\r\n\$%\$%", "$1\r\n");
+            text = Regex.Replace(text, @"(hapters?)\r\n\$%\$%", "$1\r\n");
+
+            text = Regex.Replace(text, @"((?:s(?:even|ix)|t(?:hir|wen)|f(?:if|or)|eigh|nine)ty)\r\n\$%\$%(.*)_\?_\?", "$1\r\n$2 ");
+            text = Regex.Replace(text, @" (twelve|(?:(?:elev|t)e|(?:fif|eigh|nine|(?:thi|fou)r|s(?:ix|even))tee)n)\r\n\$%\$%(.*)_\?_\?", " $1\r\n$2 ");
+            text = Regex.Replace(text, @" ((?:f(?:ive|our)|s(?:even|ix)|t(?:hree|wo)|(?:ni|o)ne|eight))\r\n\$%\$%(.*)_\?_\?", " $1\r\n$2 ");
+
 
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void FootnoteLinkCount()
@@ -703,6 +740,7 @@ namespace phdesign.NppToolBucket
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
             var pos = editor.GetSelectionLength();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Empty Document");
@@ -723,6 +761,7 @@ namespace phdesign.NppToolBucket
                 text = VisfRenumberBody(text, i);
 
                 editor.SetDocumentText(text);
+                editor.GotoLineNumber(curLine);
             }
         }
 
@@ -732,6 +771,7 @@ namespace phdesign.NppToolBucket
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
             var pos = editor.GetSelectionLength();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Empty Document");
@@ -746,6 +786,7 @@ namespace phdesign.NppToolBucket
                 text = xmlRenumber2(text, i);
 
                 editor.SetDocumentText(text);
+                editor.GotoLineNumber(curLine);
             }
         }
 
@@ -790,6 +831,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Empty Document");
@@ -803,6 +845,7 @@ namespace phdesign.NppToolBucket
                 text = Pagination(text, i);
 
                 editor.SetDocumentText(text);
+                editor.GotoLineNumber(curLine);
             }
         }
 
@@ -839,6 +882,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
             text = text.Replace("\r\n", "[!!]");
             string tempAllFiles = "";
             // Split Into Multiple Files
@@ -869,6 +913,7 @@ namespace phdesign.NppToolBucket
             }
             tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
             editor.SetDocumentText(tempAllFiles);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void StringDola14()
@@ -984,7 +1029,7 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
-
+            var curLine = editor.GetCurrentLineNumber();
             text = text.Replace("\r\n", "[!!]");
 
             string tempAllFiles = "";
@@ -1005,7 +1050,7 @@ namespace phdesign.NppToolBucket
             }
             tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
             editor.SetDocumentText(tempAllFiles);
-
+            editor.GotoLineNumber(curLine);
             MessageBox.Show("Segments Sorted.");
         }
 
@@ -1013,12 +1058,11 @@ namespace phdesign.NppToolBucket
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
-
+            var curLine = editor.GetCurrentLineNumber();
             text = Regex.Replace(text, @"\r\n\r\n([A-Z])", "\r\n\r\n$T$1");
             text = Regex.Replace(text, @"\r\n\r\n\$=B(.*?)\$=R\r\n", "\r\n\r\n$=H$=B$1$=R$=E\r\n");
-
-
             editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
         }
 
         internal static void RemoveFonts()
@@ -1048,6 +1092,10 @@ namespace phdesign.NppToolBucket
                 text = text.Replace("$=E", "");
                 text = text.Replace("$T", "");
                 text = text.Replace("$%", "");
+                text = text.Replace("<ADD>", "");
+                text = text.Replace("</ADD>", "");
+                text = text.Replace("<DEL>", "");
+                text = text.Replace("</DEL>", "");
             }
 
             editor.SetSelectedText(text);
@@ -1085,12 +1133,34 @@ namespace phdesign.NppToolBucket
 
         }
 
+        internal static void RemoveDolaDEL()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var CurLine = editor.GetCurrentLineNumber();
+
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Empty...");
+                return;
+            }
+            else
+            {
+                text = Regex.Replace(text, @"\$DEL_.*", "");
+            }
+
+            editor.SetDocumentText(text);
+            editor.GotoLineNumber(CurLine);
+
+
+        }
+
         internal static void FootnoteBodyOneSpace()
         {
             var editor = Editor.GetActive();
             var text = editor.GetDocumentText();
             var pos = editor.GetSelectionRange();
-
+            var curLine = editor.GetCurrentLineNumber();
             if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Select text before process");
@@ -1098,10 +1168,12 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                text = Regex.Replace(text, @"\r\n n(\d+) ", "\r\n$E\r\n$Fn$1 ");
+                text = Regex.Replace(text, "\r\n n(\\d+) ", "\r\n$E\r\n$Fn$1 ");
             }
 
-            editor.SetSelectedText(text);
+            editor.SetDocumentText(text);
+            editor.GotoLineNumber(curLine);
+            editor.ScrollToLine(curLine);
         }
 
         public static List<string> bodylist = new List<string>();
@@ -1429,6 +1501,11 @@ namespace phdesign.NppToolBucket
             int i = 0;
             foreach (string f in listFiles)
             {
+                if (i == 0 & listFiles[0].Length == 0)
+                {
+                    i++;
+                    continue;
+                }
                 if (listFiles.Length < 100)
                 {
                     if (i < 10)
@@ -1457,6 +1534,57 @@ namespace phdesign.NppToolBucket
                     else
                     {
                         File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                }
+            }
+            MessageBox.Show("Spilited into " + (listFiles.Length - 1) + " file(s).");
+        }
+
+        internal static void SplitXMLFiles()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+
+            string[] listFiles = Regex.Split(text, @"(?=<\?xml version.*>)");
+            int i = 0;
+            foreach (string f in listFiles)
+            {
+                if (i == 0 & listFiles[0].Length == 0)
+                {
+                    i++;
+                    continue;
+                }
+                if (listFiles.Length < 100)
+                {
+                    if (i < 10)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(0" + i + ").xml", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(" + i + ").xml", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (i < 10)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(00" + i + ").xml", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 100)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(0" + i + ").xml", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(" + i + ").xml", f, Encoding.GetEncoding("ISO-8859-1"));
                         i++;
                     }
                 }
@@ -1627,8 +1755,27 @@ namespace phdesign.NppToolBucket
             {
                 VisfToXML v = new VisfToXML();
                 text = v.visf2xml(text, fName, fPath);
-
                 text = xZero.insertCourt(text);
+
+                // Add Pacernum Attribute
+                Match mPacernum = Regex.Match(text, @"__((\d{1}):(\d{2})(\w{2})(\d+))");
+                if (mPacernum.Success)
+                {
+                    text = text.Replace(mPacernum.Groups[0].ToString(), "");
+                    text = text.Replace("pacernum=\"\"", String.Format("pacernum=\"{0}\"",mPacernum.Groups[1].ToString()));
+                }
+
+                // Final Wanring -- Require Segment
+                if (text.Contains("<lnv:COURT>"))
+                {
+                    if (!text.Contains("<lnv:DECIDEDDATE>"))
+                    {
+                        if (!text.Contains("<lnv:FILEDDATE>"))
+                        {
+                            MessageBox.Show("NO DATE ELEMENT, Please check again.", "Warning...");
+                        }
+                    }
+                }
                 // Write XML
                 string fileOutput = Path.ChangeExtension(fPath, ".xml");
                 File.WriteAllText(fileOutput, text, Encoding.GetEncoding("ISO-8859-1"));
@@ -1747,6 +1894,252 @@ namespace phdesign.NppToolBucket
             return SID;
         }
 
+        internal static void Renumber00()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+
+
+            string Pattern2 = @"\$00:(\d{2})(.*)";
+            var result2 = "";
+            int i2 = 0;
+            result2 = Regex.Replace(text, Pattern2, (Match nn) =>
+            {
+                if (i2 < 9)
+                {
+                    result2 = string.Format("$00:{0}0000000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                else if (i2 < 99)
+                {
+                    result2 = string.Format("$00:{0}000000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                else if (i2 < 999)
+                {
+                    result2 = string.Format("$00:{0}00000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                return result2;
+            });
+            editor.SetDocumentText(result2);
+        }
+
+        public static void FootnoteVISFCheck()
+        {
+            
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            File.Delete(Path.Combine(Dir, Path.ChangeExtension(filename, "hh_ftnt")));
+            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            int i = 0;
+            foreach (string singleFile in listFiles)
+            {
+                FootnoteVISFChecker(Path.Combine(Dir, Path.ChangeExtension(filename, "hh_ftnt")),singleFile,i);
+                i++;
+            }
+            System.Diagnostics.Process.Start("notepad.exe", Path.Combine(Dir, Path.ChangeExtension(filename, "hh_ftnt")));
+        }
+
+        private static void FootnoteVISFChecker(string FILENAME, string inputTEXT, int FileNo)
+        {
+            string text = inputTEXT;
+            List<string> listIndicators = new List<string>();
+            List<string> listBodies = new List<string>();
+            List<string> listBodiesFull = new List<string>();
+
+            foreach (Match m in Regex.Matches(text, @" n(\d+)"))
+            {
+                listIndicators.Add(m.ToString());
+            }
+            foreach (Match m in Regex.Matches(text, @"\$F(.*)?n(\d+)(.*)"))
+            {
+                listBodies.Add(" n" + m.Groups[2].ToString());
+                listBodiesFull.Add(m.ToString());
+            }
+
+            int Count = listIndicators.Count - listBodies.Count;
+            if (Count != 0)
+            {
+                Console.WriteLine("MISSING -- BODY OR INDICATOR");
+                WriteLog(FILENAME, "\r\n================\r\nMISSING -- BODY OR INDICATOR - File "+ FileNo);
+                if (Count > 0)
+                {
+                    for (int i = 0; i < listIndicators.Count; i++)
+                    {
+                        try
+                        {
+                            if (listIndicators[i] == listBodies[i])
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Incorrect: " + listIndicators[i]);
+                                WriteLog(FILENAME, "Incorrect Sequence: " + listIndicators[i]);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            for (int j = listBodies.Count; j < listIndicators.Count; j++)
+                            {
+                                Console.WriteLine("Check:" + listIndicators[j]);
+                                WriteLog(FILENAME, "Incorrect/Missing Body for: " + listIndicators[j]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < listBodies.Count; i++)
+                    {
+                        try
+                        {
+                            if (listIndicators[i] == listBodies[i])
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Incorrect: " + listBodies[i]);
+                                WriteLog(FILENAME, "Incorrect Sequence: " + listIndicators[i]);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            for (int j = listIndicators.Count; j < listBodies.Count; j++)
+                            {
+                                Console.WriteLine("Check:" + listBodiesFull[j]);
+                                WriteLog(FILENAME, "Incorrect/Missing Indicator for:" + listBodiesFull[j]);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                WriteLog(FILENAME, "\r\n================\r\nINCORRECT - File " + FileNo);
+                for (int i = 0; i < listIndicators.Count; i++)
+                {
+                    if (listIndicators[i] != listBodies[i])
+                    {
+                        Console.WriteLine("indicator: " + listIndicators[i] + "\r\nBody: " + listBodiesFull[i]);
+                        WriteLog(FILENAME, "Incorrect:\r\n~~~~Indicator: " + listIndicators[i].Replace(" ","") + "\r\n~~~~Body: " + listBodiesFull[i]);
+                    }
+                }
+            }
+        }
+        private static void WriteLog(string FILENAME, string TEXT)
+        {
+            File.AppendAllText(FILENAME, TEXT + "\r\n");
+        }
+
+        internal static void LEGACY_XML()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var filename = editor.GetCurrentFileName();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                string smi = "";
+                Match n = Regex.Match(text, "lnsmi=\"(.*)\"");
+                if (n.Success)
+                {
+                    smi = n.Groups[1].ToString();
+                    int smi2 = Convert.ToInt32(smi, 16);
+                    text = text.Replace("</lndocmeta:docinfo>", "</lndocmeta:docinfo>\r\n" +
+                        "<docinfo>\r\n" +
+                        "<docinfo:alt-renditions>\r\n" +
+                        "<docinfo:alt-rendition>\r\n" +
+                        "<lnlink service=\"ATTACHMENT\">\r\n" +
+                        "<lnvxe:api-params>\r\n" +
+                        "<lnvxe:param name=\"attachment-smi\" value=\"" + smi2 + "\"/>\r\n" +
+                        "<lnvxe:param name=\"attachment-type\" value=\"PDF\"/>\r\n" +
+                        "<lnvxe:param name=\"attachment-key\" value=\"" + Path.GetFileNameWithoutExtension(filename) + ".PDF\"/>\r\n" +
+                        "<lnvxe:param name=\"componentseq\" value=\"1\"/>\r\n" +
+                        "</lnvxe:api-params>\r\n" +
+                        "</lnlink>\r\n" +
+                        "</docinfo:alt-rendition>\r\n" +
+                        "</docinfo:alt-renditions>\r\n" +
+                        "</docinfo>");
+                    if (text.Contains("<lnv:SYS-PROD-INFO>"))
+                    {
+                        text = Regex.Replace(text, "<lnv:SYS-PROD-INFO>(.*)</lnv:SYS-PROD-INFO>", m => $"<lnv:SYS-PROD-INFO>{m.Groups[1].ToString().Replace(" #HAS#IMAGES#", "")} #LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
+                    }
+                    else
+                    {
+                        text = text.Replace("</lnv:SYS-AUDIT-TRAIL>", "</lnv:SYS-AUDIT-TRAIL>\r\n<lnv:SYS-PROD-INFO>#LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
+                    }
+                    editor.SetDocumentText(text);
+                }
+                else
+                {
+                    MessageBox.Show("Not found <<lnsmi>>");
+                }
+            }
+        }
+
+        internal static void IMAGE_INSERT_XML()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var filename = editor.GetCurrentFileName();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                string smi = Regex.Match(text, "lnsmi=\"(.*)\"").Groups[1].ToString();
+                if (smi != "")
+                {
+                    int smi2 = Convert.ToInt32(smi, 16);
+                    int i = 1;
+                    string result = Regex.Replace(text, @"##", (Match n) =>
+                    {
+                        result = string.Format("<p><lnvxe:text><inlineobject align=\"center\" componentseq=\"" + i + "\" key=\"" + Path.GetFileNameWithoutExtension(filename) + "." + i + ".PNG" + "\" smi=\"" + smi2 + "\" type=\"image\"/></lnvxe:text></p>", i);
+                        i++;
+                        return (result);
+                    });
+                    editor.SetDocumentText(result);
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect lnsmi");
+                }
+            }
+        }
+
+        internal static void DF989_XML()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classDF989 df989 = new classDF989();
+                // Convert to XML
+                text = df989.DF989_Process(text);
+                // Renumber Level
+                text = df989.DF989_ReNumberLevel(text);
+                editor.SetDocumentText(text);
+            }
+
+        }
+
         internal static void D1BVU_XML()
         {
             var editor = Editor.GetActive();
@@ -1818,6 +2211,41 @@ namespace phdesign.NppToolBucket
             editor.SetDocumentText(tempAllFiles);
         }
 
+        internal static void Canada()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classCanada canada = new classCanada();
+                text = canada.TextString(text);
+                editor.SetDocumentText(text);
+            }
+        }
+
+
+        internal static void SelectedText_ToDolaNewLine()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+            else
+            {
+                text = text.Replace("$T", "$%$%");
+                editor.SetSelectedText(text);
+                editor.SetSelection(pos.cpMin, pos.cpMin + text.Length);
+            }
+        }
+
+
         internal static void TableForm()
         {
             var editor = Editor.GetActive();
@@ -1834,24 +2262,73 @@ namespace phdesign.NppToolBucket
                 frmTable frmTable = new frmTable();
                 frmTable.ShowDialog();
                 tbl = frmTable.tbl;
-                editor.SetSelectedText(tbl);
-                editor.SetSelection(pos.cpMin, pos.cpMin + tbl.Length);
+                if (tbl != null)
+                {
+                    editor.SetSelectedText(tbl);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + tbl.Length);
+                }
+            }
+        }
+
+        internal static void TableFormXML()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Vui lòng chọn Text trước....", "Hoàng Hà's Table");
+            }
+            else
+            {
+                string tbl = "";
+                File.WriteAllText("tableTemp.txt", text);
+                frmTableXML frmTable = new frmTableXML();
+                frmTable.ShowDialog();
+                tbl = frmTable.tbl;
+                if (tbl != "__Empty___")
+                {
+                    editor.SetSelectedText(tbl);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + tbl.Length);
+                }
+            }
+        }
+
+        public static void frmFootnote()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Vui lòng chọn Text trước....", "Hoàng Hà's Table");
+            }
+            else
+            {
+
+                frmFootnoteXML frmFootnote = new frmFootnoteXML();
+                frmFootnote.InputText = text;
+                frmFootnote.ShowDialog();
+                if (!string.IsNullOrEmpty(frmFootnote.InputText))
+                {
+                    editor.SetSelectedText(frmFootnote.InputText);
+                }
             }
         }
 
         // Class - Somethings else
 
-        private static List<string> D9290imgList = new List<string>
+        private static readonly List<string> D9290imgList = new List<string>
         {
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as", "at", "au", "av", "aw", "ax", "ay", "az", "ba", "bb", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bv", "bw", "bx", "by", "bz", "ca", "cb", "cc", "cd", "ce", "cf", "cg", "ch", "ci", "cj", "ck", "cl", "cm", "cn", "co", "cp", "cq", "cr", "cs", "ct", "cu", "cv", "cw", "cx", "cy", "cz", "da", "db", "dc", "dd", "de", "df", "dg", "dh", "di", "dj", "dk", "dl", "dm", "dn", "do", "dp", "dq", "dr", "ds", "dt", "du", "dv", "dw", "dx", "dy", "dz", "ea", "eb", "ec", "ed", "ee", "ef", "eg", "eh", "ei", "ej", "ek", "el", "em", "en", "eo", "ep", "eq", "er", "es", "et", "eu", "ev", "ew", "ex", "ey", "ez", "fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj", "fk", "fl", "fm", "fn", "fo", "fp", "fq", "fr", "fs", "ft", "fu", "fv", "fw", "fx", "fy", "fz", "ga", "gb", "gc", "gd", "ge", "gf", "gg", "gh", "gi", "gj", "gk", "gl", "gm", "gn", "go", "gp", "gq", "gr", "gs", "gt", "gu", "gv", "gw", "gx", "gy", "gz", "ha", "hb", "hc", "hd", "he", "hf", "hg", "hh", "hi", "hj", "hk", "hl", "hm", "hn", "ho", "hp", "hq", "hr", "hs", "ht", "hu", "hv", "hw", "hx", "hy", "hz", "ia", "ib", "ic", "id", "ie", "if", "ig", "ih", "ii", "ij", "ik", "il", "im", "in", "io", "ip", "iq", "ir", "is", "it", "iu", "iv", "iw", "ix", "iy", "iz", "ja", "jb", "jc", "jd", "je", "jf", "jg", "jh", "ji", "jj", "jk", "jl", "jm", "jn", "jo", "jp", "jq", "jr", "js", "jt", "ju", "jv", "jw", "jx", "jy", "jz", "ka", "kb", "kc", "kd", "ke", "kf", "kg", "kh", "ki", "kj", "kk", "kl", "km", "kn", "ko", "kp", "kq", "kr", "ks", "kt", "ku", "kv", "kw", "kx", "ky", "kz", "la", "lb", "lc", "ld", "le", "lf", "lg", "lh", "li", "lj", "lk", "ll", "lm", "ln", "lo", "lp", "lq", "lr", "ls", "lt", "lu", "lv", "lw", "lx", "ly", "lz", "ma", "mb", "mc", "md", "me", "mf", "mg", "mh", "mi", "mj", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nb", "nc", "nd", "ne", "nf", "ng", "nh", "ni", "nj", "nk", "nl", "nm", "nn", "no", "np", "nq", "nr", "ns", "nt", "nu", "nv", "nw", "nx", "ny", "nz", "oa", "ob", "oc", "od", "oe", "of", "og", "oh", "oi", "oj", "ok", "ol", "om", "on", "oo", "op", "oq", "or", "os", "ot", "ou", "ov", "ow", "ox", "oy", "oz", "pa", "pb", "pc", "pd", "pe", "pf", "pg", "ph", "pi", "pj", "pk", "pl", "pm", "pn", "po", "pp", "pq", "pr", "ps", "pt", "pu", "pv", "pw", "px", "py", "pz", "qa", "qb", "qc", "qd", "qe", "qf", "qg", "qh", "qi", "qj", "qk", "ql", "qm", "qn", "qo", "qp", "qq", "qr", "qs", "qt", "qu", "qv", "qw", "qx", "qy", "qz", "ra", "rb", "rc", "rd", "re", "rf", "rg", "rh", "ri", "rj", "rk", "rl", "rm", "rn", "ro", "rp", "rq", "rr", "rs", "rt", "ru", "rv", "rw", "rx", "ry", "rz", "sa", "sb", "sc", "sd", "se", "sf", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sp", "sq", "sr", "ss", "st", "su", "sv", "sw", "sx", "sy", "sz", "ta", "tb", "tc", "td", "te", "tf", "tg", "th", "ti", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tq", "tr", "ts", "tt", "tu", "tv", "tw", "tx", "ty", "tz", "ua", "ub", "uc", "ud", "ue", "uf", "ug", "uh", "ui", "uj", "uk", "ul", "um", "un", "uo", "up", "uq", "ur", "us", "ut", "uu", "uv", "uw", "ux", "uy", "uz", "va", "vb", "vc", "vd", "ve", "vf", "vg", "vh", "vi", "vj", "vk", "vl", "vm", "vn", "vo", "vp", "vq", "vr", "vs", "vt", "vu", "vv", "vw", "vx", "vy", "vz", "wa", "wb", "wc", "wd", "we", "wf", "wg", "wh", "wi", "wj", "wk", "wl", "wm", "wn", "wo", "wp", "wq", "wr", "ws", "wt", "wu", "wv", "ww", "wx", "wy", "wz", "xa", "xb", "xc", "xd", "xe", "xf", "xg", "xh", "xi", "xj", "xk", "xl", "xm", "xn", "xo", "xp", "xq", "xr", "xs", "xt", "xu", "xv", "xw", "xx", "xy", "xz", "ya", "yb", "yc", "yd", "ye", "yf", "yg", "yh", "yi", "yj", "yk", "yl", "ym", "yn", "yo", "yp", "yq", "yr", "ys", "yt", "yu", "yv", "yw", "yx", "yy", "yz", "za", "zb", "zc", "zd", "ze", "zf", "zg", "zh", "zi", "zj", "zk", "zl", "zm", "zn", "zo", "zp", "zq", "zr", "zs", "zt", "zu", "zv", "zw", "zx", "zy", "zz", "aaa", "aab", "aac", "aad", "aae", "aaf", "aag", "aah", "aai", "aaj", "aak", "aal", "aam", "aan", "aao", "aap", "aaq", "aar", "aas", "aat", "aau", "aav", "aaw", "aax", "aay", "aaz", "aba", "abb", "abc", "abd", "abe", "abf", "abg", "abh", "abi", "abj", "abk", "abl", "abm", "abn", "abo", "abp", "abq", "abr", "abs", "abt", "abu", "abv", "abw", "abx", "aby", "abz", "aca", "acb", "acc", "acd", "ace", "acf", "acg", "ach", "aci", "acj", "ack", "acl", "acm", "acn", "aco", "acp", "acq", "acr", "acs", "act", "acu", "acv", "acw", "acx", "acy", "acz", "ada", "adb", "adc", "add", "ade", "adf", "adg", "adh", "adi", "adj", "adk", "adl", "adm", "adn", "ado", "adp", "adq", "adr", "ads", "adt", "adu", "adv", "adw", "adx", "ady", "adz", "aea", "aeb", "aec", "aed", "aee", "aef", "aeg", "aeh", "aei", "aej", "aek", "ael", "aem", "aen", "aeo", "aep", "aeq", "aer", "aes", "aet", "aeu", "aev", "aew", "aex", "aey", "aez", "afa", "afb", "afc", "afd", "afe", "aff", "afg", "afh", "afi", "afj", "afk", "afl", "afm", "afn", "afo", "afp", "afq", "afr", "afs", "aft", "afu", "afv", "afw", "afx", "afy", "afz", "aga", "agb", "agc", "agd", "age", "agf", "agg", "agh", "agi", "agj", "agk", "agl", "agm", "agn", "ago", "agp", "agq", "agr", "ags", "agt", "agu", "agv", "agw", "agx", "agy", "agz", "aha", "ahb", "ahc", "ahd", "ahe", "ahf", "ahg", "ahh", "ahi", "ahj", "ahk", "ahl", "ahm", "ahn", "aho", "ahp", "ahq", "ahr", "ahs", "aht", "ahu", "ahv", "ahw", "ahx", "ahy", "ahz", "aia", "aib", "aic", "aid", "aie", "aif", "aig", "aih", "aii", "aij", "aik", "ail", "aim", "ain", "aio", "aip", "aiq", "air", "ais", "ait", "aiu", "aiv", "aiw", "aix", "aiy", "aiz", "aja", "ajb", "ajc", "ajd", "aje", "ajf", "ajg", "ajh", "aji", "ajj", "ajk", "ajl", "ajm", "ajn", "ajo", "ajp", "ajq", "ajr", "ajs", "ajt", "aju", "ajv", "ajw", "ajx", "ajy", "ajz", "aka", "akb", "akc", "akd", "ake", "akf", "akg", "akh", "aki", "akj", "akk", "akl", "akm", "akn", "ako", "akp", "akq", "akr", "aks", "akt", "aku", "akv", "akw", "akx", "aky", "akz", "ala", "alb", "alc", "ald", "ale", "alf", "alg", "alh", "ali", "alj", "alk", "all", "alm", "aln", "alo", "alp", "alq", "alr", "als", "alt", "alu", "alv", "alw", "alx", "aly", "alz", "ama", "amb", "amc", "amd", "ame", "amf", "amg", "amh", "ami", "amj", "amk", "aml", "amm", "amn", "amo", "amp", "amq", "amr", "ams", "amt", "amu", "amv", "amw", "amx", "amy", "amz", "ana", "anb", "anc", "and", "ane", "anf", "ang", "anh", "ani", "anj", "ank", "anl", "anm", "ann", "ano", "anp", "anq", "anr", "ans", "ant", "anu", "anv", "anw", "anx", "any", "anz", "aoa", "aob", "aoc", "aod", "aoe", "aof", "aog", "aoh", "aoi", "aoj", "aok", "aol", "aom", "aon", "aoo", "aop", "aoq", "aor", "aos", "aot", "aou", "aov", "aow", "aox", "aoy", "aoz", "apa", "apb", "apc", "apd", "ape", "apf", "apg", "aph", "api", "apj", "apk", "apl", "apm", "apn", "apo", "app", "apq", "apr", "aps", "apt", "apu", "apv", "apw", "apx", "apy", "apz", "aqa", "aqb", "aqc", "aqd", "aqe", "aqf", "aqg", "aqh", "aqi", "aqj", "aqk", "aql", "aqm", "aqn", "aqo", "aqp", "aqq", "aqr", "aqs", "aqt", "aqu", "aqv", "aqw", "aqx", "aqy", "aqz", "ara", "arb", "arc", "ard", "are", "arf", "arg", "arh", "ari", "arj", "ark", "arl", "arm", "arn", "aro", "arp", "arq", "arr", "ars", "art", "aru", "arv", "arw", "arx", "ary", "arz", "asa", "asb", "asc", "asd", "ase", "asf", "asg", "ash", "asi", "asj", "ask", "asl", "asm", "asn", "aso", "asp", "asq", "asr", "ass", "ast", "asu", "asv", "asw", "asx", "asy", "asz", "ata", "atb", "atc", "atd", "ate", "atf", "atg", "ath", "ati", "atj", "atk", "atl", "atm", "atn", "ato", "atp", "atq", "atr", "ats", "att", "atu", "atv", "atw", "atx", "aty", "atz", "aua", "aub", "auc", "aud", "aue", "auf", "aug", "auh", "aui", "auj", "auk", "aul", "aum", "aun", "auo", "aup", "auq", "aur", "aus", "aut", "auu", "auv", "auw", "aux", "auy", "auz", "ava", "avb", "avc", "avd", "ave", "avf", "avg", "avh", "avi", "avj", "avk", "avl", "avm", "avn", "avo", "avp", "avq", "avr", "avs", "avt", "avu", "avv", "avw", "avx", "avy", "avz", "awa", "awb", "awc", "awd", "awe", "awf", "awg", "awh", "awi", "awj", "awk", "awl", "awm", "awn", "awo", "awp", "awq", "awr", "aws", "awt", "awu", "awv", "aww", "awx", "awy", "awz", "axa", "axb", "axc", "axd", "axe", "axf", "axg", "axh", "axi", "axj", "axk", "axl", "axm", "axn", "axo", "axp", "axq", "axr", "axs", "axt", "axu", "axv", "axw", "axx", "axy", "axz", "aya", "ayb", "ayc", "ayd", "aye", "ayf", "ayg", "ayh", "ayi", "ayj", "ayk", "ayl", "aym", "ayn", "ayo", "ayp", "ayq", "ayr", "ays", "ayt", "ayu", "ayv", "ayw", "ayx", "ayy", "ayz", "aza", "azb", "azc", "azd", "aze", "azf", "azg", "azh", "azi", "azj", "azk", "azl", "azm", "azn", "azo", "azp", "azq", "azr", "azs", "azt", "azu", "azv", "azw", "azx", "azy", "azz"
         };
 
-        private static List<string> PredictIndent = new List<string>
+        private static readonly List<string> PredictIndent = new List<string>
         {
             "Therefore, ", "Although ", "When ", "What ", "10) ", "1) ", "2) ", "3) ", "4) ", "5) ", "6) ", "7) ", "8) ", "9) ", "11) ", "12) ", "13) ", "14) ", "15) ", "16) ", "Following ", "After ", "An ", "Another ", "Basing ", "We ", "Other ", "One ", "To ", "$=BNote$=R: ", "$=BExample ", "At ", "*** ", "***", "* * *", "...", ". . .", "__1. ", "__2. ", "__3. ", "__4. ", "__5. ", "__6. ", "__7. ", "__8. ", "__9. ", "__11. ", "__20. ", "__12. ", "__13. ", "__14. ", "__15. ", "__16. ", "__17. ", "__18. ", "__19. ", "__21. ", "__30. ", "__22. ", "__23. ", "__24. ", "__25. ", "__26. ", "__27. ", "__28. ", "__29. ", "__31. ", "IT IS ", "$=BIT IS", "DATED: ", "HONORABLE ", "UNITED STATES ", "Third", "The ", "By ", "There ", "Under ", "These ", "A ", "As ", "$II. ", "$III. ", "$IIII. ", "$IIV. ", "$IV. ", "$IVI. ", "$IVII. ", "$IVIII. ", "$IIX. ", "$IX. ", "Fifth,", "I. ", "II. ", "III. ", "IV. ", "V. ", "VI. ", "VII. ", "VIII. ", "IX. ", "X. ", "A. ", "$IA. ", "$IB. ", "$IC. ", "$ID. ", "$IE. ", "$IF. ", "$IG. ", "$IH. ", "$IJ. ", "$IK. ", "1. ", "$I1. ", "$I2. ", "$I3. ", "$I4. ", "$I5. ", "$I6. ", "$I7. ", "$I8. ", "$I9. ", "$I11. ", "$I20. ", "$I12. ", "$I13. ", "$I14. ", "$I15. ", "$I16. ", "$I17. ", "$I18. ", "$I19. ", "$I21. ", "$I30. ", "$I22. ", "$I23. ", "$I24. ", "$I25. ", "$I26. ", "$I27. ", "$I28. ", "$I29. ", "$I31. ", "$IL. ", "$IM. ", "$IN. ", "$IO. ", "$IP. ", "$IQ. ", "$IR. ", "$IS. ", "$IT. ", "$IU. ", "$IW. ", "Respectfully submitted", "Dated:", "$ICERTIFICATE OF", "Thus, ", "Finally, ", "Grounds ", "For ", "Furthermore ", "With ", "Accordingly,", "Accordingly ", "Moreover,", "Specifically,", "(Ex. ", "Even ", "Here, ", "Of ", "This ", "Where ", "While ", "Without ", "Email:", "Each ", "Also,", "By:", "Consequently,", "During", "Fourth,", "Hence,", "However,", "If ", "I hereby", "Independent ", "Moreover, ", "Of these,", "ORDERED", "$IORDERED", "FURTHER", "$IFURTHER", "Sixth,", "Seventh,", "Email: ", "Telephone:", "Facsimile:", "$U/s/ ", "CO[2]__", "$I$UA. ", "$I$UB. ", "$I$UC. ", "$I$UD. ", "$I$UE. ", "$I$UF. ", "$I$UG. ", "$I$UH. ", "$I$UJ. ", "$I$UK. ", "$I$UL. ", "$I$UM. ", "$I$UO. ", "$I$UP. ", "$I$UQ. ", "$I$UR. ", "$I$US. ", "$I$UT. ", "$I$UU. ", "$I$UV. ", "$I$UI. ", "$I$UII. ", "$I$UIII. ", "$I$UIV. ", "$I$UVI. ", "$I$UVII. ", "$I$UVIII. ", "$I$UIX. ", "$I$UX. ", "In ", "Those ", "It ", "On ", "First", "Second", "Pursuant to", "$=BI. ", "$=BII. ", "$=BIII. ", "$=BIV. ", "$=BV. ", "$=BVI. ", "$=BVII. ", "$=BVIII. ", "$=BIX. ", "$=BX. ", "$=BA. ", "$=BB. ", "$=BC. ", "$=BD. ", "$=BE. ", "$=BF. ", "$=BG. ", "$=BH. ", "$=BJ. ", "$=BK. ", "$=B1. ", "$=B2. ", "$=B3. ", "$=B4. ", "$=B5. ", "$=B6. ", "$=B7. ", "$=B8. ", "$=B9. ", "$=B11. ", "$=B20. ", "$=B12. ", "$=B13. ", "$=B14. ", "$=B15. ", "$=B16. ", "$=B17. ", "$=B18. ", "$=B19. ", "$=B21. ", "$=B30. ", "$=B22. ", "$=B23. ", "$=B24. ", "$=B25. ", "$=B26. ", "$=B27. ", "$=B28. ", "$=B29. ", "$=B31. ", "$=BL. ", "$=BM. ", "$=BN. ", "$=BO. ", "$=BP. ", "$=BQ. ", "$=BR. ", "$=BS. ", "$=BT. ", "$=BU. ", "$=BW. ", "$=BCERTIFICATE OF", "$=BORDERED", "$=BFURTHER", "$=B$IA. ", "$=B$IB. ", "$=B$IC. ", "$=B$ID. ", "$=B$IE. ", "$=B$IF. ", "$=B$IG. ", "$=B$IH. ", "$=B$IJ. ", "$=B$IK. ", "$=B$IL. ", "$=B$IM. ", "$=B$IO. ", "$=B$IP. ", "$=B$IQ. ", "$=B$IR. ", "$=B$IS. ", "$=B$IT. ", "$=B$IU. ", "$=B$IV. ", "$=B$II. ", "$=B$III. ", "$=B$IIII. ", "$=B$IIV. ", "$=B$IVI. ", "$=B$IVII. ", "$=B$IVIII. ", "$=B$IIX. ", "$=B$IX. ", "/s/", "$=BIT IS SO ", "$=BCONCLUSION$=R", "Reg. No.", "$I/s/"
         };
 
-        private static List<string> PredictNotIndent = new List<string>
+        private static readonly List<string> PredictNotIndent = new List<string>
         {
             "THE COURT: ", "MR. ", "Date: ", "Judgment Entered", "Q. ", "A. ", "Q: ", "A: ", "$=BFrom$=R: ", "$=BSent$=R: ", "$=BTo$=R: ", "$=BCc$=R: ", "$=BSubject$=R: ", "Dated:"
         };
@@ -1867,26 +2344,5 @@ namespace phdesign.NppToolBucket
                 return StrCmpLogicalW(x, y);
             }
         }
-
-        private static bool IsViewVisible(int targetView)
-        {
-            int currentView;
-            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTSCINTILLA, 0, out currentView);
-            // If the view is active it must be visible
-            if (currentView == targetView) return true;
-            var currentDocIndex = (int)Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTDOCINDEX, 0, currentView);
-            var currentDocIndexTargetView = (int)Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTDOCINDEX, 0, targetView);
-
-            // Try switching to other view, if that fails it must be hidden.
-            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_ACTIVATEDOC, targetView, currentDocIndexTargetView);
-            int newView;
-            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_GETCURRENTSCINTILLA, 0, out newView);
-
-            // Restore active doc
-            Win32.SendMessage(PluginBase.nppData._nppHandle, NppMsg.NPPM_ACTIVATEDOC, currentView, currentDocIndex);
-
-            return newView == targetView;
-        }
-
     }
 }

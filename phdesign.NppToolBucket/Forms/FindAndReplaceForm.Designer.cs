@@ -75,6 +75,7 @@ namespace phdesign.NppToolBucket.Forms
             this.button91 = new System.Windows.Forms.Button();
             this.button89 = new System.Windows.Forms.Button();
             this.button78 = new System.Windows.Forms.Button();
+            this.button94 = new System.Windows.Forms.Button();
             this.button90 = new System.Windows.Forms.Button();
             this.button36 = new System.Windows.Forms.Button();
             this.button35 = new System.Windows.Forms.Button();
@@ -127,6 +128,7 @@ namespace phdesign.NppToolBucket.Forms
             this.button11 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button92 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.button37 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
@@ -178,6 +180,8 @@ namespace phdesign.NppToolBucket.Forms
             this.button81 = new System.Windows.Forms.Button();
             this.button80 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button93 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -194,6 +198,7 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -523,6 +528,7 @@ namespace phdesign.NppToolBucket.Forms
             this.panel3.Controls.Add(this.button91);
             this.panel3.Controls.Add(this.button89);
             this.panel3.Controls.Add(this.button78);
+            this.panel3.Controls.Add(this.button94);
             this.panel3.Controls.Add(this.button90);
             this.panel3.Controls.Add(this.button36);
             this.panel3.Controls.Add(this.button35);
@@ -579,6 +585,17 @@ namespace phdesign.NppToolBucket.Forms
             this.button78.Text = "Entity to Unicode";
             this.button78.UseVisualStyleBackColor = true;
             this.button78.Click += new System.EventHandler(this.button78_Click);
+            // 
+            // button94
+            // 
+            this.button94.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button94.Location = new System.Drawing.Point(344, 59);
+            this.button94.Name = "button94";
+            this.button94.Size = new System.Drawing.Size(149, 30);
+            this.button94.TabIndex = 5;
+            this.button94.Text = "Remove $DEL_";
+            this.button94.UseVisualStyleBackColor = true;
+            this.button94.Click += new System.EventHandler(this.button94_Click);
             // 
             // button90
             // 
@@ -833,6 +850,7 @@ namespace phdesign.NppToolBucket.Forms
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(52, 25);
             this.tabControl1.Location = new System.Drawing.Point(4, 56);
@@ -1097,12 +1115,13 @@ namespace phdesign.NppToolBucket.Forms
             // 
             this.button21.BackColor = System.Drawing.Color.White;
             this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.button21.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button21.ForeColor = System.Drawing.Color.Red;
             this.button21.Location = new System.Drawing.Point(17, 352);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(162, 31);
             this.button21.TabIndex = 6;
-            this.button21.Text = "Footnote Link Count";
+            this.button21.Text = "FOOTNOTE CHECK";
             this.button21.UseVisualStyleBackColor = false;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -1235,6 +1254,7 @@ namespace phdesign.NppToolBucket.Forms
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button92);
             this.tabPage3.Controls.Add(this.button38);
             this.tabPage3.Controls.Add(this.button37);
             this.tabPage3.Controls.Add(this.button34);
@@ -1246,6 +1266,19 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "VIP ONLY";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button92
+            // 
+            this.button92.BackColor = System.Drawing.Color.Bisque;
+            this.button92.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button92.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.button92.Location = new System.Drawing.Point(173, 89);
+            this.button92.Name = "button92";
+            this.button92.Size = new System.Drawing.Size(149, 31);
+            this.button92.TabIndex = 5;
+            this.button92.Text = "Split XML Files";
+            this.button92.UseVisualStyleBackColor = false;
+            this.button92.Click += new System.EventHandler(this.button92_Click);
             // 
             // button38
             // 
@@ -1518,13 +1551,15 @@ namespace phdesign.NppToolBucket.Forms
             // 
             this.button46.BackColor = System.Drawing.Color.AliceBlue;
             this.button46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button46.ForeColor = System.Drawing.Color.Green;
+            this.button46.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button46.ForeColor = System.Drawing.Color.Orchid;
             this.button46.Location = new System.Drawing.Point(17, 253);
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(153, 27);
             this.button46.TabIndex = 7;
-            this.button46.Text = "----";
+            this.button46.Text = "Renumber $00";
             this.button46.UseVisualStyleBackColor = false;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // button45
             // 
@@ -1583,6 +1618,7 @@ namespace phdesign.NppToolBucket.Forms
             // 
             this.button41.BackColor = System.Drawing.Color.AliceBlue;
             this.button41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button41.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button41.ForeColor = System.Drawing.Color.Green;
             this.button41.Location = new System.Drawing.Point(17, 88);
             this.button41.Name = "button41";
@@ -1671,44 +1707,51 @@ namespace phdesign.NppToolBucket.Forms
             this.button69.Name = "button69";
             this.button69.Size = new System.Drawing.Size(142, 30);
             this.button69.TabIndex = 8;
-            this.button69.Text = "---";
+            this.button69.Text = "Footnote Renumber";
             this.button69.UseVisualStyleBackColor = false;
+            this.button69.Click += new System.EventHandler(this.button69_Click);
             // 
             // button68
             // 
             this.button68.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.button68.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button68.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.button68.Location = new System.Drawing.Point(17, 267);
             this.button68.Name = "button68";
             this.button68.Size = new System.Drawing.Size(142, 30);
             this.button68.TabIndex = 7;
-            this.button68.Text = "---";
+            this.button68.Text = "Table Builder";
             this.button68.UseVisualStyleBackColor = false;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
             // 
             // button67
             // 
             this.button67.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.button67.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button67.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button67.ForeColor = System.Drawing.Color.Cyan;
             this.button67.Location = new System.Drawing.Point(17, 231);
             this.button67.Name = "button67";
             this.button67.Size = new System.Drawing.Size(142, 30);
             this.button67.TabIndex = 6;
-            this.button67.Text = "---";
+            this.button67.Text = "IMAGE LINK";
             this.button67.UseVisualStyleBackColor = false;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
             // 
             // button66
             // 
             this.button66.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.button66.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button66.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button66.Location = new System.Drawing.Point(17, 195);
             this.button66.Name = "button66";
             this.button66.Size = new System.Drawing.Size(142, 30);
             this.button66.TabIndex = 5;
-            this.button66.Text = "---";
+            this.button66.Text = "LEGACY INSERT";
             this.button66.UseVisualStyleBackColor = false;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
             // 
             // button65
             // 
@@ -1859,13 +1902,15 @@ namespace phdesign.NppToolBucket.Forms
             // 
             this.button83.BackColor = System.Drawing.Color.White;
             this.button83.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button83.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button83.ForeColor = System.Drawing.Color.Blue;
             this.button83.Location = new System.Drawing.Point(17, 160);
             this.button83.Name = "button83";
             this.button83.Size = new System.Drawing.Size(142, 30);
             this.button83.TabIndex = 11;
-            this.button83.Text = "---";
+            this.button83.Text = "DF989";
             this.button83.UseVisualStyleBackColor = false;
+            this.button83.Click += new System.EventHandler(this.button83_Click);
             // 
             // button82
             // 
@@ -1922,6 +1967,30 @@ namespace phdesign.NppToolBucket.Forms
             this.button79.UseVisualStyleBackColor = false;
             this.button79.Click += new System.EventHandler(this.button79_Click);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.Color.White;
+            this.tabPage7.Controls.Add(this.button93);
+            this.tabPage7.Location = new System.Drawing.Point(4, 29);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(846, 418);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Canada";
+            // 
+            // button93
+            // 
+            this.button93.BackColor = System.Drawing.Color.White;
+            this.button93.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button93.ForeColor = System.Drawing.Color.Green;
+            this.button93.Location = new System.Drawing.Point(17, 19);
+            this.button93.Name = "button93";
+            this.button93.Size = new System.Drawing.Size(152, 32);
+            this.button93.TabIndex = 0;
+            this.button93.Text = "Text String";
+            this.button93.UseVisualStyleBackColor = false;
+            this.button93.Click += new System.EventHandler(this.button93_Click);
+            // 
             // FindAndReplaceForm
             // 
             this.AcceptButton = this.buttonFindNext;
@@ -1964,6 +2033,7 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2104,5 +2174,9 @@ namespace phdesign.NppToolBucket.Forms
         private System.Windows.Forms.Button button89;
         private System.Windows.Forms.Button button90;
         private System.Windows.Forms.Button button91;
+        private System.Windows.Forms.Button button92;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button button93;
+        private System.Windows.Forms.Button button94;
     }
 }

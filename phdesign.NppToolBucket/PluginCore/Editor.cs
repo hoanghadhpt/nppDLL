@@ -101,6 +101,41 @@ namespace phdesign.NppToolBucket.PluginCore
             return GetTextByRange(start, end, end - start);
         }
 
+
+        /// <summary>
+        ///  GetCurrentLineNumber()
+        ///  Go to line number from current Position
+        /// 
+        /// </summary>
+        /// 
+        public int GotoLineNumber(int line)
+        {
+            var linePos = Call(SciMsg.SCI_POSITIONFROMLINE, line, 0);
+            return Call(SciMsg.SCI_GOTOPOS, linePos, 0);
+        }
+
+        /// <summary>
+        ///  Choose caret X
+        ///  Go to line number from current Position
+        /// 
+        /// </summary>
+        /// 
+        public int ChooseCaretX()
+        {
+            return Call(SciMsg.SCI_SCROLLCARET);
+        }
+
+        /// <summary>
+        ///  Scroll
+        ///  Go to line number from current Position
+        /// 
+        /// </summary>
+        /// 
+        public int ScrollToLine(int line)
+        {
+            return Call(SciMsg.SCI_LINESCROLL,0,line);
+        }
+
         /// <summary>
         /// Returns the text between the positions start and end. If end is -1, text is returned to the end of the document. 
         /// The text is 0 terminated, so you must supply a buffer that is at least 1 character longer than the number of characters 

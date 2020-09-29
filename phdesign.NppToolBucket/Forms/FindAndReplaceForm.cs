@@ -376,7 +376,13 @@ namespace phdesign.NppToolBucket.Forms
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
 
-            if (Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E0265" || Environment.UserName.ToUpper() == "E1057" || Environment.UserName.ToUpper() == "E1872")
+            if (Environment.UserName.ToUpper() == "HOANG HA" 
+                || Environment.UserName.ToUpper() == "E1897" 
+                || Environment.UserName.ToUpper() == "E1859" 
+                || Environment.UserName.ToUpper() == "E2866" 
+                || Environment.UserName.ToUpper() == "E0265" 
+                || Environment.UserName.ToUpper() == "E1057" 
+                || Environment.UserName.ToUpper() == "E1872")
             {
 
             }
@@ -513,7 +519,7 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button21_Click(object sender, EventArgs e)
         {
-            HoangHaFunctions.FootnoteLinkCount();
+            HoangHaFunctions.FootnoteVISFCheck();
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -596,7 +602,9 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button60_Click(object sender, EventArgs e)
         {
-            if (Environment.UserName.ToString().ToUpper() == "E1897" || Environment.UserName.ToString().ToUpper() == "HOANG HA" || Environment.UserName.ToString().ToUpper() == "1057")
+            if (Environment.UserName.ToString().ToUpper() == "E1897" 
+                || Environment.UserName.ToString().ToUpper() == "HOANG HA" 
+                || Environment.UserName.ToString().ToUpper() == "E1057")
             {
                 D9290 frmD9290 = new D9290();
                 frmD9290.Show();
@@ -636,7 +644,7 @@ namespace phdesign.NppToolBucket.Forms
 
         private void button41_Click(object sender, EventArgs e)
         {
-            HoangHaFunctions.Table_Process();
+            HoangHaFunctions.TableForm();
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -718,8 +726,61 @@ namespace phdesign.NppToolBucket.Forms
         {
             HoangHaFunctions.StringDola130();
         }
-    }
 
+        private void button83_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.DF989_XML();
+        }
+
+        private void button92_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.SplitXMLFiles();
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.Renumber00();
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.LEGACY_XML();
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.IMAGE_INSERT_XML();
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.TableFormXML();
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.frmFootnote();
+        }
+
+        private void button93_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.Canada();
+        }
+
+        private void button94_Click(object sender, EventArgs e)
+        {
+            RemoveDEL();
+        }
+
+        public void RemoveDEL()
+        {
+            FindText = @"\$DEL_.*";
+            ReplaceText = @"";
+            MatchCase = true;
+            UseRegularExpression = true;
+            OnDoAction(Action.ReplaceAll);
+        }
+    }
 
 
     public enum Action

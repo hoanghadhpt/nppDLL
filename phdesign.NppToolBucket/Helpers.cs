@@ -104,10 +104,37 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                DateTime dt = Convert.ToDateTime(text);
-                var result = dt.ToString("MMMM d, yyyy");
-                editor.SetSelectedText(result);
-                editor.SetSelection(pos.cpMin, pos.cpMin + result.Length);
+                if (text == "now")
+                {
+                    editor.SetSelectedText(DateTime.Now.ToString("MMMM d, yyyy"));
+                    editor.SetSelection(pos.cpMin, pos.cpMin + DateTime.Now.ToString("MMMM d, yyyy").Length);
+                }
+                else if (text == "now_")
+                {
+                    editor.SetSelectedText(DateTime.Now.ToString("mm/dd/yy"));
+                    editor.SetSelection(pos.cpMin, pos.cpMin + DateTime.Now.ToString("MM/dd/yy").Length);
+                }
+                else if (text.Contains("_"))
+                {
+                    DateTime dt = Convert.ToDateTime(text.Replace("_",""));
+                    var result = dt.ToString("MM/dd/yy");
+                    editor.SetSelectedText(result);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + result.Length);
+                }
+                else if (text.Contains("#"))
+                {
+                    DateTime dt = Convert.ToDateTime(text.Replace("#", ""));
+                    var result = dt.ToString("MM/dd/yyyy");
+                    editor.SetSelectedText(result);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + result.Length);
+                }
+                else 
+                {
+                    DateTime dt = Convert.ToDateTime(text);
+                    var result = dt.ToString("MMMM d, yyyy");
+                    editor.SetSelectedText(result);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + result.Length);
+                }
             }
         }
 

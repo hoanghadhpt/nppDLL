@@ -98,7 +98,7 @@ namespace phdesign.NppToolBucket.Forms
                 }
                 else if (mSession.Groups[1].Value.ToLower() == "summer")
                 {
-                    tmp = string.Format("$21:January {0}\r\n$22:February {0}\r\n$23:March {0}\r\n$27:Winter, {0}\r\n", mSession.Groups[3].Value);
+                    tmp = string.Format("$21:July {0}\r\n$22:August {0}\r\n$23:September {0}\r\n$27:Summer, {0}\r\n", mSession.Groups[3].Value);
                 }
                 else if (mSession.Groups[1].Value.ToLower() == "fall")
                 {

@@ -187,7 +187,7 @@ namespace phdesign.NppToolBucket
         {
             if (TableWith > 78)
             {
-                MessageBox.Show("Table Exceed 78 Chars");
+                MessageBox.Show("Table Exceed 640 pixels","Warning");
             }
             ExportTable();
             this.Close();
