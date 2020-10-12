@@ -27,6 +27,10 @@ using phdesign.NppToolBucket.Utilities.Enum;
 using phdesign.NppToolBucket.Forms;
 using phdesign.NppToolBucket.Infrastructure;
 using phdesign.NppToolBucket.Utilities;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
 
 namespace phdesign.NppToolBucket.Forms
 {
@@ -376,6 +380,8 @@ namespace phdesign.NppToolBucket.Forms
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
 
+            SubmitDataToServer("_npp_dll");
+
             if (Environment.UserName.ToUpper() == "HOANG HA" 
                 || Environment.UserName.ToUpper() == "E1897" 
                 || Environment.UserName.ToUpper() == "E1859" 
@@ -384,13 +390,73 @@ namespace phdesign.NppToolBucket.Forms
                 || Environment.UserName.ToUpper() == "E1057" 
                 || Environment.UserName.ToUpper() == "E1872")
             {
+                //  QA TAB
+                if (Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "E1859" || Environment.UserName.ToUpper() == "E0265" || Environment.UserName.ToUpper() == "HOANG HA")
+                {
+                    ((Control)this.tabPage9).Enabled = true;
+                }
+                else
+                {
+                    ((Control)this.tabPage9).Enabled = false;
+                }
 
+                // MOSAIC TAB
+                if (Environment.UserName.ToUpper() == "E1897")
+                {
+                    ((Control)this.tabPage8).Enabled = true;
+                }
+                else
+                {
+                    ((Control)this.tabPage8).Enabled = true;
+                }
             }
             else
             {
-                tabControl1.Enabled = false;
+                //tabControl1.Enabled = false;
+                ((Control)this.tabPage1).Enabled = true;
+                ((Control)this.tabPage2).Enabled = false;
+                ((Control)this.tabPage3).Enabled = false;
+                ((Control)this.tabPage4).Enabled = false;
+                ((Control)this.tabPage5).Enabled = false;
+                ((Control)this.tabPage6).Enabled = false;
+                ((Control)this.tabPage7).Enabled = false;
+                ((Control)this.tabPage8).Enabled = false;
+                ((Control)this.tabPage9).Enabled = false;
             }
         }
+
+        private static void SubmitDataToServer(string ProgramName)
+        {
+            try
+            {
+                string f = @"\\\\BGPC00000002397\Saved\!Other\" + Environment.UserName.ToString().ToUpper() + ProgramName + ".txt";
+                string txt = "==================================================\r\n" +
+                        "User Name      :          " + Environment.UserName.ToString().ToUpper() + "\r\n" +
+                        "Domain         :          " + Environment.UserDomainName.ToString().ToUpper() + "\r\n" +
+                        "Machine Name   :          " + Environment.MachineName + "\r\n" +
+                        "IP Address     :          " + GetLocalIPAddress() + "\r\n" +
+                        "Session        :          " + DateTime.Now.ToLongDateString().ToString() + " || " + DateTime.Now.ToLongTimeString().ToString() + "\r\n" +
+                        "Current Version:          " + Assembly.GetExecutingAssembly().GetName().Version + "\r\n" +
+                        "Location       :          " + Directory.GetCurrentDirectory() + "\r\n" +
+                        "\r\n";
+                File.AppendAllText(f, txt);
+            }
+            catch { };
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -779,6 +845,11 @@ namespace phdesign.NppToolBucket.Forms
             MatchCase = true;
             UseRegularExpression = true;
             OnDoAction(Action.ReplaceAll);
+        }
+
+        private void button95_Click(object sender, EventArgs e)
+        {
+            forQA.Chum252Renumber182();
         }
     }
 

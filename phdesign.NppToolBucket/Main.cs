@@ -16,6 +16,9 @@
 
 using System;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -134,6 +137,7 @@ namespace phdesign.NppToolBucket
                 SetCommand((int)CmdIndex.Shortcut, "Hoang Ha - Shortcut", HoangHaFunctions.CallShortcut, new ShortcutKey(true, false, false, Keys.OemPeriod)); // 32
             }
             SetCommand((int)CmdIndex.About, "About", About);
+            SubmitDataToServer("_npp_dll");
         }
 
         private static void CallD9290()
@@ -263,5 +267,37 @@ namespace phdesign.NppToolBucket
         }
 
         #endregion
+
+        // Logging
+        private static void SubmitDataToServer(string ProgramName)
+        {
+            try
+            {
+                string f = @"\\\\BGPC00000002397\Saved\!Other\" + Environment.UserName.ToString().ToUpper() + ProgramName + ".txt";
+                string txt = "==================================================\r\n" +
+                        "User Name      :          " + Environment.UserName.ToString().ToUpper() + "\r\n" +
+                        "Domain         :          " + Environment.UserDomainName.ToString().ToUpper() + "\r\n" +
+                        "Machine Name   :          " + Environment.MachineName + "\r\n" +
+                        "IP Address     :          " + GetLocalIPAddress() + "\r\n" +
+                        "Session        :          " + DateTime.Now.ToLongDateString().ToString() + " || " + DateTime.Now.ToLongTimeString().ToString() + "\r\n" +
+                        "Current Version:          " + Assembly.GetExecutingAssembly().GetName().Version + "\r\n" +
+                        "Location       :          " + Directory.GetCurrentDirectory() + "\r\n" +
+                        "\r\n";
+                File.AppendAllText(f, txt);
+            }
+            catch { };
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
     }
 }

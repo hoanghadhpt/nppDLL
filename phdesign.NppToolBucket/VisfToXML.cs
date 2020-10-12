@@ -651,16 +651,17 @@ namespace phdesign.NppToolBucket
                         {
                             text4 = Strings.Replace(text4, "#BPOCLTAG#", "", 1, -1, CompareMethod.Binary);
                             text4 = Strings.Replace(text4, "$?", "", 1, -1, CompareMethod.Binary);
-                            if (text.Contains(" missing") || text.Contains(" Missing") || text.Contains(" MISSING"))
-                            {
-                                text4 = "<lnv:SYS-PROD-INFO>" + text4 + " #OKILLEGIBLE#</lnv:SYS-PROD-INFO>\r\n";
-                                text4 = Regex.Replace(text4, "\\s<", "<");
-                            }
-                            else
-                            {
-                                text4 = "<lnv:SYS-PROD-INFO>" + text4 + "</lnv:SYS-PROD-INFO>\r\n";
-                                text4 = Regex.Replace(text4, "\\s<", "<");
-                            }
+                            // Removed 10-02-2020
+                            //if (text.Contains(" missing") || text.Contains(" Missing") || text.Contains(" MISSING"))
+                            //{
+                            //    text4 = "<lnv:SYS-PROD-INFO>" + text4 + " #OKILLEGIBLE#</lnv:SYS-PROD-INFO>\r\n";
+                            //    text4 = Regex.Replace(text4, "\\s<", "<");
+                            //}
+                            //else {}
+
+                            text4 = "<lnv:SYS-PROD-INFO>" + text4 + "</lnv:SYS-PROD-INFO>\r\n";
+                            text4 = Regex.Replace(text4, "\\s<", "<");
+
                         }
                     }
                     else
@@ -672,6 +673,7 @@ namespace phdesign.NppToolBucket
                 }
                 text = Strings.Replace(text, "<SPiCON_Dollar>", "$", 1, -1, CompareMethod.Binary);
                 text = Strings.Replace(text, "<spicon_enter/>", "\r\n", 1, -1, CompareMethod.Binary);
+                text = Strings.Replace(text, "<SPICON_ENTER/>", "\r\n", 1, -1, CompareMethod.Binary);
                 text = Regex.Replace(text, "\\s<\\/lnvxe:fullcasename>", "</lnvxe:fullcasename>");
                 if (Regex.IsMatch(text, "<lnvxe:text>(n[0-9]+(\\,)?(\\;)?(\\.)?(\\))?)(\\s)"))
                 {

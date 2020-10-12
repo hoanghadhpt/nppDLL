@@ -141,6 +141,7 @@
     <Compile Include="Forms\Shortcut.Designer.cs">
       <DependentUpon>Shortcut.cs</DependentUpon>
     </Compile>
+    <Compile Include="forQA.cs" />
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="GuidGeneratorSettings.cs" />
     <Compile Include="HoangHaFunctions.cs" />

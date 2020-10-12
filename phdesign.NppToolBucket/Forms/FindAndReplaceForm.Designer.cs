@@ -182,6 +182,18 @@ namespace phdesign.NppToolBucket.Forms
             this.button79 = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.button93 = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.button95 = new System.Windows.Forms.Button();
+            this.button96 = new System.Windows.Forms.Button();
+            this.button97 = new System.Windows.Forms.Button();
+            this.button98 = new System.Windows.Forms.Button();
+            this.button99 = new System.Windows.Forms.Button();
+            this.button100 = new System.Windows.Forms.Button();
+            this.button101 = new System.Windows.Forms.Button();
+            this.button102 = new System.Windows.Forms.Button();
+            this.button103 = new System.Windows.Forms.Button();
+            this.button104 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -199,6 +211,7 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -851,6 +864,8 @@ namespace phdesign.NppToolBucket.Forms
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(52, 25);
             this.tabControl1.Location = new System.Drawing.Point(4, 56);
@@ -1991,6 +2006,157 @@ namespace phdesign.NppToolBucket.Forms
             this.button93.UseVisualStyleBackColor = false;
             this.button93.Click += new System.EventHandler(this.button93_Click);
             // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 29);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(846, 418);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Mosaic - StateNet";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.button104);
+            this.tabPage9.Controls.Add(this.button103);
+            this.tabPage9.Controls.Add(this.button102);
+            this.tabPage9.Controls.Add(this.button101);
+            this.tabPage9.Controls.Add(this.button100);
+            this.tabPage9.Controls.Add(this.button99);
+            this.tabPage9.Controls.Add(this.button98);
+            this.tabPage9.Controls.Add(this.button97);
+            this.tabPage9.Controls.Add(this.button96);
+            this.tabPage9.Controls.Add(this.button95);
+            this.tabPage9.Location = new System.Drawing.Point(4, 29);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(846, 418);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "QA Only";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // button95
+            // 
+            this.button95.BackColor = System.Drawing.Color.White;
+            this.button95.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button95.ForeColor = System.Drawing.Color.Green;
+            this.button95.Location = new System.Drawing.Point(17, 22);
+            this.button95.Name = "button95";
+            this.button95.Size = new System.Drawing.Size(152, 32);
+            this.button95.TabIndex = 1;
+            this.button95.Text = "Chùm 252 chạy $180:";
+            this.button95.UseVisualStyleBackColor = false;
+            this.button95.Click += new System.EventHandler(this.button95_Click);
+            // 
+            // button96
+            // 
+            this.button96.BackColor = System.Drawing.Color.White;
+            this.button96.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button96.ForeColor = System.Drawing.Color.Green;
+            this.button96.Location = new System.Drawing.Point(17, 60);
+            this.button96.Name = "button96";
+            this.button96.Size = new System.Drawing.Size(152, 32);
+            this.button96.TabIndex = 1;
+            this.button96.Text = "---";
+            this.button96.UseVisualStyleBackColor = false;
+            // 
+            // button97
+            // 
+            this.button97.BackColor = System.Drawing.Color.White;
+            this.button97.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button97.ForeColor = System.Drawing.Color.Green;
+            this.button97.Location = new System.Drawing.Point(17, 98);
+            this.button97.Name = "button97";
+            this.button97.Size = new System.Drawing.Size(152, 32);
+            this.button97.TabIndex = 1;
+            this.button97.Text = "---";
+            this.button97.UseVisualStyleBackColor = false;
+            // 
+            // button98
+            // 
+            this.button98.BackColor = System.Drawing.Color.White;
+            this.button98.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button98.ForeColor = System.Drawing.Color.Green;
+            this.button98.Location = new System.Drawing.Point(17, 136);
+            this.button98.Name = "button98";
+            this.button98.Size = new System.Drawing.Size(152, 32);
+            this.button98.TabIndex = 1;
+            this.button98.Text = "---";
+            this.button98.UseVisualStyleBackColor = false;
+            // 
+            // button99
+            // 
+            this.button99.BackColor = System.Drawing.Color.White;
+            this.button99.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button99.ForeColor = System.Drawing.Color.Green;
+            this.button99.Location = new System.Drawing.Point(17, 174);
+            this.button99.Name = "button99";
+            this.button99.Size = new System.Drawing.Size(152, 32);
+            this.button99.TabIndex = 1;
+            this.button99.Text = "---";
+            this.button99.UseVisualStyleBackColor = false;
+            // 
+            // button100
+            // 
+            this.button100.BackColor = System.Drawing.Color.White;
+            this.button100.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button100.ForeColor = System.Drawing.Color.Green;
+            this.button100.Location = new System.Drawing.Point(17, 212);
+            this.button100.Name = "button100";
+            this.button100.Size = new System.Drawing.Size(152, 32);
+            this.button100.TabIndex = 1;
+            this.button100.Text = "---";
+            this.button100.UseVisualStyleBackColor = false;
+            // 
+            // button101
+            // 
+            this.button101.BackColor = System.Drawing.Color.White;
+            this.button101.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button101.ForeColor = System.Drawing.Color.Green;
+            this.button101.Location = new System.Drawing.Point(17, 250);
+            this.button101.Name = "button101";
+            this.button101.Size = new System.Drawing.Size(152, 32);
+            this.button101.TabIndex = 1;
+            this.button101.Text = "---";
+            this.button101.UseVisualStyleBackColor = false;
+            // 
+            // button102
+            // 
+            this.button102.BackColor = System.Drawing.Color.White;
+            this.button102.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button102.ForeColor = System.Drawing.Color.Green;
+            this.button102.Location = new System.Drawing.Point(17, 288);
+            this.button102.Name = "button102";
+            this.button102.Size = new System.Drawing.Size(152, 32);
+            this.button102.TabIndex = 1;
+            this.button102.Text = "---";
+            this.button102.UseVisualStyleBackColor = false;
+            // 
+            // button103
+            // 
+            this.button103.BackColor = System.Drawing.Color.White;
+            this.button103.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button103.ForeColor = System.Drawing.Color.Green;
+            this.button103.Location = new System.Drawing.Point(17, 326);
+            this.button103.Name = "button103";
+            this.button103.Size = new System.Drawing.Size(152, 32);
+            this.button103.TabIndex = 1;
+            this.button103.Text = "---";
+            this.button103.UseVisualStyleBackColor = false;
+            // 
+            // button104
+            // 
+            this.button104.BackColor = System.Drawing.Color.White;
+            this.button104.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button104.ForeColor = System.Drawing.Color.Green;
+            this.button104.Location = new System.Drawing.Point(17, 364);
+            this.button104.Name = "button104";
+            this.button104.Size = new System.Drawing.Size(152, 32);
+            this.button104.TabIndex = 1;
+            this.button104.Text = "---";
+            this.button104.UseVisualStyleBackColor = false;
+            // 
             // FindAndReplaceForm
             // 
             this.AcceptButton = this.buttonFindNext;
@@ -2034,6 +2200,7 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2178,5 +2345,17 @@ namespace phdesign.NppToolBucket.Forms
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Button button93;
         private System.Windows.Forms.Button button94;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.Button button95;
+        private System.Windows.Forms.Button button104;
+        private System.Windows.Forms.Button button103;
+        private System.Windows.Forms.Button button102;
+        private System.Windows.Forms.Button button101;
+        private System.Windows.Forms.Button button100;
+        private System.Windows.Forms.Button button99;
+        private System.Windows.Forms.Button button98;
+        private System.Windows.Forms.Button button97;
+        private System.Windows.Forms.Button button96;
     }
 }

@@ -657,6 +657,11 @@ namespace phdesign.NppToolBucket
             text = Regex.Replace(text, @" (twelve|(?:(?:elev|t)e|(?:fif|eigh|nine|(?:thi|fou)r|s(?:ix|even))tee)n)\r\n\$T(.*)_\?_\?", " $1\r\n$2 ");
             text = Regex.Replace(text, @" ((?:f(?:ive|our)|s(?:even|ix)|t(?:hree|wo)|(?:ni|o)ne|eight))\r\n\$T(.*)_\?_\?", " $1\r\n$2 ");
 
+            // List Section 9393
+
+            text = Regex.Replace(text, @"\r\nSection (\d+)\. ", "\r\n$TSection $1. ");
+
+
             editor.SetDocumentText(text);
             editor.GotoLineNumber(curLine);
         }
@@ -886,7 +891,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("\r\n", "[!!]");
             string tempAllFiles = "";
             // Split Into Multiple Files
-            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            string[] listFiles = Regex.Split(text, @"(?=\$00:.*?:)");
 
             foreach (string file in listFiles)
             {
@@ -912,6 +917,9 @@ namespace phdesign.NppToolBucket
                 tempAllFiles += tempFile;
             }
             tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
+
+            tempAllFiles = Regex.Replace(tempAllFiles, @"\s+\r\n", "\r\n");
+
             editor.SetDocumentText(tempAllFiles);
             editor.GotoLineNumber(curLine);
         }
@@ -923,7 +931,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("\r\n", "[!!]");
             string tempAllFiles = "";
             // Split Into Multiple Files
-            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            string[] listFiles = Regex.Split(text, @"(?=\$00:.*?:)");
 
             foreach (string file in listFiles)
             {
@@ -949,6 +957,7 @@ namespace phdesign.NppToolBucket
                 tempAllFiles += tempFile;
             }
             tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
+            tempAllFiles = Regex.Replace(tempAllFiles, @"\s+\r\n", "\r\n");
             editor.SetDocumentText(tempAllFiles);
         }
 
@@ -959,7 +968,7 @@ namespace phdesign.NppToolBucket
             text = text.Replace("\r\n", "[!!]");
             string tempAllFiles = "";
             // Split Into Multiple Files
-            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            string[] listFiles = Regex.Split(text, @"(?=\$00:.*?:)");
 
             foreach (string file in listFiles)
             {
@@ -985,6 +994,7 @@ namespace phdesign.NppToolBucket
                 tempAllFiles += tempFile;
             }
             tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
+            tempAllFiles = Regex.Replace(tempAllFiles, @"\s+\r\n", "\r\n");
             editor.SetDocumentText(tempAllFiles);
         }
 
@@ -1146,7 +1156,7 @@ namespace phdesign.NppToolBucket
             }
             else
             {
-                text = Regex.Replace(text, @"\$DEL_.*", "");
+                text = Regex.Replace(text, @"\$DEL_.*\r\n", "\r\n");
             }
 
             editor.SetDocumentText(text);
@@ -1497,11 +1507,11 @@ namespace phdesign.NppToolBucket
             var Dir = editor.GetCurrentDirectory();
             var text = editor.GetDocumentText();
 
-            string[] listFiles = Regex.Split(text, @"(?=\$00:)");
+            string[] listFiles = Regex.Split(text, @"(?=\$00:.*?:)");
             int i = 0;
             foreach (string f in listFiles)
             {
-                if (i == 0 & listFiles[0].Length == 0)
+                if (i == 0 && listFiles[0].Length == 0)
                 {
                     i++;
                     continue;
@@ -1519,7 +1529,7 @@ namespace phdesign.NppToolBucket
                         i++;
                     }
                 }
-                else
+                else if (listFiles.Length < 1000)
                 {
                     if (i < 10)
                     {
@@ -1537,6 +1547,58 @@ namespace phdesign.NppToolBucket
                         i++;
                     }
                 }
+                else if (listFiles.Length < 10000)
+                {
+                    if (i < 10)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(000" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 100)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(00" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 1000)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(0" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (i < 10)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(0000" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 100)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(000" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 1000)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(00" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else if (i < 10000)
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(0" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                    else
+                    {
+                        File.WriteAllText(Dir + "\\" + Path.GetFileNameWithoutExtension(filename) + "(" + i + ").visf", f, Encoding.GetEncoding("ISO-8859-1"));
+                        i++;
+                    }
+                }
+
             }
             MessageBox.Show("Spilited into " + (listFiles.Length - 1) + " file(s).");
         }
@@ -1864,7 +1926,7 @@ namespace phdesign.NppToolBucket
                 string Pattern2 = @"\$00:(\d{2})(.*)";
                 var result2 = "";
                 int i2 = 0;
-                result2 = Regex.Replace(result, Pattern2, (Match nn) =>
+                result2 = Regex.Replace(text, Pattern2, (Match nn) =>
                 {
                     if (i2 < 9)
                     {
@@ -1879,6 +1941,21 @@ namespace phdesign.NppToolBucket
                     else if (i2 < 999)
                     {
                         result2 = string.Format("$00:{0}00000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    else if (i2 < 9999)
+                    {
+                        result2 = string.Format("$00:{0}0000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    else if (i2 < 99999)
+                    {
+                        result2 = string.Format("$00:{0}000" + (++i2) + ":", nn.Groups[1].Value);
+                        return result2;
+                    }
+                    else if (i2 < 999999)
+                    {
+                        result2 = string.Format("$00:{0}00" + (++i2) + ":", nn.Groups[1].Value);
                         return result2;
                     }
                     return result2;
@@ -1902,7 +1979,7 @@ namespace phdesign.NppToolBucket
             var text = editor.GetDocumentText();
 
 
-            string Pattern2 = @"\$00:(\d{2})(.*)";
+            string Pattern2 = @"\$00:(\d{2})(.*?):";
             var result2 = "";
             int i2 = 0;
             result2 = Regex.Replace(text, Pattern2, (Match nn) =>
@@ -1920,6 +1997,21 @@ namespace phdesign.NppToolBucket
                 else if (i2 < 999)
                 {
                     result2 = string.Format("$00:{0}00000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                else if (i2 < 9999)
+                {
+                    result2 = string.Format("$00:{0}0000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                else if (i2 < 99999)
+                {
+                    result2 = string.Format("$00:{0}000" + (++i2) + ":", nn.Groups[1].Value);
+                    return result2;
+                }
+                else if (i2 < 999999)
+                {
+                    result2 = string.Format("$00:{0}00" + (++i2) + ":", nn.Groups[1].Value);
                     return result2;
                 }
                 return result2;
