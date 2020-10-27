@@ -401,13 +401,13 @@ namespace phdesign.NppToolBucket.Forms
                 }
 
                 // MOSAIC TAB
-                if (Environment.UserName.ToUpper() == "E1897")
+                if (Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "HOANG HA")
                 {
                     ((Control)this.tabPage8).Enabled = true;
                 }
                 else
                 {
-                    ((Control)this.tabPage8).Enabled = true;
+                    ((Control)this.tabPage8).Enabled = false;
                 }
             }
             else
@@ -850,6 +850,21 @@ namespace phdesign.NppToolBucket.Forms
         private void button95_Click(object sender, EventArgs e)
         {
             forQA.Chum252Renumber182();
+        }
+
+        private void button105_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.mosaic();
+        }
+
+        private void button88_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.D1BVU_LINK();
+        }
+
+        private void button106_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.mosaicInsertLink();
         }
     }
 

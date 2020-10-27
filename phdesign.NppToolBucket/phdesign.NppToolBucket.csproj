@@ -82,6 +82,7 @@
     <Compile Include="classCanada.cs" />
     <Compile Include="classD1712.cs" />
     <Compile Include="classDE535.cs" />
+    <Compile Include="classMosaic.cs" />
     <Compile Include="Counsel.cs" />
     <Compile Include="classDF989.cs" />
     <Compile Include="D1BVU.cs" />
@@ -110,6 +111,12 @@
     </Compile>
     <Compile Include="Forms\frmFootnoteXML.Designer.cs">
       <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTableMosaic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTableMosaic.Designer.cs">
+      <DependentUpon>frmTableMosaic.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmTableXML.cs">
       <SubType>Form</SubType>
@@ -302,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmFootnoteXML.resx">
       <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTableMosaic.resx">
+      <DependentUpon>frmTableMosaic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTableXML.resx">
       <DependentUpon>frmTableXML.cs</DependentUpon>

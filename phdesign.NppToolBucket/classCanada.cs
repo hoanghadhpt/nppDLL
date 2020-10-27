@@ -30,6 +30,31 @@ namespace phdesign.NppToolBucket
             output = Regex.Replace(output, @"(\$\d+)\:", "\r\n$1:");
             output = Regex.Replace(output, @"\$120\:(.*)", "\r\n$1</text>\r\n</para>");
 
+            // $05: ShortName
+            if (output.Contains("$05:"))
+            {
+                output = Regex.Replace(output, @"\$05\:(.*)\r\n", "<short-name>\r\n<text>$1</text>\r\n</short-name>\r\n");
+            }
+            // $10: Long name
+            if (output.Contains("$10:"))
+            {
+                string text10 = Regex.Match(output, @"\$10\:(.*)\r\n").Value.ToString();
+                string text10_process = text10.Replace(", and", "\r\n, and\r\n");
+                text10_process = text10_process.Replace("Between", "<long-name>\r\n<proc-phrase>Between</proc-phrase>");
+                text10_process = Regex.Replace(text10_process, "!!(.*)!(.*)", "<party>$1<party-role>$2</party-role></party>");
+                text10_process = text10_process.Replace("\r</party-role></party>", "</party-role></party>");
+                text10_process = text10_process.Replace("</party-role></party>\n", "</party-role></party>\r\n");
+                text10_process = text10_process.Replace("</party-role></party>\r", "</party-role></party>\r\n");
+                text10_process = text10_process.Replace("\n, and\r\n", ", and");
+                text10_process = text10_process.Replace("\r, and\r\n", ", and");
+                text10_process = text10_process.Replace("$10:", "") + "</long-name>\r\n";
+                text10_process = text10_process.Replace("\n</long-name>", "</long-name>");
+
+                output = output.Replace(text10, text10_process);
+            }
+
+
+
             // mac dinh doan
 
             output = output.Replace(" $T", "</text>\r\n</para>\r\n<para>\r\n<text>");
@@ -59,11 +84,21 @@ namespace phdesign.NppToolBucket
             output = Regex.Replace(output, @"\$%(.*?) (.*?)\r\n", "<list-item>\r\n<label>$1</label>\r\n<text>$2</text>\r\n</list-item>");
             output = output.Replace("</list-item></list></text>", "</list-item>\r\n</list>");
 
+            // TOC
+
+            output = Regex.Replace(output, "<para>\r\n<text>>>(.*?)</text>\r\n</para>", "<toc>\r\n<toc-entry>\r\n<heading>$1</heading>\r\n</toc-entry>\r\n</toc>");
+            output = output.Replace("\r\n</toc>\r\n<toc>\r\n", "\r\n");
+            output = Regex.Replace(output, "<toc>\r\n<toc-entry>\r\n(.*?)\r\n</toc-entry>", "<toc>$1\r\n");
+
+            output = output.Replace("<toc><heading>", "<toc>\r\n<heading>");
+            // Table of Authorities
+
             // Clean Up 2
             output = output.Replace("<text>\r\n<pnum>", "<pnum>");
             output = output.Replace("$=E</text>", "</heading>");
-           
-            
+            output = output.Replace("<heading level=\"1\"><b>", "<heading level=\"1\">");
+            output = output.Replace("</b></heading>", "</heading>");
+
             // return
             return output;
         }

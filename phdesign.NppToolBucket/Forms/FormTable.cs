@@ -225,5 +225,52 @@ namespace phdesign.NppToolBucket
             tbl = tbl + "$X";
             tbl = tbl.Replace("$H\r\n$X", "$X");
         }
+
+        private void MergeCells()
+        {
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                try
+                {
+                    for (int i = 0; i < MaxColumn; i++)
+                    {
+                        if (i < MaxColumn - 1)
+                        {
+                            string cellValue = dr.Cells[i].Value.ToString().Trim();
+                            // $L
+                            if (cellValue.Contains("$Q*"))
+                            {
+                                int col = 0;
+                                Match m = Regex.Match(cellValue, @"\$Q\*(\d+)\*");
+                                if (m.Success)
+                                {
+                                    col = Convert.ToInt32(m.Groups[1].Value);
+                                    for (int k = 0; k < col; k++)
+                                    {
+
+                                    }
+                                }
+                            }
+                            // $H
+
+                        }
+                    }
+
+                }
+                catch
+                {
+
+                };
+            }
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Clear Selection
+            dataGridView1.ClearSelection();
+            // Select all cell in column
+            for (int r = 0; r < dataGridView1.RowCount; r++)
+                dataGridView1[e.ColumnIndex, r].Selected = true;
+        }
     }
 }

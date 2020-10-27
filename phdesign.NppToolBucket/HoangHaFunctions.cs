@@ -50,6 +50,53 @@ namespace phdesign.NppToolBucket
 
         }
 
+        internal static void InsertUnderlineHeader()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+            else
+            {
+                text = text.Replace("$=B", "$=B$U");
+                text = text.Replace("$=R", "$O$=R");
+                try
+                {
+                    text = Regex.Replace(text, @"(\$=H|\$T|\$%)?\$=B\$U([A-Z]{1,3})\. (.*?)\$=R", "$1$=B$2. $U$3$=R", RegexOptions.Singleline);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                editor.SetSelectedText(text);
+                editor.SetSelection(pos.cpMin, pos.cpMin + text.Length);
+            }
+
+        }
+
+        internal static void InsertUnderline()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+            else
+            {
+                text = text.Replace("$=B", "$=B$U");
+                text = text.Replace("$=R", "$O$=R");
+
+                editor.SetSelectedText(text);
+                editor.SetSelection(pos.cpMin, pos.cpMin + text.Length);
+            }
+
+        }
+
         internal static void NonVirgoPreProcess()
         {
             // Read all Doc.
@@ -1926,7 +1973,7 @@ namespace phdesign.NppToolBucket
                 string Pattern2 = @"\$00:(\d{2})(.*)";
                 var result2 = "";
                 int i2 = 0;
-                result2 = Regex.Replace(text, Pattern2, (Match nn) =>
+                result2 = Regex.Replace(result, Pattern2, (Match nn) =>
                 {
                     if (i2 < 9)
                     {
@@ -2272,6 +2319,26 @@ namespace phdesign.NppToolBucket
                 editor.SetDocumentText(text);
             }
         }
+
+        internal static void D1BVU_LINK()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classD1BVU d1bvu = new classD1BVU();
+                text = d1bvu.D1BVU_Link(text);
+                editor.SetDocumentText(text);
+            }
+        }
+
+
         internal static void DE535()
         {
             var editor = Editor.GetActive();
@@ -2318,6 +2385,41 @@ namespace phdesign.NppToolBucket
                 editor.SetDocumentText(text);
             }
         }
+
+        internal static void mosaic()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classMosaic mosaic = new classMosaic();
+                text = mosaic.MOSAIC_VISF_TO_XML(text);
+                editor.SetDocumentText(text);
+            }
+        }
+
+        internal static void mosaicInsertLink()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var name = editor.GetCurrentFileName();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                string nameonly = Path.GetFileNameWithoutExtension(name);
+                classMosaic mosaic = new classMosaic();
+                text = mosaic.AddImageLink(text, nameonly);
+                editor.SetDocumentText(text);
+            }
+        }
+
 
 
         internal static void SelectedText_ToDolaNewLine()
@@ -2386,6 +2488,31 @@ namespace phdesign.NppToolBucket
             }
         }
 
+
+        internal static void TableFormMOSAIC()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetSelectedText();
+            var pos = editor.GetSelectionRange();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Vui lòng chọn Text trước....", "Hoàng Hà's Table");
+            }
+            else
+            {
+                string tbl = "";
+                File.WriteAllText("tableTemp.txt", text);
+                frmTableMosaic frmTable = new frmTableMosaic();
+                frmTable.ShowDialog();
+                tbl = frmTable.tbl;
+                if (tbl != "__Empty___")
+                {
+                    editor.SetSelectedText(tbl);
+                    editor.SetSelection(pos.cpMin, pos.cpMin + tbl.Length);
+                }
+            }
+        }
+
         public static void frmFootnote()
         {
             var editor = Editor.GetActive();
@@ -2417,7 +2544,8 @@ namespace phdesign.NppToolBucket
 
         private static readonly List<string> PredictIndent = new List<string>
         {
-            "Therefore, ", "Although ", "When ", "What ", "10) ", "1) ", "2) ", "3) ", "4) ", "5) ", "6) ", "7) ", "8) ", "9) ", "11) ", "12) ", "13) ", "14) ", "15) ", "16) ", "Following ", "After ", "An ", "Another ", "Basing ", "We ", "Other ", "One ", "To ", "$=BNote$=R: ", "$=BExample ", "At ", "*** ", "***", "* * *", "...", ". . .", "__1. ", "__2. ", "__3. ", "__4. ", "__5. ", "__6. ", "__7. ", "__8. ", "__9. ", "__11. ", "__20. ", "__12. ", "__13. ", "__14. ", "__15. ", "__16. ", "__17. ", "__18. ", "__19. ", "__21. ", "__30. ", "__22. ", "__23. ", "__24. ", "__25. ", "__26. ", "__27. ", "__28. ", "__29. ", "__31. ", "IT IS ", "$=BIT IS", "DATED: ", "HONORABLE ", "UNITED STATES ", "Third", "The ", "By ", "There ", "Under ", "These ", "A ", "As ", "$II. ", "$III. ", "$IIII. ", "$IIV. ", "$IV. ", "$IVI. ", "$IVII. ", "$IVIII. ", "$IIX. ", "$IX. ", "Fifth,", "I. ", "II. ", "III. ", "IV. ", "V. ", "VI. ", "VII. ", "VIII. ", "IX. ", "X. ", "A. ", "$IA. ", "$IB. ", "$IC. ", "$ID. ", "$IE. ", "$IF. ", "$IG. ", "$IH. ", "$IJ. ", "$IK. ", "1. ", "$I1. ", "$I2. ", "$I3. ", "$I4. ", "$I5. ", "$I6. ", "$I7. ", "$I8. ", "$I9. ", "$I11. ", "$I20. ", "$I12. ", "$I13. ", "$I14. ", "$I15. ", "$I16. ", "$I17. ", "$I18. ", "$I19. ", "$I21. ", "$I30. ", "$I22. ", "$I23. ", "$I24. ", "$I25. ", "$I26. ", "$I27. ", "$I28. ", "$I29. ", "$I31. ", "$IL. ", "$IM. ", "$IN. ", "$IO. ", "$IP. ", "$IQ. ", "$IR. ", "$IS. ", "$IT. ", "$IU. ", "$IW. ", "Respectfully submitted", "Dated:", "$ICERTIFICATE OF", "Thus, ", "Finally, ", "Grounds ", "For ", "Furthermore ", "With ", "Accordingly,", "Accordingly ", "Moreover,", "Specifically,", "(Ex. ", "Even ", "Here, ", "Of ", "This ", "Where ", "While ", "Without ", "Email:", "Each ", "Also,", "By:", "Consequently,", "During", "Fourth,", "Hence,", "However,", "If ", "I hereby", "Independent ", "Moreover, ", "Of these,", "ORDERED", "$IORDERED", "FURTHER", "$IFURTHER", "Sixth,", "Seventh,", "Email: ", "Telephone:", "Facsimile:", "$U/s/ ", "CO[2]__", "$I$UA. ", "$I$UB. ", "$I$UC. ", "$I$UD. ", "$I$UE. ", "$I$UF. ", "$I$UG. ", "$I$UH. ", "$I$UJ. ", "$I$UK. ", "$I$UL. ", "$I$UM. ", "$I$UO. ", "$I$UP. ", "$I$UQ. ", "$I$UR. ", "$I$US. ", "$I$UT. ", "$I$UU. ", "$I$UV. ", "$I$UI. ", "$I$UII. ", "$I$UIII. ", "$I$UIV. ", "$I$UVI. ", "$I$UVII. ", "$I$UVIII. ", "$I$UIX. ", "$I$UX. ", "In ", "Those ", "It ", "On ", "First", "Second", "Pursuant to", "$=BI. ", "$=BII. ", "$=BIII. ", "$=BIV. ", "$=BV. ", "$=BVI. ", "$=BVII. ", "$=BVIII. ", "$=BIX. ", "$=BX. ", "$=BA. ", "$=BB. ", "$=BC. ", "$=BD. ", "$=BE. ", "$=BF. ", "$=BG. ", "$=BH. ", "$=BJ. ", "$=BK. ", "$=B1. ", "$=B2. ", "$=B3. ", "$=B4. ", "$=B5. ", "$=B6. ", "$=B7. ", "$=B8. ", "$=B9. ", "$=B11. ", "$=B20. ", "$=B12. ", "$=B13. ", "$=B14. ", "$=B15. ", "$=B16. ", "$=B17. ", "$=B18. ", "$=B19. ", "$=B21. ", "$=B30. ", "$=B22. ", "$=B23. ", "$=B24. ", "$=B25. ", "$=B26. ", "$=B27. ", "$=B28. ", "$=B29. ", "$=B31. ", "$=BL. ", "$=BM. ", "$=BN. ", "$=BO. ", "$=BP. ", "$=BQ. ", "$=BR. ", "$=BS. ", "$=BT. ", "$=BU. ", "$=BW. ", "$=BCERTIFICATE OF", "$=BORDERED", "$=BFURTHER", "$=B$IA. ", "$=B$IB. ", "$=B$IC. ", "$=B$ID. ", "$=B$IE. ", "$=B$IF. ", "$=B$IG. ", "$=B$IH. ", "$=B$IJ. ", "$=B$IK. ", "$=B$IL. ", "$=B$IM. ", "$=B$IO. ", "$=B$IP. ", "$=B$IQ. ", "$=B$IR. ", "$=B$IS. ", "$=B$IT. ", "$=B$IU. ", "$=B$IV. ", "$=B$II. ", "$=B$III. ", "$=B$IIII. ", "$=B$IIV. ", "$=B$IVI. ", "$=B$IVII. ", "$=B$IVIII. ", "$=B$IIX. ", "$=B$IX. ", "/s/", "$=BIT IS SO ", "$=BCONCLUSION$=R", "Reg. No.", "$I/s/"
+            "Therefore, ", "Although ", "When ", "What ", "10) ", "1) ", "2) ", "3) ", "4) ", "5) ", "6) ", "7) ", "8) ", "9) ", "11) ", "12) ", "13) ", "14) ", "15) ", "16) ", "Following ", "After ", "An ", "Another ", "Basing ", "We ", "Other ", "One ", "To ", "$=BNote$=R: ", "$=BExample ", "At ", "*** ", "***", "* * *", "...", ". . .", "__1. ", "__2. ", "__3. ", "__4. ", "__5. ", "__6. ", "__7. ", "__8. ", "__9. ", "__11. ", "__20. ", "__12. ", "__13. ", "__14. ", "__15. ", "__16. ", "__17. ", "__18. ", "__19. ", "__21. ", "__30. ", "__22. ", "__23. ", "__24. ", "__25. ", "__26. ", "__27. ", "__28. ", "__29. ", "__31. ", "IT IS ", "$=BIT IS", "DATED: ", "HONORABLE ", "UNITED STATES ", "Third", "The ", "By ", "There ", "Under ", "These ", "A ", "As ", "$II. ", "$III. ", "$IIII. ", "$IIV. ", "$IV. ", "$IVI. ", "$IVII. ", "$IVIII. ", "$IIX. ", "$IX. ", "Fifth,", "I. ", "II. ", "III. ", "IV. ", "V. ", "VI. ", "VII. ", "VIII. ", "IX. ", "X. ", "A. ", "$IA. ", "$IB. ", "$IC. ", "$ID. ", "$IE. ", "$IF. ", "$IG. ", "$IH. ", "$IJ. ", "$IK. ", "1. ", "$I1. ", "$I2. ", "$I3. ", "$I4. ", "$I5. ", "$I6. ", "$I7. ", "$I8. ", "$I9. ", "$I11. ", "$I20. ", "$I12. ", "$I13. ", "$I14. ", "$I15. ", "$I16. ", "$I17. ", "$I18. ", "$I19. ", "$I21. ", "$I30. ", "$I22. ", "$I23. ", "$I24. ", "$I25. ", "$I26. ", "$I27. ", "$I28. ", "$I29. ", "$I31. ", "$IL. ", "$IM. ", "$IN. ", "$IO. ", "$IP. ", "$IQ. ", "$IR. ", "$IS. ", "$IT. ", "$IU. ", "$IW. ", "Respectfully submitted", "Dated:", "$ICERTIFICATE OF", "Thus, ", "Finally, ", "Grounds ", "For ", "Furthermore ", "With ", "Accordingly,", "Accordingly ", "Moreover,", "Specifically,", "(Ex. ", "Even ", "Here, ", "Of ", "This ", "Where ", "While ", "Without ", "Email:", "Each ", "Also,", "By:", "Consequently,", "During", "Fourth,", "Hence,", "However,", "If ", "I hereby", "Independent ", "Moreover, ", "Of these,", "ORDERED", "$IORDERED", "FURTHER", "$IFURTHER", "Sixth,", "Seventh,", "Email: ", "Telephone:", "Facsimile:", "$U/s/ ", "CO[2]__", "$I$UA. ", "$I$UB. ", "$I$UC. ", "$I$UD. ", "$I$UE. ", "$I$UF. ", "$I$UG. ", "$I$UH. ", "$I$UJ. ", "$I$UK. ", "$I$UL. ", "$I$UM. ", "$I$UO. ", "$I$UP. ", "$I$UQ. ", "$I$UR. ", "$I$US. ", "$I$UT. ", "$I$UU. ", "$I$UV. ", "$I$UI. ", "$I$UII. ", "$I$UIII. ", "$I$UIV. ", "$I$UVI. ", "$I$UVII. ", "$I$UVIII. ", "$I$UIX. ", "$I$UX. ", "In ", "Those ", "It ", "On ", "First", "Second", "Pursuant to", "$=BI. ", "$=BII. ", "$=BIII. ", "$=BIV. ", "$=BV. ", "$=BVI. ", "$=BVII. ", "$=BVIII. ", "$=BIX. ", "$=BX. ", "$=BA. ", "$=BB. ", "$=BC. ", "$=BD. ", "$=BE. ", "$=BF. ", "$=BG. ", "$=BH. ", "$=BJ. ", "$=BK. ", "$=B1. ", "$=B2. ", "$=B3. ", "$=B4. ", "$=B5. ", "$=B6. ", "$=B7. ", "$=B8. ", "$=B9. ", "$=B11. ", "$=B20. ", "$=B12. ", "$=B13. ", "$=B14. ", "$=B15. ", "$=B16. ", "$=B17. ", "$=B18. ", "$=B19. ", "$=B21. ", "$=B30. ", "$=B22. ", "$=B23. ", "$=B24. ", "$=B25. ", "$=B26. ", "$=B27. ", "$=B28. ", "$=B29. ", "$=B31. ", "$=BL. ", "$=BM. ", "$=BN. ", "$=BO. ", "$=BP. ", "$=BQ. ", "$=BR. ", "$=BS. ", "$=BT. ", "$=BU. ", "$=BW. ", "$=BCERTIFICATE OF", "$=BORDERED", "$=BFURTHER", "$=B$IA. ", "$=B$IB. ", "$=B$IC. ", "$=B$ID. ", "$=B$IE. ", "$=B$IF. ", "$=B$IG. ", "$=B$IH. ", "$=B$IJ. ", "$=B$IK. ", "$=B$IL. ", "$=B$IM. ", "$=B$IO. ", "$=B$IP. ", "$=B$IQ. ", "$=B$IR. ", "$=B$IS. ", "$=B$IT. ", "$=B$IU. ", "$=B$IV. ", "$=B$II. ", "$=B$III. ", "$=B$IIII. ", "$=B$IIV. ", "$=B$IVI. ", "$=B$IVII. ", "$=B$IVIII. ", "$=B$IIX. ", "$=B$IX. ", "/s/", "$=BIT IS SO ", "$=BCONCLUSION$=R", "Reg. No.", "$I/s/",
+            "Indeed,", "[T]he", "For this reason,", "$=BINTRODUCTION$=R"
         };
 
         private static readonly List<string> PredictNotIndent = new List<string>

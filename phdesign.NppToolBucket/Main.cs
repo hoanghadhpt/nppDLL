@@ -134,6 +134,9 @@ namespace phdesign.NppToolBucket
                 SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Table XML", HoangHaFunctions.TableFormXML); //29
                 SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Delete $DEL_",HoangHaFunctions.RemoveDolaDEL); //30
                 SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Footnote Body", HoangHaFunctions.FootnoteBodyOneSpace); //31
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Insert Underline", HoangHaFunctions.InsertUnderline); //32
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Insert Underline w/ Header", HoangHaFunctions.InsertUnderlineHeader); //33
+                SetCommand((int)CmdIndex.Pagination, "Hoang Ha - Table MOSAIC", HoangHaFunctions.TableFormMOSAIC); //34
                 SetCommand((int)CmdIndex.Shortcut, "Hoang Ha - Shortcut", HoangHaFunctions.CallShortcut, new ShortcutKey(true, false, false, Keys.OemPeriod)); // 32
             }
             SetCommand((int)CmdIndex.About, "About", About);

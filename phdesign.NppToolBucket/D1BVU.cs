@@ -165,5 +165,128 @@ namespace phdesign.NppToolBucket
                 return StrCmpLogicalW(x, y);
             }
         }
+
+        ///
+        public string D1BVU_Link(string input)
+        {
+            // §§([0-9.A-Z]+)(, | and )([0-9.A-Z-]+)  See §§3.47 and 3.49-3.51A
+            var result = "";
+            result = Regex.Replace(input, " §§([0-9.A-Z]+)(, | and )([0-9.A-Z-]+)", (Match n) =>
+            {
+                int index = n.Groups[3].Value.IndexOf('-');
+                string link21 = "";
+                string link22 = "";
+                string linkFull = "";
+                if (index != -1)
+                {
+                    link21 = n.Groups[3].Value.Substring(0, index - 1);
+                    link22 = n.Groups[3].Value.Substring(index + 1, n.Groups[3].Value.Length - index - 1);
+                    linkFull = link21 + "-" + link22;
+                }
+                else
+                {
+                    link21 = n.Groups[3].Value;
+                    linkFull = link21;
+                }
+                string endPeriod = "";
+                if (link21.EndsWith("."))
+                {
+                    link21 = link21.Substring(0, link21.Length - 1);
+                    linkFull = link21;
+                    endPeriod = ".";
+                }
+                else if (link22.EndsWith("."))
+                {
+                    link22 = link22.Substring(0, link21.Length - 1);
+                    linkFull = link21;
+                    endPeriod = ".";
+                }
+
+
+                result = string.Format(" <lnlink service=\"TRAVERSE\">\r\n" +
+                "<lnvxe:marker>§§{0}</lnvxe:marker>\r\n" +
+                "<lnvxe:api-params>\r\n" +
+                "<lnvxe:param name=\"normcite\" value=\"CITE_____________§{1}\"/>\r\n" +
+                "<lnvxe:param name=\"normprotocol\" value=\"lexstat\"/>\r\n" +
+                "<lnvxe:param name=\"countrycode\" value=\"USA\"/>\r\n" +
+                "</lnvxe:api-params>\r\n" +
+                "</lnlink>{2}<lnlink service=\"TRAVERSE\">\r\n" +
+                "<lnvxe:marker>{3}</lnvxe:marker>\r\n" +
+                "<lnvxe:api-params>\r\n" +
+                "<lnvxe:param name=\"normcite\" value=\"CITE_____________{4}\"/>\r\n" +
+                "<lnvxe:param name=\"normprotocol\" value=\"lexstat\"/>\r\n" +
+                "<lnvxe:param name=\"countrycode\" value=\"USA\"/>\r\n" +
+                "</lnvxe:api-params>\r\n" +
+                "</lnlink>{5}", n.Groups[1].Value, n.Groups[1].Value, n.Groups[2].Value, linkFull, link21, endPeriod);
+                return result;
+            });
+
+            /// -----------<>
+            result = Regex.Replace(result, " §§([0-9.A-Z-]+)", (Match n) =>
+            {
+                int index = n.Groups[1].Value.IndexOf('-');
+                string link21 = "";
+                string link22 = "";
+                string linkFull = n.Groups[1].Value;
+                if (index != -1)
+                {
+                    link21 = n.Groups[1].Value.Substring(0, index);
+                    link22 = n.Groups[1].Value.Substring(index, n.Groups[1].Value.Length - index);
+                }
+                else
+                {
+                    link21 = n.Groups[1].Value;
+                    linkFull = link21;
+                }
+                string endPeriod = "";
+                if (link22.EndsWith("."))
+                {
+                    linkFull = n.Groups[1].Value.Substring(0, n.Groups[1].Value.Length - 1);
+                    endPeriod = ".";
+                }
+
+
+                result = string.Format(" <lnlink service=\"TRAVERSE\">\r\n" +
+                "<lnvxe:marker>§§{0}</lnvxe:marker>\r\n" +
+                "<lnvxe:api-params>\r\n" +
+                "<lnvxe:param name=\"normcite\" value=\"CITE_____________§{1}\"/>\r\n" +
+                "<lnvxe:param name=\"normprotocol\" value=\"lexstat\"/>\r\n" +
+                "<lnvxe:param name=\"countrycode\" value=\"USA\"/>\r\n" +
+                "</lnvxe:api-params>\r\n" +
+                "</lnlink>{2}", linkFull, link21, endPeriod);
+                return result;
+            });
+
+            //=======================================
+            //
+            result = Regex.Replace(result, " §([0-9.A-Z]+)", (Match n) =>
+            {
+                string endPeriod = "";
+                string linkFull = "";
+                if (n.Groups[1].Value.EndsWith("."))
+                {
+                    endPeriod = ".";
+                    linkFull = n.Groups[1].Value.Substring(0, n.Groups[1].Value.Length-1);
+                }
+                else
+                {
+                    linkFull = n.Groups[1].Value;
+                }
+
+                result = string.Format(" <lnlink service=\"TRAVERSE\">\r\n" +
+                "<lnvxe:marker>§{0}</lnvxe:marker>\r\n" +
+                "<lnvxe:api-params>\r\n" +
+                "<lnvxe:param name=\"normcite\" value=\"CITE_____________§{0}\"/>\r\n" +
+                "<lnvxe:param name=\"normprotocol\" value=\"lexstat\"/>\r\n" +
+                "<lnvxe:param name=\"countrycode\" value=\"USA\"/>\r\n" +
+                "</lnvxe:api-params>\r\n" +
+                "</lnlink>{1}", linkFull, endPeriod);
+                return result;
+            });
+
+
+            return result;
+        }
+
     }
 }
