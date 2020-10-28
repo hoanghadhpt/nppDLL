@@ -183,7 +183,6 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.button93 = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.button106 = new System.Windows.Forms.Button();
             this.button105 = new System.Windows.Forms.Button();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.button104 = new System.Windows.Forms.Button();
@@ -196,6 +195,7 @@ namespace phdesign.NppToolBucket.Forms
             this.button97 = new System.Windows.Forms.Button();
             this.button96 = new System.Windows.Forms.Button();
             this.button95 = new System.Windows.Forms.Button();
+            this.button106 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -2022,19 +2022,6 @@ namespace phdesign.NppToolBucket.Forms
             this.tabPage8.Text = "Mosaic - StateNet";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // button106
-            // 
-            this.button106.BackColor = System.Drawing.Color.White;
-            this.button106.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button106.ForeColor = System.Drawing.Color.Green;
-            this.button106.Location = new System.Drawing.Point(17, 57);
-            this.button106.Name = "button106";
-            this.button106.Size = new System.Drawing.Size(152, 32);
-            this.button106.TabIndex = 3;
-            this.button106.Text = "Insert Image Link";
-            this.button106.UseVisualStyleBackColor = false;
-            this.button106.Click += new System.EventHandler(this.button106_Click);
-            // 
             // button105
             // 
             this.button105.BackColor = System.Drawing.Color.White;
@@ -2173,9 +2160,8 @@ namespace phdesign.NppToolBucket.Forms
             this.button96.Name = "button96";
             this.button96.Size = new System.Drawing.Size(152, 32);
             this.button96.TabIndex = 1;
-            this.button96.Text = "$52 -> $40";
+            this.button96.Text = "---";
             this.button96.UseVisualStyleBackColor = false;
-            this.button96.Click += new System.EventHandler(this.button96_Click);
             // 
             // button95
             // 
@@ -2189,6 +2175,19 @@ namespace phdesign.NppToolBucket.Forms
             this.button95.Text = "Chùm 252 chạy $182:";
             this.button95.UseVisualStyleBackColor = false;
             this.button95.Click += new System.EventHandler(this.button95_Click);
+            // 
+            // button106
+            // 
+            this.button106.BackColor = System.Drawing.Color.White;
+            this.button106.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button106.ForeColor = System.Drawing.Color.Green;
+            this.button106.Location = new System.Drawing.Point(17, 57);
+            this.button106.Name = "button106";
+            this.button106.Size = new System.Drawing.Size(152, 32);
+            this.button106.TabIndex = 3;
+            this.button106.Text = "Insert Image Link";
+            this.button106.UseVisualStyleBackColor = false;
+            this.button106.Click += new System.EventHandler(this.button106_Click);
             // 
             // FindAndReplaceForm
             // 

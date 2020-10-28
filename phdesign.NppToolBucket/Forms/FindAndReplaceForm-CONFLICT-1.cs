@@ -716,7 +716,6 @@ namespace phdesign.NppToolBucket.Forms
         private void button42_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.StringDola120();
-            HoangHaFunctions.CheckDuplicateSegments();
         }
 
         private void button72_Click(object sender, EventArgs e)
@@ -787,13 +786,11 @@ namespace phdesign.NppToolBucket.Forms
         private void button44_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.StringDola14();
-            HoangHaFunctions.CheckDuplicateSegments();
         }
 
         private void button45_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.StringDola130();
-            HoangHaFunctions.CheckDuplicateSegments();
         }
 
         private void button83_Click(object sender, EventArgs e)
@@ -868,11 +865,6 @@ namespace phdesign.NppToolBucket.Forms
         private void button106_Click(object sender, EventArgs e)
         {
             HoangHaFunctions.mosaicInsertLink();
-        }
-
-        private void button96_Click(object sender, EventArgs e)
-        {
-            HoangHaFunctions.QA_Dola52toDola40();
         }
     }
 
