@@ -1897,25 +1897,29 @@ namespace phdesign.NppToolBucket.Forms
             // 
             this.button85.BackColor = System.Drawing.Color.White;
             this.button85.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button85.ForeColor = System.Drawing.Color.Blue;
+            this.button85.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button85.ForeColor = System.Drawing.Color.MidnightBlue;
             this.button85.Location = new System.Drawing.Point(17, 268);
             this.button85.Name = "button85";
             this.button85.Size = new System.Drawing.Size(142, 30);
             this.button85.TabIndex = 11;
-            this.button85.Text = "---";
+            this.button85.Text = "DR043 - XML";
             this.button85.UseVisualStyleBackColor = false;
+            this.button85.Click += new System.EventHandler(this.button85_Click);
             // 
             // button84
             // 
             this.button84.BackColor = System.Drawing.Color.White;
             this.button84.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button84.ForeColor = System.Drawing.Color.Blue;
+            this.button84.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button84.ForeColor = System.Drawing.Color.MidnightBlue;
             this.button84.Location = new System.Drawing.Point(17, 232);
             this.button84.Name = "button84";
             this.button84.Size = new System.Drawing.Size(142, 30);
             this.button84.TabIndex = 11;
-            this.button84.Text = "---";
+            this.button84.Text = "DR043 - visf";
             this.button84.UseVisualStyleBackColor = false;
+            this.button84.Click += new System.EventHandler(this.button84_Click);
             // 
             // button83
             // 

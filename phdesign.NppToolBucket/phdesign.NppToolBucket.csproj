@@ -82,6 +82,7 @@
     <Compile Include="classCanada.cs" />
     <Compile Include="classD1712.cs" />
     <Compile Include="classDE535.cs" />
+    <Compile Include="classDR043.cs" />
     <Compile Include="classMosaic.cs" />
     <Compile Include="Counsel.cs" />
     <Compile Include="classDF989.cs" />

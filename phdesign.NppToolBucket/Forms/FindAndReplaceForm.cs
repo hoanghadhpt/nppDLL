@@ -874,6 +874,16 @@ namespace phdesign.NppToolBucket.Forms
         {
             HoangHaFunctions.QA_Dola52toDola40();
         }
+
+        private void button84_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.DR043_VISF();
+        }
+
+        private void button85_Click(object sender, EventArgs e)
+        {
+            HoangHaFunctions.DR043_XML();
+        }
     }
 
 

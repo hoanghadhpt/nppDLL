@@ -2301,7 +2301,7 @@ namespace phdesign.NppToolBucket
             }
 
         }
-
+        // D1BVU
         internal static void D1BVU_VISF()
         {
             var editor = Editor.GetActive();
@@ -2338,7 +2338,49 @@ namespace phdesign.NppToolBucket
             }
         }
 
+        // DR043
+        internal static void DR043_XML()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classDR043 r043 = new classDR043();
+                // Convert to XML
+                text = r043.fProcess(text);
+                // Renumber Level
+                text = r043.fReNumberLevel(text);
 
+                editor.SetDocumentText(text);
+            }
+
+        }
+
+        internal static void DR043_VISF()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+            if (string.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Document Empty");
+            }
+            else
+            {
+                classDR043 r043 = new classDR043();
+                text = r043.fPreProcess(text);
+                editor.SetDocumentText(text);
+            }
+        }
+
+        // DE535
         internal static void DE535()
         {
             var editor = Editor.GetActive();
