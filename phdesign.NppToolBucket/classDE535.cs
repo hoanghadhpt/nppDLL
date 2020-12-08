@@ -87,9 +87,27 @@ namespace phdesign.NppToolBucket
             $"<p>{m.Groups[1].ToString().Trim()}</p>\r\n" +
             $"</lnv:HIGHLIGHT>");
             // <lnv:GRAPHIC>
-            output = Regex.Replace(output, @"\$130:(.*)", m => $"<lnv:GRAPHIC>\r\n" +
-            $"<lnvxe:desc>{m.Groups[1].ToString().Trim()}</lnvxe:desc>\r\n" +
-            $"</lnv:GRAPHIC>");
+
+            string result = Regex.Replace(output, @"\$130:(.*)", (Match n) =>
+            {
+                if (n.Groups[1].Value != "")
+                {
+                    result = "<lnv:GRAPHIC>\r\n" +
+            $"<lnvxe:desc>Picture 1, " + n.Groups[1].ToString().Trim() + "</lnvxe:desc>\r\n" +
+            $"</lnv:GRAPHIC>";
+                }
+                else
+                {
+                    result = "<lnv:GRAPHIC>\r\n" +
+            $"<lnvxe:desc>Picture, no caption</lnvxe:desc>\r\n" +
+            $"</lnv:GRAPHIC>";
+                }
+                return (result);
+            });
+
+            output = result;
+
+            
             output = output.Replace("</lnv:GRAPHIC>\r\n<lnv:GRAPHIC>", "");
             output = output.Replace("</lnv:GRAPHIC>\r<lnv:GRAPHIC>", "");
             output = output.Replace("</lnv:GRAPHIC>\n<lnv:GRAPHIC>", "");

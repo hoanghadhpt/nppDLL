@@ -61,5 +61,26 @@ namespace phdesign.NppToolBucket
             editor.SetDocumentText(result2);
         }
 
+        internal static void HierMeToCITE()
+        {
+            var editor = Editor.GetActive();
+            var filename = editor.GetCurrentFileName();
+            var Dir = editor.GetCurrentDirectory();
+            var text = editor.GetDocumentText();
+
+            string[] listFiles = Regex.Split(text, @"(?=<\?xml version.*>)");
+            string AllText = "";
+            foreach (string file in listFiles)
+            {
+                Match cite = Regex.Match(file, "<lnvxe:title>&#x00A7;(.*?) ");
+                string result = Regex.Replace(file, "&#x00A7;(.*)</lnv:CITE>", "&#x00A7;" + cite.Groups[1].ToString() + "</lnv:CITE>");
+                result = Regex.Replace(result, "<lnci:content status=\"valid\">(.*?) &#x00A7;(.*)</lnci:content>", "<lnci:content status=\"valid\">$1 &#x00A7;" + cite.Groups[1].ToString() + "</lnci:content>");
+                AllText += result;
+            }
+
+            editor.SetDocumentText(AllText);
+            
+        }
+
     }
 }

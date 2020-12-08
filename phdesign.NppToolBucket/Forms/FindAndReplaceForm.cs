@@ -884,6 +884,11 @@ namespace phdesign.NppToolBucket.Forms
         {
             HoangHaFunctions.DR043_XML();
         }
+
+        private void button97_Click(object sender, EventArgs e)
+        {
+            forQA.HierMeToCITE();
+        }
     }
 
 

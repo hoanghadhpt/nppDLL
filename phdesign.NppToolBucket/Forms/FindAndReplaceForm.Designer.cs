@@ -2165,8 +2165,9 @@ namespace phdesign.NppToolBucket.Forms
             this.button97.Name = "button97";
             this.button97.Size = new System.Drawing.Size(152, 32);
             this.button97.TabIndex = 1;
-            this.button97.Text = "---";
+            this.button97.Text = "HIER-ME to CITE";
             this.button97.UseVisualStyleBackColor = false;
+            this.button97.Click += new System.EventHandler(this.button97_Click);
             // 
             // button96
             // 
