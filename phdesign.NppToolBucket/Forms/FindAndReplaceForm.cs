@@ -380,8 +380,6 @@ namespace phdesign.NppToolBucket.Forms
             label7.Text = AssemblyUtils.Version;
             button1.Focus();
 
-            SubmitDataToServer("_npp_dll");
-
             if (Environment.UserName.ToUpper() == "HOANG HA" 
                 || Environment.UserName.ToUpper() == "E1897" 
                 || Environment.UserName.ToUpper() == "E1859" 
@@ -401,7 +399,7 @@ namespace phdesign.NppToolBucket.Forms
                 }
 
                 // MOSAIC TAB
-                if (Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "HOANG HA")
+                if (Environment.UserName.ToUpper() == "E1897" || Environment.UserName.ToUpper() == "HOANG HA" || Environment.UserName.ToUpper() == "E2866" || Environment.UserName.ToUpper() == "E1872")
                 {
                     ((Control)this.tabPage8).Enabled = true;
                 }
@@ -888,6 +886,11 @@ namespace phdesign.NppToolBucket.Forms
         private void button97_Click(object sender, EventArgs e)
         {
             forQA.HierMeToCITE();
+        }
+
+        private void button98_Click(object sender, EventArgs e)
+        {
+            forQA.UpperLowerCaseBySegment();
         }
     }
 

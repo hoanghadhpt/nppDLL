@@ -2153,8 +2153,9 @@ namespace phdesign.NppToolBucket.Forms
             this.button98.Name = "button98";
             this.button98.Size = new System.Drawing.Size(152, 32);
             this.button98.TabIndex = 1;
-            this.button98.Text = "---";
+            this.button98.Text = "UpperLower Segment";
             this.button98.UseVisualStyleBackColor = false;
+            this.button98.Click += new System.EventHandler(this.button98_Click);
             // 
             // button97
             // 

@@ -82,5 +82,37 @@ namespace phdesign.NppToolBucket
             
         }
 
+        internal static void UpperLowerCaseBySegment()
+        {
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Hoàng Hà Dev.",
+                       "Hoàng Hà Dev.",
+                       "Nhập segment vào đây nhé, không nhập $ chỉ số thôi ^^!", 200, 200);
+
+            var editor = Editor.GetActive();
+            int totalopenfiles = editor.GetAllOpenFiles() - 1;
+            for (int i = 0; i < totalopenfiles; i++)
+            {
+                editor.ActiveDocumentByIndex(i);
+                string text = editor.GetDocumentText();
+                text = UpperLowerSegment(text, input);
+                editor.SetDocumentText(text);
+            }
+            editor.ActiveDocumentByIndex(0);
+            MessageBox.Show("Đã upper-LOWER case cho " + totalopenfiles + " file.","Hoàng Hà - Dev.");
+        }
+
+        
+
+        private static string UpperLowerSegment(string inputText, string inputSegment)
+        {
+            string pattern = @"\$"+inputSegment+@":(.*?)\r\n";
+            var result = "";
+            result = Regex.Replace(inputText, pattern, (Match n) =>
+            {
+                string outputText = Helpers.asTitleCase(n.Value.ToString());
+                return outputText;
+            });
+            return result;
+        }
     }
 }
