@@ -892,6 +892,11 @@ namespace phdesign.NppToolBucket.Forms
         {
             forQA.UpperLowerCaseBySegment();
         }
+
+        private void button99_Click(object sender, EventArgs e)
+        {
+            forQA.D3478();
+        }
     }
 
 

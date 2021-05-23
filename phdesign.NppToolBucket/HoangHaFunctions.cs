@@ -2209,14 +2209,14 @@ namespace phdesign.NppToolBucket
                         "</docinfo:alt-rendition>\r\n" +
                         "</docinfo:alt-renditions>\r\n" +
                         "</docinfo>");
-                    if (text.Contains("<lnv:SYS-PROD-INFO>"))
-                    {
-                        text = Regex.Replace(text, "<lnv:SYS-PROD-INFO>(.*)</lnv:SYS-PROD-INFO>", m => $"<lnv:SYS-PROD-INFO>{m.Groups[1].ToString().Replace(" #HAS#IMAGES#", "")} #LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
-                    }
-                    else
-                    {
-                        text = text.Replace("</lnv:SYS-AUDIT-TRAIL>", "</lnv:SYS-AUDIT-TRAIL>\r\n<lnv:SYS-PROD-INFO>#LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
-                    }
+                    //if (text.Contains("<lnv:SYS-PROD-INFO>"))
+                    //{
+                    //    text = Regex.Replace(text, "<lnv:SYS-PROD-INFO>(.*)</lnv:SYS-PROD-INFO>", m => $"<lnv:SYS-PROD-INFO>{m.Groups[1].ToString().Replace(" #HAS#IMAGES#", "")} #LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
+                    //}
+                    //else
+                    //{
+                    //    text = text.Replace("</lnv:SYS-AUDIT-TRAIL>", "</lnv:SYS-AUDIT-TRAIL>\r\n<lnv:SYS-PROD-INFO>#LEGACY# #HAS#IMAGES#</lnv:SYS-PROD-INFO>");
+                    //}
                     editor.SetDocumentText(text);
                 }
                 else

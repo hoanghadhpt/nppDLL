@@ -2141,8 +2141,9 @@ namespace phdesign.NppToolBucket.Forms
             this.button99.Name = "button99";
             this.button99.Size = new System.Drawing.Size(152, 32);
             this.button99.TabIndex = 1;
-            this.button99.Text = "---";
+            this.button99.Text = "D3478 Sort by $40";
             this.button99.UseVisualStyleBackColor = false;
+            this.button99.Click += new System.EventHandler(this.button99_Click);
             // 
             // button98
             // 

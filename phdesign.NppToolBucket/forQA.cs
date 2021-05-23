@@ -114,5 +114,55 @@ namespace phdesign.NppToolBucket
             });
             return result;
         }
+
+
+        internal static void D3478()
+        {
+            var editor = Editor.GetActive();
+            var text = editor.GetDocumentText();
+            var curLine = editor.GetCurrentLineNumber();
+            text = text.Replace("\r\n", "[!!]");
+            string tempAllFiles = "";
+            // Split Into Multiple Files
+            string[] listFiles = Regex.Split(text, @"(?=\$00:.*?:)");
+            List<string> listNewFile = new List<string>();
+
+            foreach (string file in listFiles)
+            {
+                
+                string pattern = @"\$40:(.*?) ([A-Z]{2}.?) (.*?)?\[!!\]";
+                Match m = Regex.Match(file, pattern);
+                string d00 = "$_0:" + m.Groups[2].ToString() + " " + m.Groups[3].ToString()+"$__:";
+                listNewFile.Add(d00 + file);
+            }
+
+            listNewFile.Sort(new WinCompare());
+
+            foreach (string s in listNewFile)
+            {
+                tempAllFiles += s;
+            }
+
+            tempAllFiles = tempAllFiles.Replace("[!!]", "\r\n");
+            tempAllFiles = Regex.Replace(tempAllFiles, @"\$_0:(.*?)\$__:", "\r\n");
+
+            editor.SetDocumentText(tempAllFiles);
+            editor.GotoLineNumber(curLine);
+        }
+
+        private class WinCompare : IComparer<string>
+        {
+
+            [DllImport("shlwapi.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+            static extern int StrCmpLogicalW(String x, String y);
+
+            public int Compare(string x, string y)
+            {
+                return StrCmpLogicalW(x, y);
+            }
+        }
+
     }
+
+    
 }
