@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29A99B34-65C1-48A3-986A-03E297782A1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>phdesign.NppToolBucket</RootNamespace>
+    <AssemblyName>HOANGHA</AssemblyName>
+    <OutputPath>bin\Debug\</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="classCanada.cs" />
+    <Compile Include="classD1712.cs" />
+    <Compile Include="classDE535.cs" />
+    <Compile Include="classDR043.cs" />
+    <Compile Include="classMosaic.cs" />
+    <Compile Include="Counsel.cs" />
+    <Compile Include="classDF989.cs" />
+    <Compile Include="class252.cs" />
+    <Compile Include="D1BVU.cs" />
+    <Compile Include="FindAndReplace.cs" />
+    <Compile Include="FindAndReplaceSettings.cs" />
+    <Compile Include="Forms\FormTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTable.designer.cs">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\D9290.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\D9290.Designer.cs">
+      <DependentUpon>D9290.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FindAndReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FindAndReplaceForm.Designer.cs">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFootnoteXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFootnoteXML.Designer.cs">
+      <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTableMosaic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTableMosaic.Designer.cs">
+      <DependentUpon>frmTableMosaic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTableXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTableXML.Designer.cs">
+      <DependentUpon>frmTableXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GuidGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GuidGeneratorForm.Designer.cs">
+      <DependentUpon>GuidGeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MichiganCounsel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MichiganCounsel.Designer.cs">
+      <DependentUpon>MichiganCounsel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaginationXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaginationXML.Designer.cs">
+      <DependentUpon>PaginationXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Shortcut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Shortcut.Designer.cs">
+      <DependentUpon>Shortcut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forQA.cs" />
+    <Compile Include="GuidGenerator.cs" />
+    <Compile Include="GuidGeneratorSettings.cs" />
+    <Compile Include="HoangHaFunctions.cs" />
+    <Compile Include="IndentationSettings.cs" />
+    <Compile Include="DllExport\DllExportAttribute.cs" />
+    <Compile Include="Forms\IndentationSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IndentationSettingsForm.Designer.cs">
+      <DependentUpon>IndentationSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Settings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\WindowWrapper.cs" />
+    <Compile Include="Jayrock\BooleanObject.cs" />
+    <Compile Include="Jayrock\Collections\KeyedCollection.cs" />
+    <Compile Include="Jayrock\Configuration\DictionarySectionHandler.cs" />
+    <Compile Include="Jayrock\Configuration\ListSectionHandler.cs" />
+    <Compile Include="Jayrock\Configuration\TypeListSectionHandler.cs" />
+    <Compile Include="Jayrock\Diagnostics\DebugString.cs" />
+    <Compile Include="Jayrock\DictionaryHelper.cs" />
+    <Compile Include="Jayrock\IAttributeAttachment.cs" />
+    <Compile Include="Jayrock\IndentedTextWriter.cs" />
+    <Compile Include="Jayrock\InternetDate.cs" />
+    <Compile Include="Jayrock\JsonML\JsonMLCodec.cs" />
+    <Compile Include="Jayrock\JsonML\JsonMLException.cs" />
+    <Compile Include="Jayrock\JsonML\JsonMLForm.cs" />
+    <Compile Include="Jayrock\Json\BufferedCharReader.cs" />
+    <Compile Include="Jayrock\Json\Conversion\AnyType.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\AnyImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ArrayImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\BooleanExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\BooleanImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ByteArrayExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ByteArrayImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ComponentExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ComponentImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ControlExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DataRowExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DataRowViewExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DataSetExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DataTableExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DataViewExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DateTimeExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DateTimeImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DbDataRecordExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DictionaryExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\DictionaryImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\EnumerableExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\EnumImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ExportAwareExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ExporterBase.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\GuidImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ImportAwareImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ImporterBase.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\JsonBufferExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\JsonBufferImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\JsonNumberExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\ListImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NameValueCollectionExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NameValueCollectionImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NullableExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NullableImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NumberExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\NumberImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\StringExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\StringImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\Converters\UriImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\CustomTypeDescriptor.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ExportContext.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ExporterCollection.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ExporterListSectionHandler.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IJsonExportable.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IJsonImportable.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ImportContext.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ImporterCollection.cs" />
+    <Compile Include="Jayrock\Json\Conversion\ImporterListSectionHandler.cs" />
+    <Compile Include="Jayrock\Json\Conversion\INonObjectMemberImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IObjectMemberExporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\IObjectMemberImporter.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonConvert.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonDefaultValueAttribute.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonExportAttribue.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonIgnoreAttribute.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonMemberNameAttribute.cs" />
+    <Compile Include="Jayrock\Json\Conversion\JsonMemberNamingConventionAttribute.cs" />
+    <Compile Include="Jayrock\Json\Conversion\PropertyCustomization.cs" />
+    <Compile Include="Jayrock\Json\EmptyJsonWriter.cs" />
+    <Compile Include="Jayrock\Json\InvalidMemberException.cs" />
+    <Compile Include="Jayrock\Json\JsonArray.cs" />
+    <Compile Include="Jayrock\Json\JsonBoolean.cs" />
+    <Compile Include="Jayrock\Json\JsonBuffer.cs" />
+    <Compile Include="Jayrock\Json\JsonBufferReader.cs" />
+    <Compile Include="Jayrock\Json\JsonBufferStorage.cs" />
+    <Compile Include="Jayrock\Json\JsonBufferWriter.cs" />
+    <Compile Include="Jayrock\Json\JsonException.cs" />
+    <Compile Include="Jayrock\Json\JsonImportingWriter.cs" />
+    <Compile Include="Jayrock\Json\JsonMember.cs" />
+    <Compile Include="Jayrock\Json\JsonNull.cs" />
+    <Compile Include="Jayrock\Json\JsonNumber.cs" />
+    <Compile Include="Jayrock\Json\JsonObject.cs" />
+    <Compile Include="Jayrock\Json\JsonReader.cs" />
+    <Compile Include="Jayrock\Json\JsonReaderBase.cs" />
+    <Compile Include="Jayrock\Json\JsonRecorder.cs" />
+    <Compile Include="Jayrock\Json\JsonString.cs" />
+    <Compile Include="Jayrock\Json\JsonText.cs" />
+    <Compile Include="Jayrock\Json\JsonTextReader.cs" />
+    <Compile Include="Jayrock\Json\JsonTextWriter.cs" />
+    <Compile Include="Jayrock\Json\JsonToken.cs" />
+    <Compile Include="Jayrock\Json\JsonTokenClass.cs" />
+    <Compile Include="Jayrock\Json\JsonTokenWriterBase.cs" />
+    <Compile Include="Jayrock\Json\JsonWriter.cs" />
+    <Compile Include="Jayrock\Json\JsonWriterBase.cs" />
+    <Compile Include="Jayrock\Json\JsonWriterBracket.cs" />
+    <Compile Include="Jayrock\Json\NamedJsonBuffer.cs" />
+    <Compile Include="Jayrock\Mask.cs" />
+    <Compile Include="Jayrock\Reflection\Reflector.cs" />
+    <Compile Include="Jayrock\TypeResolution.cs" />
+    <Compile Include="Jayrock\UnixTime.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="PluginCore\Editor.cs" />
+    <Compile Include="PluginCore\NppPluginNETBase.cs" />
+    <Compile Include="PluginCore\NppPluginNETHelper.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PluginCore\UnmanagedExports.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\AssemblyUtils.cs" />
+    <Compile Include="Utilities\Enum\EnumUtils.cs" />
+    <Compile Include="Utilities\Security\MD5.cs" />
+    <Compile Include="Utilities\Security\SHA1.cs" />
+    <Compile Include="Utilities\StringUtils.cs" />
+    <Compile Include="VisfToXML.cs" />
+    <Compile Include="xZero.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FormTable.resx">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\D9290.resx">
+      <DependentUpon>D9290.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FindAndReplaceForm.resx">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFootnoteXML.resx">
+      <DependentUpon>frmFootnoteXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTableMosaic.resx">
+      <DependentUpon>frmTableMosaic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTableXML.resx">
+      <DependentUpon>frmTableXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GuidGeneratorForm.resx">
+      <DependentUpon>GuidGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IndentationSettingsForm.resx">
+      <DependentUpon>IndentationSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MichiganCounsel.resx">
+      <DependentUpon>MichiganCounsel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaginationXML.resx">
+      <DependentUpon>PaginationXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Shortcut.resx">
+      <DependentUpon>Shortcut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\changeindent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\history.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Artdesigner-Emoticons-2-Cry-mouth.ico" />
+    <Content Include="Custom-Icon-Design-Flatastic-9-Yin-Yang-True-false.ico" />
+    <None Include="Resources\Generate-tables-icon48.png" />
+    <None Include="Resources\Generate-tables-icon64.png" />
+    <None Include="Resources\Table48px.bmp" />
+    <None Include="Resources\Generate-tables-icon1.png" />
+    <None Include="Resources\text-plus-icon.png" />
+    <None Include="Resources\cat-walk-icon.png" />
+    <None Include="Resources\10042-squinting-face-with-tongue-icon.png" />
+    <None Include="Resources\timeshift-icon.png" />
+    <None Include="Resources\Generate-tables-icon.png" />
+    <None Include="Resources\Sort-ascending-icon.png" />
+    <None Include="Resources\giaoan.lik-trong-dong.png" />
+    <None Include="Resources\e6dc3452323521.5608da7b64f55.jpg" />
+    <None Include="Resources\drstrange.jpg" />
+    <None Include="Resources\star-icon.png" />
+    <None Include="Resources\Deadpool_2018.jpg" />
+    <None Include="Resources\deadpool-wallpapers-29482-8205796.jpg" />
+    <None Include="Resources\kisspng-v-for-vendetta-clip-art-anonymous-mask-5ab5d15bd9fcb6.6348865215218650518929.jpg" />
+    <None Include="Resources\anonymous-mask-png-5a3859dfb2b031.8505957015136424637319.jpg" />
+    <None Include="Resources\cry-mouth-icon16.png" />
+    <None Include="Resources\cry-mouth-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\DllExport\NppPlugin.DllExport.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
